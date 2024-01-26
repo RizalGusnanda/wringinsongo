@@ -18,105 +18,231 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
+    <style>
+        .card-body {
+            height: 100vh;
+            width: 100%;
+            overflow: auto;
+        }
+
+        .heading-text h3 {
+            margin-left: 30px;
+        }
+
+        .welcome-text {
+            padding-left: 50px;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        .rounded-input {
+            border-radius: 15px;
+        }
+
+        .welcome-text {
+            padding-left: 50px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            margin-top: 20px;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .input-container input[type="email"],
+        .input-container input[type="password"] {
+            border-radius: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .text-link {
+            color: #1F3C88;
+        }
+
+        .text-link-register {
+            color: #EE6F57;
+
+        }
+
+        .btn.btn-lg {
+            padding: 0.55rem 1.5rem;
+            font-size: 12px;
+
+        }
+
+        .input-container button {
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .btn-responsive {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 767px) {
+            .full-height-card {
+                height: auto;
+            }
+
+            .full-screen-card {
+                height: auto;
+            }
+
+            .card-body {
+                height: auto;
+                overflow: visible;
+            }
+
+            .heading-text h3 {
+                font-size: 16px;
+                margin-left: 0px;
+            }
+
+            .full-height-card img {
+                width: 100%;
+            }
+
+            .welcome-text {
+                padding-left: 10px;
+                padding-right: 20px;
+                font-size: 12px;
+            }
+
+            .input-container {
+                margin: 20px 10px;
+            }
+
+            .input-container input[type="email"],
+            .input-container input[type="password"] {
+                border-radius: 10px;
+                padding: 8px;
+                border: 1px solid #ccc;
+            }
+
+            .btn.btn-lg {
+                padding: 0.45rem 1.25rem;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <section class="section">
-            <div class="container mt-5">
-                <div class="row">
-                    <div
-                        class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-                        <div class="login-brand">
-                            <img src="../assets/img/stisla-fill.svg" alt="logo" width="100"
-                                class="shadow-light rounded-circle">
-                        </div>
-
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h4>Register</h4>
+        <section class="section full-screen-section p-0">
+            <div class="row d-flex justify-content-between m-0">
+                <div class="col-md-6 col-sm-6 col-lg-6 full-height-card">
+                    <div style="background-color:rgba(31, 60, 136, 0.90);">
+                        <div class="card-body">
+                            <div class="col mt-1">
+                                <img src="{{ asset('assets/img/avatar/Wringinsongo.png') }}" alt=""
+                                    srcset="" style="width: 35%">
                             </div>
-                            <div class="card-body">
+                            <div class="col mt-5">
+                                <img src="{{ asset('assets/img/avatar/cuate.png') }}" alt="" srcset=""
+                                    style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-lg-6 full-height-card">
+                    <div style="background-color:#fff;">
+                        <div class="card-body">
+                            <div class="col mt-5 welcome-text">
+                                <h3 style="color: #000000">Registrasi</h3>
+                            </div>
+
+                            <div class="input-container">
                                 <form action="{{ route('register') }}" method="POST">
                                     @csrf
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <div class="form-group">
-                                                <label for="first_name">Full Name</label>
-                                                <input id="first_name" type="text" name="name"
-                                                    value="{{ old('name') }}"
-                                                    class="form-control @error('name') is-invalid @enderror"
-                                                    placeholder="Masukkan Nama Lengkap" autofocus>
-                                                @error('name')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group col-6">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input id="email" type="email" class="form-control" name="email"
-                                                    value="{{ old('email') }}"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    placeholder="Masukkan Alamat Email">
-                                                @error('email')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                    <div class="form-group">
+                                        <label for="first_name">Nama Lengkap</label>
+                                        <input id="first_name" type="text" name="name" value="{{ old('name') }}"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            placeholder="Masukkan Nama Lengkap" autofocus>
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <div class="form-group">
-                                                <label for="password" class="d-block">Password</label>
-                                                <input id="password" type="password" name="password"
-                                                    class="form-control @error('password') is-invalid @enderror"
-                                                    placeholder="Masukkan Password" data-indicator="pwindicator">
-                                                @error('password')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-6">
-                                            <div class="form-group">
-                                                <label for="password_confirmation" class="d-block">Password
-                                                    Confirmation</label>
-                                                <input id="password_confirmation" name="password_confirmation"
-                                                    type="password" class="form-control"
-                                                    placeholder="Masukkan Konfirmasi Password">
-                                                @error('password')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                            Register
+                                        <label for="email">Email</label>
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" placeholder="Masukkan Alamat Email">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password" class="d-block">Password</label>
+                                        <input id="password" type="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            placeholder="Masukkan Password" data-indicator="pwindicator">
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password_confirmation" class="d-block">Konfirmasi Password</label>
+                                        <input id="password_confirmation" name="password_confirmation" type="password"
+                                            class="form-control" placeholder="Masukkan Konfirmasi Password">
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block btn-responsive"
+                                            style="background-color: rgba(31, 60, 136, 0.90); color: #fff;">
+                                            Registrasi
                                         </button>
                                     </div>
                                 </form>
+                                <div class="mt-5 text-muted text-center">
+                                    <a class="text-link">Sudah punya akun?</a> <a href="/login"
+                                        class="text-link-register">MASUK</a>
+                                </div>
+                                <div class="simple-footer">
+                                    Copyright &copy; Stisla 2018
+                                </div>
                             </div>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+
+    <script>
+        // Script to handle role selection
+        function selectRole(role) {
+            document.getElementById('user_type').value = role;
+            var cards = document.getElementsByClassName('role-card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('active');
+            }
+            document.getElementById(role + '-card').classList.add('active');
+        }
+    </script>
 
     <!-- General JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -141,6 +267,7 @@
 
     <!-- Page Specific JS File -->
     <script src="../assets/js/page/auth-register.js"></script>
+
 </body>
 
 </html>

@@ -62,6 +62,7 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
+    'home-user' => RouteServiceProvider::HOME_USER,
 
     /*
     |--------------------------------------------------------------------------
@@ -141,6 +142,8 @@ return [
             'confirm' => true,
             'confirmPassword' => true,
         ]),
+        'home' => RouteServiceProvider::HOME,
+        'home-user' => RouteServiceProvider::HOME_USER,
     ],
 
 ];
