@@ -1,0 +1,773 @@
+body {
+    font-family: 'Poppins';
+}
+
+.bg-primary-nav {
+    background-color: #FFFFFF !important;
+}
+
+a.btn-login {
+    border-color: #265073;
+    border-radius: 12px;
+    color: #265073;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+a.btn-login:hover {
+    background-color: #265073;
+    border-color: #265073;
+    color: white !important;
+}
+
+a.btn-login:focus {
+    box-shadow: none;
+}
+
+a.btn-regis {
+    background-color: #eb9481;
+    border-color: #eb9481;
+    color: white;
+    border-radius: 12px;
+}
+
+a.btn-regis:hover {
+    background-color: #EE6F57;
+    border-color: #EE6F57;
+    color: white;
+}
+
+a.btn-regis:focus {
+    box-shadow: none;
+}
+
+.navbar-nav li.nav-item a.nav-link {
+    color: #000000;
+}
+
+.navbar-nav li.nav-item.active a.nav-link {
+    color: #265073;
+}
+
+.myfooter {
+    background-color: #265073;
+}
+
+.footer-text {
+    font-size: 14px;
+}
+
+.foot1, .foot2, .foot3{
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.contact-list{
+    margin-top: 25px;
+}
+
+/* landingpage */
+
+.landing {
+    width: 371px;
+    height: 439px;
+    object-fit: contain;
+    margin-left: 50px;
+}
+
+.welcome-title {
+    margin-top: 150px;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.wringin,
+.songo {
+    font-weight: bold;
+    font-size: 64px;
+}
+
+.wringin {
+    color: #265073;
+}
+
+.songo {
+    color: #EE6F57;
+}
+
+.wringin2,
+.songo2 {
+    font-size: 28px;
+    color: #000000;
+}
+
+.wringin3,
+.songo3 {
+    font-size: 28px;
+    color: #000000;
+}
+
+.title-land-wis {
+    color: #000000;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.welcome-fill {
+    color: #FFFFFF;
+    font-size: 16px;
+    text-align: center;
+}
+
+.btn.btn-outline-secondary {
+    border-width: 5px;
+    border-radius: 0 15px 15px 0;
+    border-color: #FFFFFF;
+}
+
+.land {
+    border-radius: 15px 0 0 15px;
+}
+
+.btn.btn-outline-secondary i.fas.fa-search {
+    color: #FFFFFF;
+}
+
+.btn.btn-outline-secondary:hover {
+    background-color: #EE6F57;
+}
+
+.card-wringinsongo-view-mobile {
+    background-color: #F5F5F5;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3.text-center.mt-4.font-weight-bold {
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+}
+
+.card-wringinsongo-view-mobile .card-text {
+    font-size: 14px;
+}
+
+.card-wringinsongo-view-mobile .fas.fa-info-circle {
+    color: #265073 !important;
+}
+
+.card-wringinsongo-view-mobile .fas.fa-map-marked-alt {
+    color: #265073 !important;
+}
+
+.card-wringinsongo-view-mobile .fas.fa-lightbulb {
+    color: #265073 !important;
+}
+
+.card-wringinsongo-view-mobile .fas.fa-brain {
+    color: #265073 !important;
+}
+
+/* wisata */
+.card-search-wisata {
+    border: none;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    background-color: #265073;
+    margin-top: 20px;
+}
+
+.title-wisata {
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+}
+
+.search-icon i {
+    color: #ccc;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.search-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    width: 800px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px 0 0 15px;
+    padding-left: 40px;
+}
+
+.search-button {
+    background-color: rgb(12, 16, 78);
+    width: 50px;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    border-color: initial;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.search-button i {
+    color: #ffffff;
+}
+
+.list-wisata {
+    padding: 40px 0;
+}
+
+.card-wisata {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+.card-wisata img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.wisata-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.wisata-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.wisata-description {
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.btn-detailwisata {
+    background-color: #265073;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-top: auto;
+    font-size: 14px;
+}
+
+.btn-detailwisata:hover {
+    background-color: #1F3C88;
+    color: #fff;
+}
+
+/* about */
+.bg-about {
+    background-color: #f8f9fa;
+}
+
+.about-h {
+    color: #000000;
+    margin-top: 25px;
+    font-size: 28px;
+}
+
+.about-p {
+    color: #000000;
+    font-size: 14px;
+    text-align: justify;
+}
+
+/* contact us */
+.contact-header {
+    color: #EE6F57;
+    font-size: 28px;
+    padding-top: 30px;
+}
+
+.form-group-margin {
+    margin-bottom: 20px;
+}
+
+.card-contact {
+    border-radius: 15px;
+    box-shadow: 0 10px 40px 0 rgba(51, 73, 94, 0.15);
+}
+
+.label-title {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.btn-send {
+    background-color: #265073;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+}
+
+.btn-send:hover {
+    background-color: #1F3C88;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+/* profile */
+.centered-section-1 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.card {
+    box-shadow: 0 10px 40px 0 rgba(51, 73, 94, 0.15);
+    background-color: #fff;
+    border-radius: 15px;
+    border: none;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.upload-icon {
+    position: absolute;
+    top: 90%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: #1F3C88;
+    cursor: pointer;
+}
+
+.profile-widget-description {
+    position: relative;
+}
+
+.profile-title-card1 {
+    color: #265073;
+    padding-bottom: 10px;
+}
+
+.profile-title-card2 {
+    color: #265073;
+    padding-left: 20px;
+}
+
+.profile-title-card3 {
+    color: #265073;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.profile-title-card4 {
+    color: #265073;
+    padding-top: 10px;
+}
+
+.btn-profile {
+    background-color: #265073;
+    color: #ffffff;
+    padding: 5px 25px;
+    border-radius: 15px;
+}
+
+.btn-profile:hover {
+    background-color: #1F3C88;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+/* Reservasi User*/
+.btn-custom-str {
+    width: 100%;
+    background-color: #265073;
+    color: #ffffff;
+}
+
+.btn-custom-str:hover {
+    background-color: #1F3C88;
+    color: #ffffff;
+}
+
+.card-date-res {
+    margin-top: -10px;
+}
+
+.card-tick-res {
+    margin-top: -10px;
+}
+
+.card-kod-res {
+    margin-top: 20px;
+}
+
+.btn-test {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.btn-testimoni {
+    border-radius: 20px;
+    background-color: #265073;
+    color: #ffffff;
+}
+
+.btn-testimoni:hover {
+    background-color: #1F3C88;
+    color: #ffffff;
+}
+
+.dt-res {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #265073;
+    border-color: #265073;
+    color: #fff;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #000000;
+}
+
+.pagination .page-link {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #265073;
+}
+
+.pagination .page-link:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    color: #EE6F57;
+}
+
+/* transaksi wisata */
+.tr-wisata{
+    text-align: center;
+}
+
+.tr-jdl{
+    margin-left: 40px;
+}
+
+.tr-jml, .tr-tb, .tr-tgl{
+    margin-top: -15px;
+}
+
+.status-text{
+    margin-left: 10px;
+    font-size: 16px;
+    color: #ffc107;
+}
+
+.status-text2{
+    margin-left: 10px;
+    font-size: 16px;
+    color: #198754;
+}
+
+.btn-byr{
+    border-radius: 20px;
+    background-color: #265073;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.btn-byr:hover{
+    background-color: #1F3C88;
+    color: #ffffff;
+}
+
+.tr-crd{
+    box-shadow: 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ccc;
+    margin-bottom: 5px;
+}
+
+.btn-testim{
+    border-radius: 20px;
+    background-color: #265073;
+    color: #ffffff;
+    width: auto;
+}
+
+.btn-testim:hover{
+    background-color: #1F3C88;
+    color: #ffffff;
+}
+
+.custom-alert {
+    width: 86%;
+    margin-left: 30px;
+    font-size: 14px;
+    background-color: #fc544b;
+}
+
+.alert-clr {
+    color: #000000;
+}
+
+.alert-scs{
+    background-color: #63ed7a;
+    width: 96%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    color: #FFFFFF;
+}
+
+
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        margin-top: 20px;
+    }
+
+    .kontak-km{
+        margin-top: 20px;
+    }
+
+    .contact-list{
+        margin-top: 0px;
+    }
+
+    .about-h {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .landing {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        object-fit: cover;
+        margin-top: 0px;
+    }
+
+    .card-contact {
+        padding-top: 0px !important;
+    }
+
+    .title-wisata {
+        color: #FFFFFF;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .wringin,
+    .songo {
+        font-weight: bold;
+        font-size: 46px;
+    }
+
+    .search-input {
+        flex: 1;
+        width: 250px;
+        padding: 10px;
+        border: none;
+        border-radius: 15px 0 0 15px;
+        padding-left: 40px;
+    }
+
+    .title-wisata {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .card-profile1 {
+        width: 387px;
+    }
+
+    .card-profile1-tr {
+        width: 387px;
+    }
+
+    .upload-icon {
+        position: absolute;
+        top: 90%;
+        left: 88%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+        color: #1F3C88;
+        cursor: pointer;
+    }
+
+    .btn-profile {
+        width: auto;
+        margin: 0 auto;
+        display: block;
+        padding: 10px 20px;
+        border-radius: 15px;
+    }
+
+    .profile-title-card2 {
+        color: #265073;
+        text-align: center;
+    }
+
+    .card {
+        margin: 0 auto;
+        width: 95%;
+        box-sizing: border-box;
+    }
+
+    .profile-widget-description,
+    .profile-widget-description .form-control {
+        width: auto;
+        max-width: 100%;
+        margin: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .card-title-res {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .card-kod-res, .card-date-res, .card-tick-res{
+        text-align: center;
+    }
+
+    .btn-test {
+        width: 100%;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .rs-ws {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dt-res .dt-ws > div {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .status-text{
+        margin-left: 5px;
+    }
+
+    .tr-jdl, .col-6 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0;
+    }
+
+    .tr-jdl p, .col-6 p {
+        margin-top: 5px;
+    }
+
+    .tr-jdl p strong, .col-6 p strong {
+        display: inline-block;
+        width: 120px;
+    }
+
+    .custom-alert {
+        width: 86%;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .welcome-title {
+        text-align: center;
+        width: 700px;
+    }
+
+    .welcome-fill {
+        text-align: center;
+        width: 700px;
+    }
+
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 700px;
+    }
+
+    .about-h {
+        font-size: 24px;
+    }
+
+    .about-p {
+        font-size: 14px;
+    }
+
+    .landing {
+        max-width: 85%;
+        height: auto;
+        margin-top: 30px;
+        padding-right: 20px;
+    }
+
+    .search-input{
+        flex: 1;
+        width: 500px;
+        padding: 10px;
+        border: none;
+        border-radius: 15px 0 0 15px;
+        padding-left: 40px;
+    }
+
+    .btn-testimoni {
+        font-size: 12px;
+    }
+
+    .card-date-res .card-tick-res, .card-kod-res{
+        font-size: 14px;
+    }
+
+    .custom-alert {
+        width: 82%;
+        height: auto;
+    }
+      
+}

@@ -52,6 +52,7 @@
             margin-right: 50px;
         }
 
+        .input-container input[type="text"],
         .input-container input[type="email"],
         .input-container input[type="password"] {
             border-radius: 15px;
@@ -118,8 +119,10 @@
                 margin: 20px 10px;
             }
 
+            .input-container input[type="name"],
             .input-container input[type="email"],
-            .input-container input[type="password"] {
+            .input-container input[type="password"],
+            .input-container .input[type="password_confirmation"] {
                 border-radius: 10px;
                 padding: 8px;
                 border: 1px solid #ccc;
@@ -163,7 +166,7 @@
                                 <form action="{{ route('register') }}" method="POST">
                                     @csrf
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <label for="first_name">Nama Lengkap</label>
                                         <input id="first_name" type="text" name="name" value="{{ old('name') }}"
                                             class="form-control @error('name') is-invalid @enderror"
@@ -175,7 +178,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <label for="email">Email</label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
@@ -187,42 +190,58 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <label for="password" class="d-block">Password</label>
-                                        <input id="password" type="password" name="password"
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            placeholder="Masukkan Password" data-indicator="pwindicator">
-                                        @error('password')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                        <div class="input-group">
+                                            <input id="password" type="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                placeholder="Masukkan Password" data-indicator="pwindicator">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text toggle-password" style="cursor: pointer; border-radius: 0px 15px 15px 0px; border: 1px solid #ccc; color: #000000;">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </div>
                                             </div>
-                                        @enderror
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: 15px;">
                                         <label for="password_confirmation" class="d-block">Konfirmasi Password</label>
-                                        <input id="password_confirmation" name="password_confirmation" type="password"
-                                            class="form-control" placeholder="Masukkan Konfirmasi Password">
-                                        @error('password')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                        <div class="input-group">
+                                            <input id="password_confirmation" type="password"
+                                                name="password_confirmation" class="form-control"
+                                                placeholder="Masukkan Konfirmasi Password">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text toggle-password-confirm"
+                                                    style="cursor: pointer; border-radius: 0px 15px 15px 0px; border: 1px solid #ccc; color: #000000;">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </div>
                                             </div>
-                                        @enderror
+                                            @error('password')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: -15px;">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block btn-responsive"
                                             style="background-color: rgba(31, 60, 136, 0.90); color: #fff;">
                                             Registrasi
                                         </button>
                                     </div>
                                 </form>
-                                <div class="mt-5 text-muted text-center">
+                                <div class="mt-5 text-muted text-center" style="margin-bottom: -35px;">
                                     <a class="text-link">Sudah punya akun?</a> <a href="/login"
                                         class="text-link-register">MASUK</a>
                                 </div>
                                 <div class="simple-footer">
-                                    Copyright &copy; Stisla 2018
+                                    Copyright &copy; 2024 Design By Muchamad Rizal Gusnanda Atmaja
                                 </div>
                             </div>
                         </div>
@@ -242,6 +261,34 @@
             }
             document.getElementById(role + '-card').classList.add('active');
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Handle toggle for password field
+            const togglePassword = document.querySelector(".toggle-password");
+            const passwordInput = document.getElementById("password");
+
+            togglePassword.addEventListener("click", function() {
+                toggleInputType(passwordInput, this);
+            });
+
+            // Handle toggle for confirm password field
+            const togglePasswordConfirm = document.querySelector(".toggle-password-confirm");
+            const passwordConfirmInput = document.getElementById("password_confirmation");
+
+            togglePasswordConfirm.addEventListener("click", function() {
+                toggleInputType(passwordConfirmInput, this);
+            });
+
+            function toggleInputType(inputField, toggleIcon) {
+                if (inputField.type === "password") {
+                    inputField.type = "text";
+                    toggleIcon.innerHTML = '<i class="fa fa-eye"></i>';
+                } else {
+                    inputField.type = "password";
+                    toggleIcon.innerHTML = '<i class="fa fa-eye-slash"></i>';
+                }
+            }
+        });
     </script>
 
     <!-- General JS Scripts -->

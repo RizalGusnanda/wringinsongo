@@ -31,8 +31,9 @@
 
         .welcome-text {
             padding-left: 50px;
-            font-size: 24px;
-            color: #000000;
+            font-size: 14px;
+            color: #1F3C88;
+            margin-bottom: -10px;
         }
 
         .rounded-input {
@@ -60,7 +61,8 @@
         }
 
         .text-link {
-            color: #1F3C88;
+            color: #6C757D;
+
         }
 
         .text-link-register {
@@ -83,6 +85,10 @@
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
+        }
+
+        .password-focused {
+            border-color: #808eec !important;
         }
 
         @media (max-width: 767px) {
@@ -153,7 +159,7 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-lg-6 full-height-card">
-                    <div style="background-color:#fff;">
+                    <div style="background-color:#ffffff;">
                         <div class="card-body">
                             <div class="col mt-5 heading-text">
                                 <h3 style="color: #000000">Selamat datang di desa <img
@@ -161,7 +167,7 @@
                                         srcset="" style="width: 35%;"></h3>
                             </div>
                             <div class="col mt-4 welcome-text">
-                                <p style="color: #000000">Temukan destinasi wisata terbaik disini</p>
+                                <p>Temukan destinasi wisata terbaik disini</p>
                             </div>
 
                             <div class="input-container">
@@ -182,18 +188,31 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="password" class="control-label">Password</label>
-                                        <input type="password" name="password"
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            placeholder="Masukkan Password">
+                                        <div class="d-block">
+                                            <label for="password" class="control-label">Password</label>
+                                            <div class="float-right">
+                                                <a href="/forgot-password" class="text-small">
+                                                    Lupa kata sandi?
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                placeholder="Masukkan password anda"
+                                                style="border-right: none; border-radius: 15px 0px 0px 15px;">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text toggle-password" id="password-toggle"
+                                                    style="border-left: none; border-radius: 0px 15px 15px 0px; background-color: #e8f0fe; border: 1px solid #ccc; color: #000000;">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                         @error('password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                        <div class="mt-2 text-right">
-                                            <a href="/forgot-password" class="text-small">Lupa Password?</a>
-                                        </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-bottom: -20px;">
                                         <button type="submit" class="btn btn-lg btn-block btn-responsive"
                                             tabindex="4"
                                             style="background-color: rgba(31, 60, 136, 0.90); color: #fff;">
@@ -201,12 +220,12 @@
                                         </button>
                                     </div>
                                 </form>
-                                <div class="mt-5 text-muted text-center">
+                                <div class="mt-5 text-center" style="margin-bottom: -30px;">
                                     <a class="text-link">Belum punya akun?</a> <a href="/register"
                                         class="text-link-register">REGISTRASI</a>
                                 </div>
                                 <div class="simple-footer">
-                                    Copyright &copy; Stisla 2018
+                                    Copyright &copy; 2024 Design By Muchamad Rizal Gusnanda Atmaja
                                 </div>
                             </div>
                         </div>
@@ -234,6 +253,35 @@
     <!-- Template JS File -->
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const togglePassword = document.querySelector(".toggle-password");
+            const passwordInput = document.querySelector("input[name='password']");
+            const passwordToggleWrapper = document.querySelector("#password-toggle");
+
+            togglePassword.addEventListener("click", function() {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    togglePassword.innerHTML = '<i class="fa fa-eye"></i>';
+                } else {
+                    passwordInput.type = "password";
+                    togglePassword.innerHTML = '<i class="fa fa-eye-slash"></i>';
+                }
+                passwordInput.classList.add("password-focused");
+            });
+
+            passwordInput.addEventListener("focus", function() {
+                passwordToggleWrapper.style.borderColor = "#808eec";
+                this.classList.add("password-focused");
+            });
+
+            passwordInput.addEventListener("blur", function() {
+                passwordToggleWrapper.classList.remove("password-toggle-focus");
+                passwordToggleWrapper.classList.add("password-toggle-blur");
+            });
+        });
+    </script>
 
 </body>
 

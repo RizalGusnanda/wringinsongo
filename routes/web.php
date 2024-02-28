@@ -12,6 +12,7 @@ use App\Http\Controllers\RoleAndPermission\ImportRoleController;
 use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfilesController;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -29,6 +30,39 @@ use App\Models\Category;
 
 Route::get('/', function () {
     return view('auth/login');
+});
+
+Route::get('/landing', function () {
+    return view('layout-users/landingpage');
+});
+
+Route::get('/wisata', function () {
+    return view('layout-users/wisata');
+});
+
+Route::get('/contact-us', function () {
+    return view('layout-users/contact');
+});
+
+Route::get('/about-us', function () {
+    return view('layout-users/about');
+});
+
+Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
+Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
+
+
+
+Route::get('/reservasi-user', function () {
+    return view('layout-users/reservasi');
+});
+
+Route::get('/transaksi-user', function () {
+    return view('layout-users/transaksi');
+});
+
+Route::get('/testimoni', function () {
+    return view('layout-users/testimoni');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
