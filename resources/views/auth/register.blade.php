@@ -237,7 +237,7 @@
                                     </div>
                                 </form>
                                 <div class="mt-5 text-muted text-center" style="margin-bottom: -35px;">
-                                    <a class="text-link">Sudah punya akun?</a> <a href="/login"
+                                    <a class="text-link">Sudah punya akun?</a> <a href="/log-in"
                                         class="text-link-register">MASUK</a>
                                 </div>
                                 <div class="simple-footer">

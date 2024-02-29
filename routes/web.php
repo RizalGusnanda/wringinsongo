@@ -29,11 +29,15 @@ use App\Models\Category;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return view('layout-users/landingpage');
 });
 
 Route::get('/landing', function () {
     return view('layout-users/landingpage');
+});
+
+Route::get('/log-in', function () {
+    return view('auth/login');
 });
 
 Route::get('/wisata', function () {

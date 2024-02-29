@@ -61,7 +61,7 @@
                 <ul class="navbar-nav ml-auto navbar-button">
                     @if (!auth()->user())
                         <li class="nav-item">
-                            <a class="px-4 py-1 btn mr-2 btn-login" href="/">Login</a>
+                            <a class="px-4 py-1 btn mr-2 btn-login" href="/log-in">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="px-4 py-1 btn btn-regis" href="/register">Daftar</a>
