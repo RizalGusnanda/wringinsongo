@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-12 col-md-8 col-sm-12">
                         <h1 class="welcome-title">Selamat Datang di </br><span class="wringin">Wringin</span><span
-                                class="songo">Songo</span></h1>
+                                class="songo">songo</span></h1>
                         <p class="welcome-fill">Tempat Wisata Tersembunyi yang Penuh Keindahan dan Keasrian Alam.</p>
                         <form action="/search" method="GET" class="search-form text-center">
                             <div class="input-group mb-3 justify-content-center">
