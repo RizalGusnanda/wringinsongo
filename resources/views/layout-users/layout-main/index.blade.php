@@ -69,16 +69,16 @@
                     @else
                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown"
-                                class="nav-link dropdown-toggle nav-link-lg nav-link-user text-primary authVerifikasi">
-                                @if (Auth::user()->profile && Auth::user()->profile->foto != '')
-                                    <img alt="image" src="{{ Storage::url(Auth::user()->profile->foto) }}"
-                                        class="rounded-circle mr-1" style="width: 35px; height: 35px;">
+                                class="nav-link dropdown-toggle nav-link-lg nav-link-user authVerifikasi">
+                                @if (auth()->check() && auth()->user()->profile && auth()->user()->profile->profile_image)
+                                    <img src="{{ Storage::url(auth()->user()->profile->profile_image) }}"
+                                        style="width: 35px; height: 35px;" class="rounded-circle mr-1">
                                 @else
                                     <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                         class="rounded-circle mr-1" style="width: 35px; height: 35px;">
                                 @endif
-                                <div class="d-sm-none d-lg-inline-block" style="color: #070D59">
-                                    Hai, {{ auth()->user()->name }}
+                                <div class="d-sm-none d-lg-inline-block" style="color: #000000">
+                                    Hai, {{ strlen(auth()->user()->name) > 6 ? ucfirst(strtolower(substr(auth()->user()->name, 0, 6))) . '..' : ucfirst(strtolower(auth()->user()->name)) }}
                                 </div>
                             </a>
                             <hr class="hr-navbar" style="display: none;">
@@ -126,15 +126,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
-                        <a href="#" class="footer-site-logo d-block mb-4"><img src="{{ asset('assets/img/avatar/foot-logo.png') }}" class="img-fluid"></a>
-                        <p class="footer-text">Kami adalah platform inovatif yang <br> menyediakan informasi destinasi wisata yang <br> berada di Desa Wringinsongo.</p>
+                        <a href="#" class="footer-site-logo d-block mb-4"><img
+                                src="{{ asset('assets/img/avatar/foot-logo.png') }}" class="img-fluid"></a>
+                        <p class="footer-text">Kami adalah platform inovatif yang <br> menyediakan informasi destinasi
+                            wisata yang <br> berada di Desa Wringinsongo.</p>
                     </div>
-    
+
                     <div class="col-md-6">
                         <h5 class="kontak-km">Kontak Kami</h5>
                         <ul class="list-unstyled contact-list">
-                            <li><a href="#" class="foot1 text-white">wringinsongo.tumpang@malangkab.go.id</a></li>
-                            <li><a href="#" class="foot2 text-white">Jl. Glanggang Raya, Sumberringin, Wringinsongo, Kec. Tumpang, Kabupaten Malang</a></li>
+                            <li><a href="#" class="foot1 text-white">wringinsongo.tumpang@malangkab.go.id</a>
+                            </li>
+                            <li><a href="#" class="foot2 text-white">Jl. Glanggang Raya, Sumberringin,
+                                    Wringinsongo, Kec. Tumpang, Kabupaten Malang</a></li>
                             <li><a href="#" class="foot3 text-white">kode pos : 65156</a></li>
                         </ul>
                     </div>
@@ -142,7 +146,7 @@
             </div>
         </footer>
     </section>
-    
+
 
 
 

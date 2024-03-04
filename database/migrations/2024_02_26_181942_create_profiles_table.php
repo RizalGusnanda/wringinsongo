@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('profile_image')->nullable();
             $table->string('address');
             $table->string('phone_number');
             $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->restrictOnDelete();
         });
     }
 

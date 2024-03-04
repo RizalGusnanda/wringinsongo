@@ -6,7 +6,9 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Http\Requests\StoreprofilesRequest;
 use App\Http\Requests\UpdateProfilesRequest;
+use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -24,10 +26,21 @@ class ProfilesController extends Controller
 
     public function profile()
     {
-        $userId = Auth::id();
-        $profile = Profile::where('user_id', $userId)->first();
+        $user = Auth::id();
+        $users = DB::table('users')->select('id', 'name', 'email')->where('id', $user)->first();
+        $profile = DB::table('profiles')->join('users', 'profiles.user_id', 'users.id')
+            ->select(
+                'profiles.user_id',
+                'profiles.profile_image',
+                'profiles.phone_number',
+                'profiles.gender',
+                'profiles.address',
+                'users.name',
+                'users.email'
+            )->where('profiles.user_id', $user)
+            ->first();
 
-        return view('layout-users.profileUser', ['profile' => $profile]);
+        return view('layout-users.profileUser', ['profile' => $profile, 'users' => $users]);
     }
 
     /**
@@ -84,8 +97,9 @@ class ProfilesController extends Controller
 
     public function update(UpdateProfilesRequest $request)
     {
-        $userId = Auth::id();
-        $user = User::findOrFail($userId);
+        $user = Auth::user();
+        $originalUser = $user->getOriginal();
+        $isChanged = false;
 
         if ($request->filled('password_current')) {
             if (!\Hash::check($request->input('password_current'), $user->password)) {
@@ -103,25 +117,46 @@ class ProfilesController extends Controller
             ]);
 
             $user->password = bcrypt($request->input('password_new'));
+            $isChanged = true;
         }
 
-        $user->name = $request->input('username');
-        $user->email = $request->input('email');
+        $profile = Profile::firstOrNew(['user_id' => $user->id]);
+
+        $profile->address = $request->filled('address') ? $request->input('address') : $profile->address;
+        $profile->phone_number = $request->filled('phone_number') ? $request->input('phone_number') : $profile->phone_number;
+        $profile->gender = $request->filled('gender') ? $request->input('gender') : $profile->gender;
+
+        if ($profile->isDirty()) {
+            $isChanged = true;
+        }
+
+        $user->name = $request->input('username') != $user->name ? $request->input('username') : $user->name;
+        $user->email = $request->input('email') != $user->email ? $request->input('email') : $user->email;
+
+        if ($user->isDirty()) {
+            $isChanged = true;
+        }
+
+        if ($request->hasFile('profile_image')) {
+            if ($profile->profile_image) {
+                Storage::disk('public')->delete($profile->profile_image);
+            }
+
+            $filename = time() . '.' . $request->file('profile_image')->getClientOriginalExtension();
+            $imagePath = $request->file('profile_image')->storeAs('profile_images', $filename, 'public');
+            $profile->profile_image = $imagePath;
+            $isChanged = true;
+        }
+
+        if (!$isChanged) {
+            return redirect()->back()->with('error', 'Profile gagal diperbarui karena tidak ada perubahan data.');
+        }
+
         $user->save();
+        $profile->save();
 
-        $profile = Profile::updateOrCreate(
-            ['user_id' => $userId],
-            [
-                'address' => $request->input('address'),
-                'phone_number' => $request->input('phone_number'),
-                'gender' => $request->input('gender')
-            ]
-        );
-
-        return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Profile berhasil diperbarui.');
     }
-
-
 
 
 

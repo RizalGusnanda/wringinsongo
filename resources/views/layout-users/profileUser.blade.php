@@ -14,27 +14,72 @@
                             <div class="bg-primary-section card py-1 card-profile1 mb-4">
                                 @if (session('success'))
                                     <div class="alert alert-scs" role="alert">
-                                        {{ session('success') }}
+                                        <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                            <i class="far fa-lightbulb"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            {{ session('success') }}
+                                        </div>
+                                        <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                            <button type="button" class="close-alrt" data-bs-dismiss="alert" aria-label="Close">
+                                                <span>X</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 @endif
+                                @if (session('error'))
+                                    <div class="alert alert-dgr" role="alert">
+                                        <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                            <i class="far fa-lightbulb"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            {{ session('error') }}
+                                        </div>
+                                        <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                            <button type="button" class="close-alrt2" data-bs-dismiss="alert" aria-label="Close">
+                                                <span>X</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="profile-widget-description m-4 text-center">
                                             <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card1">Profile
                                             </h5>
-                                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
-                                                class=" profile-widget-picture img-fluid card-profile-img"
-                                                style="max-width: 60%; height: auto; border-radius:15px; object-fit: cover;">
+                                            @php
+                                                $defaultImagePath = asset('assets/img/avatar/avatar-1.png');
+                                                if (!is_null($profile)) {
+                                                    $storageImagePath = $profile->profile_image
+                                                        ? Storage::url($profile->profile_image)
+                                                        : null;
+                                                } else {
+                                                    $storageImagePath = null;
+                                                }
 
-                                            <label for="profile-picture-upload" class="upload-icon">
-                                                <i class="fas fa-plus-circle"></i>
-                                            </label>
-                                            <input type="file" id="profile-picture-upload"
-                                                accept="image/jpeg, image/jpg, image/png" style="display: none;">
+                                                $imagePath = $storageImagePath ?: $defaultImagePath;
+                                            @endphp
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <div class="col-md-5 d-flex justify-content-center">
+                                                    <div class="profile-picture-container">
+                                                        <img alt="image" src="{{ $imagePath }}"
+                                                            class="profile-widget-picture rounded-circle card-profile-img"
+                                                            id="profile-picture">
+                                                        <label for="profile-picture-upload" class="upload-icon">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </label>
+                                                        <input type="file" id="profile-picture-upload"
+                                                            accept="image/jpeg, image/jpg, image/png" style="display: none;"
+                                                            name="profile_image">
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="profile-widget-description ml-4 mr-4 mt-4"
+                                        <div class="profile-widget-description mr-4 mt-4"
                                             style="display: flex; flex-direction: column;">
                                             <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card2">Ubah
                                                 Kata Sandi</h5>
@@ -42,9 +87,11 @@
                                             @if ($errors->has('password_current'))
                                                 <div class="alert custom-alert alert-dismissible fade show" role="alert">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span>Password Sekarang Salah</span>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                            aria-label="Close"></button>
+                                                        <span class="title-close">Password Sekarang Salah</span>
+                                                        <button type="button" class="close" data-bs-dismiss="alert"
+                                                            aria-label="Close">
+                                                            <span>X</span>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             @endif
@@ -87,28 +134,35 @@
                                     <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card3">Informasi
                                         Pengguna</h5>
 
+
+
                                     <div class="d-flex justify-content-center align-items-center mb-3">
                                         <label class="small mb-1 mr-2" for="inputUsername"
                                             style="min-width: 150px;">Username</label>
                                         <input class="form-control" id="inputUsername" type="text" name="username"
-                                            value="{{ auth()->user()->name }}" pattern="^[A-Za-z\s]+$" maxlength="30"
-                                            oninput="validateUsername(this)" style="width: 70%;" required>
+                                            value="@if (is_null($profile)) {{ $users->name }}@else{{ $profile->name }} @endif"
+                                            pattern="^[A-Za-z\s]+$" maxlength="30" oninput="validateUsername(this)"
+                                            style="width: 70%;" required>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center mb-3">
                                         <label class="small mb-1 mr-2" for="inputEmailAddress"
                                             style="min-width: 150px;">Email</label>
                                         <input class="form-control" id="inputEmailAddress" type="email" name="email"
-                                            value="{{ auth()->user()->email }}" pattern="^.+@gmail\.com$"
-                                            oninput="validateEmail(this)" style="width: 70%;" required>
+                                            value="@if (is_null($profile)) {{ $users->email }}@else{{ $profile->email }} @endif"
+                                            pattern="^.+@gmail\.com$" oninput="validateEmail(this)" style="width: 70%;"
+                                            required>
                                     </div>
+
 
                                     <div class="d-flex justify-content-center align-items-center mb-3">
                                         <label class="small mb-1 mr-2" for="inputAddress"
                                             style="min-width: 150px;">Alamat</label>
                                         <input type="text" class="form-control" id="inputAddress" name="address"
                                             rows="3" style="width: 70%;" maxlength="50"
-                                            value="{{ $profile->address ?? old('address') }}" required oninvalid="this.setCustomValidity('Harap masukkan alamat terlebih dahulu.')" oninput="this.setCustomValidity('')">
+                                            value="{{ $profile->address ?? old('address') }}" required
+                                            oninvalid="this.setCustomValidity('Harap masukkan alamat terlebih dahulu.')"
+                                            oninput="this.setCustomValidity('')">
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center mb-3">
@@ -118,7 +172,8 @@
                                             name="phone_number"
                                             title="Harap masukkan nomor telepon yang valid, 10-13 digit angka."
                                             value="{{ $profile->phone_number ?? old('phone_number') }}"
-                                            pattern="^\d{11,13}$" style="width: 70%;" required oninvalid="this.setCustomValidity('Harap masukkan nomor telepon yang valid. 11-13 digit angka.')"
+                                            pattern="^\d{11,13}$" style="width: 70%;" required
+                                            oninvalid="this.setCustomValidity('Harap masukkan nomor telepon yang valid. 11-13 digit angka.')"
                                             oninput="this.setCustomValidity('')">
                                     </div>
 
@@ -126,7 +181,9 @@
                                         <label class="small mb-1 mr-2" for="inputGender" style="min-width: 150px;">Jenis
                                             Kelamin</label>
                                         <select class="form-control" id="inputGender" name="gender" style="width: 70%;"
-                                            required oninvalid="this.setCustomValidity('Harap pilih jenis kelamin terlebih dahulu.')" oninput="this.setCustomValidity('')">
+                                            required
+                                            oninvalid="this.setCustomValidity('Harap pilih jenis kelamin terlebih dahulu.')"
+                                            oninput="this.setCustomValidity('')">
                                             <option value="">Pilih Jenis Kelamin...</option>
                                             <option value="Laki-laki"
                                                 {{ isset($profile) && $profile->gender === 'Laki-laki' ? 'selected' : '' }}>
@@ -161,19 +218,36 @@
             var profileImage = document.querySelector('.profile-widget-picture');
 
             profileImage.src = imageUrl;
-        });
-    </script>
-    <script>
-        var closeButtons = document.querySelectorAll('.btn-close');
+            profileImage.onload = function() {
+                URL.revokeObjectURL(profileImage.src);
+            };
 
+            profileImage.style.maxWidth = "200px";
+            profileImage.style.maxHeight = "200px";
+        });
+
+        document.querySelectorAll('.close-alrt').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var alert = this.closest('.alert');
+                alert.style.display = 'none';
+            });
+        });
+
+        document.querySelectorAll('.close-alrt2').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var alert = this.closest('.alert');
+                alert.style.display = 'none';
+            });
+        });
+
+        var closeButtons = document.querySelectorAll('close');
         closeButtons.forEach(function(button) {
             button.addEventListener('click', function() {
                 var alert = this.closest('.alert');
                 alert.style.display = 'none';
             });
         });
-    </script>
-    <script>
+
         document.getElementById('inputPhoneNumber').addEventListener('input', function(e) {
             let inputValue = e.target.value;
             let sanitizedValue = inputValue.replace(/\D/g, '');

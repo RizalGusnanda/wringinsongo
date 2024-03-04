@@ -94,8 +94,12 @@
         <section id="about-section" class="bg-about">
             <div class="container py-5">
                 <div class="row align-items">
-                    <div class="col-lg-5 col-md-4 col-sm-12">
+                    <div class="col-lg-5 col-md-4 col-sm-12 position-relative">
                         <img class="img-fluid landing" src="{{ asset('assets/img/avatar/balai.png') }}" alt="Trulli">
+                        <a href="#" class="play-btn" data-toggle="modal" data-target="#videoModal">
+                            <i class="fas fa-play-circle fa-3x"
+                                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255, 255, 255, 0.5);"></i>
+                        </a>
                     </div>
                     <div class="col-lg-7 col-md-8 col-sm-12">
                         <h1 class="about-h">Desa Wringinsongo</h1>
@@ -113,10 +117,30 @@
             </div>
         </section>
 
+        <!-- Modal Video -->
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalLabel" style="text-align: center">Video Tour</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ratio ratio-16x9">
+                            <iframe id="youtubeVideo" class="embed-responsive-item" src="https://www.youtube.com/embed/E6z5MQUGO2g?start=18&end=240&autoplay=1&mute=1" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Akhir Video -->
+
         <section class="land-wisata">
             <div class="container">
-                <h3 class="text-center mt-4 font-weight-bold title-land-wis" style=" ">Rekomendasi Destinasi Wisata <span
-                        class="wringin3">Wringin</span><span class="songo3">songo</span>
+                <h3 class="text-center mt-4 font-weight-bold title-land-wis" style=" ">Rekomendasi Destinasi Wisata
+                    <span class="wringin3">Wringin</span><span class="songo3">songo</span>
                 </h3>
                 <div class="row">
                     <div class="col-md-3 mx-auto">
@@ -124,7 +148,8 @@
                             <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid" alt="Wisata Image">
                             <div class="wisata-info">
                                 <h2 class="wisata-title">Nama Wisata</h2>
-                                <p class="wisata-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                                <p class="wisata-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nulla
                                     quis justo a elit rhoncus ultricies. Suspendisse potenti. Sed non sem eu nisi auctor
                                     finibus.</p>
                                 <a href="#" class="btn btn-detailwisata">Lihat Detail</a>
@@ -136,7 +161,8 @@
                             <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid" alt="Wisata Image">
                             <div class="wisata-info">
                                 <h2 class="wisata-title">Nama Wisata</h2>
-                                <p class="wisata-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                                <p class="wisata-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nulla
                                     quis justo a elit rhoncus ultricies. Suspendisse potenti. Sed non sem eu nisi auctor
                                     finibus.</p>
                                 <a href="#" class="btn btn-detailwisata">Lihat Detail</a>
@@ -148,7 +174,8 @@
                             <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid" alt="Wisata Image">
                             <div class="wisata-info">
                                 <h2 class="wisata-title">Nama Wisata</h2>
-                                <p class="wisata-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                                <p class="wisata-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nulla
                                     quis justo a elit rhoncus ultricies. Suspendisse potenti. Sed non sem eu nisi auctor
                                     finibus.</p>
                                 <a href="#" class="btn btn-detailwisata">Lihat Detail</a>
@@ -161,4 +188,6 @@
         </section>
 
     </section>
+
+    
 @endsection

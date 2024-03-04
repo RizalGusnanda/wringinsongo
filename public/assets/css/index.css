@@ -57,12 +57,14 @@ a.btn-regis:focus {
     font-size: 14px;
 }
 
-.foot1, .foot2, .foot3{
+.foot1,
+.foot2,
+.foot3 {
     font-size: 14px;
     text-decoration: none;
 }
 
-.contact-list{
+.contact-list {
     margin-top: 25px;
 }
 
@@ -363,11 +365,15 @@ h3.text-center.mt-4.font-weight-bold {
 .upload-icon {
     position: absolute;
     top: 90%;
-    left: 90%;
     transform: translate(-50%, -50%);
     font-size: 30px;
     color: #1F3C88;
     cursor: pointer;
+}
+
+.card-profile-img {
+    width: 200px;
+    height: 200px;
 }
 
 .profile-widget-description {
@@ -484,56 +490,58 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 /* transaksi wisata */
-.tr-wisata{
+.tr-wisata {
     text-align: center;
 }
 
-.tr-jdl{
+.tr-jdl {
     margin-left: 40px;
 }
 
-.tr-jml, .tr-tb, .tr-tgl{
+.tr-jml,
+.tr-tb,
+.tr-tgl {
     margin-top: -15px;
 }
 
-.status-text{
+.status-text {
     margin-left: 10px;
     font-size: 16px;
     color: #ffc107;
 }
 
-.status-text2{
+.status-text2 {
     margin-left: 10px;
     font-size: 16px;
     color: #198754;
 }
 
-.btn-byr{
+.btn-byr {
     border-radius: 20px;
     background-color: #265073;
     color: #ffffff;
     font-size: 16px;
 }
 
-.btn-byr:hover{
+.btn-byr:hover {
     background-color: #1F3C88;
     color: #ffffff;
 }
 
-.tr-crd{
+.tr-crd {
     box-shadow: 4px rgba(0, 0, 0, 0.1);
     border: 2px solid #ccc;
     margin-bottom: 5px;
 }
 
-.btn-testim{
+.btn-testim {
     border-radius: 20px;
     background-color: #265073;
     color: #ffffff;
     width: auto;
 }
 
-.btn-testim:hover{
+.btn-testim:hover {
     background-color: #1F3C88;
     color: #ffffff;
 }
@@ -541,15 +549,16 @@ h3.text-center.mt-4.font-weight-bold {
 .custom-alert {
     width: 86%;
     margin-left: 30px;
-    font-size: 14px;
+    font-size: 16px;
     background-color: #fc544b;
+    color: #FFFFFF;
 }
 
 .alert-clr {
     color: #000000;
 }
 
-.alert-scs{
+.alert-scs {
     background-color: #63ed7a;
     width: 96%;
     margin: auto;
@@ -558,9 +567,40 @@ h3.text-center.mt-4.font-weight-bold {
     align-items: center;
     margin-top: 10px;
     margin-bottom: -10px;
+    font-size: 16px;
     color: #FFFFFF;
 }
 
+.close-alrt{
+    background-color: #63ed7a;
+    border: none;
+    color: #FFFFFF;
+}
+
+.alert-dgr{
+    background-color: #fc544b;
+    width: 96%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.close-alrt2{
+    background-color: #fc544b;
+    border: none;
+    color: #FFFFFF;
+}
+
+.close{
+    background-color: #fc544b;
+    border: none;
+    color: #FFFFFF;
+}
 
 
 @media (max-width: 768px) {
@@ -568,11 +608,11 @@ h3.text-center.mt-4.font-weight-bold {
         margin-top: 20px;
     }
 
-    .kontak-km{
+    .kontak-km {
         margin-top: 20px;
     }
 
-    .contact-list{
+    .contact-list {
         margin-top: 0px;
     }
 
@@ -647,7 +687,6 @@ h3.text-center.mt-4.font-weight-bold {
 
     .profile-title-card2 {
         color: #265073;
-        text-align: center;
     }
 
     .card {
@@ -669,7 +708,9 @@ h3.text-center.mt-4.font-weight-bold {
         margin-top: 10px;
     }
 
-    .card-kod-res, .card-date-res, .card-tick-res{
+    .card-kod-res,
+    .card-date-res,
+    .card-tick-res {
         text-align: center;
     }
 
@@ -684,27 +725,30 @@ h3.text-center.mt-4.font-weight-bold {
         flex-direction: column;
     }
 
-    .dt-res .dt-ws > div {
+    .dt-res .dt-ws>div {
         flex: 0 0 100%;
         max-width: 100%;
     }
 
-    .status-text{
+    .status-text {
         margin-left: 5px;
     }
 
-    .tr-jdl, .col-6 {
+    .tr-jdl,
+    .col-6 {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin-left: 0;
     }
 
-    .tr-jdl p, .col-6 p {
+    .tr-jdl p,
+    .col-6 p {
         margin-top: 5px;
     }
 
-    .tr-jdl p strong, .col-6 p strong {
+    .tr-jdl p strong,
+    .col-6 p strong {
         display: inline-block;
         width: 120px;
     }
@@ -748,7 +792,7 @@ h3.text-center.mt-4.font-weight-bold {
         padding-right: 20px;
     }
 
-    .search-input{
+    .search-input {
         flex: 1;
         width: 500px;
         padding: 10px;
@@ -761,7 +805,8 @@ h3.text-center.mt-4.font-weight-bold {
         font-size: 12px;
     }
 
-    .card-date-res .card-tick-res, .card-kod-res{
+    .card-date-res .card-tick-res,
+    .card-kod-res {
         font-size: 14px;
     }
 
@@ -769,5 +814,10 @@ h3.text-center.mt-4.font-weight-bold {
         width: 82%;
         height: auto;
     }
-      
+
+    .card-profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
 }
