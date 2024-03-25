@@ -3,6 +3,7 @@
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
+use App\Http\Controllers\MenuWisataController;
 use App\Http\Controllers\RoleAndPermission\AssignPermissionController;
 use App\Http\Controllers\RoleAndPermission\AssignUserToRoleController;
 use App\Http\Controllers\RoleAndPermission\ExportPermissionController;
@@ -13,6 +14,11 @@ use App\Http\Controllers\RoleAndPermission\PermissionController;
 use App\Http\Controllers\RoleAndPermission\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\ReservasiWisataController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ToursController;
+use App\Http\Controllers\DetailWisataController;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -28,25 +34,21 @@ use App\Models\Category;
 |
 */
 
-Route::get('/', function () {
-    return view('layout-users/landingpage');
-});
+Route::get('/', [LandingController::class, 'show']);
 
-Route::get('/landing', function () {
-    return view('layout-users/landingpage');
-});
+Route::get('/landing', [LandingController::class, 'show']);
 
 Route::get('/log-in', function () {
     return view('auth/login');
 });
 
-Route::get('/wisata', function () {
-    return view('layout-users/wisata');
-});
+Route::get('/wisata', [ToursController::class, 'index']);
 
 Route::get('/contact-us', function () {
     return view('layout-users/contact');
 });
+
+Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
 
 Route::get('/about-us', function () {
     return view('layout-users/about');
@@ -55,7 +57,9 @@ Route::get('/about-us', function () {
 Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
 Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
 
-
+Route::get('/profileAdmin', function () {
+    return view('profile-admin.index');
+});
 
 Route::get('/reservasi-user', function () {
     return view('layout-users/reservasi');
@@ -70,9 +74,10 @@ Route::get('/testimoni', function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('home', ['users' => User::get(),]);
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('home', ['users' => User::get(),]);
+    // });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
     //user list
 
     Route::prefix('user-management')->group(function () {
@@ -86,6 +91,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('menu-group', MenuGroupController::class);
         Route::resource('menu-item', MenuItemController::class);
     });
+
+    Route::prefix('wisata-management')->group(function () {
+        Route::resource('menu-wisata', MenuWisataController::class);
+        Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
+        Route::resource('reservasi-wisata', ReservasiWisataController::class);
+    });
+
     Route::group(['prefix' => 'role-and-permission'], function () {
         //role
         Route::resource('role', RoleController::class);

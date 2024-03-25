@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="card-body">
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-12" data-aos="fade-right">
                                                 <div class="card tr-crd">
                                                     <div class="card-body">
                                                         <h5 class="card-title tr-wisata"> Wisata Wringinsongo</h5>
@@ -64,7 +64,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12" data-aos="fade-right">
                                                 <div class="card tr-crd">
                                                     <div class="card-body">
                                                         <h5 class="card-title tr-wisata"> Wisata Wringinsongo</h5>

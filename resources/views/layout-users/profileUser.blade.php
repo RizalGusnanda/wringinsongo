@@ -82,7 +82,7 @@
                                         <div class="profile-widget-description mr-4 mt-4"
                                             style="display: flex; flex-direction: column;">
                                             <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card2">Ubah
-                                                Kata Sandi</h5>
+                                                Password</h5>
 
                                             @if ($errors->has('password_current'))
                                                 <div class="alert custom-alert alert-dismissible fade show" role="alert">
@@ -97,14 +97,14 @@
                                             @endif
 
 
-                                            <div class="mb-3" style="margin-left: 30px;">
+                                            <div class="mb-3 ml-customs">
                                                 <label class="small mb-1" for="inputPassword">Password Sekarang</label>
                                                 <input class="form-control" id="inputPassword" type="password"
                                                     name="password_current" style="width: 90%;">
                                             </div>
 
-                                            <div class="mb-3" style="margin-left: 30px;">
-                                                <label class="small mb-1" for="inputNewPassword">Kata Sandi Baru</label>
+                                            <div class="mb-3 ml-customs">
+                                                <label class="small mb-1" for="inputNewPassword">Password Baru</label>
                                                 <input class="form-control" id="inputNewPassword" type="password"
                                                     name="password_new" style="width: 90%;">
                                                 @if ($errors->has('password_new'))
@@ -112,9 +112,8 @@
                                                 @endif
                                             </div>
 
-                                            <div class="mb-3" style="margin-left: 30px;">
-                                                <label class="small mb-1" for="inputConfirmPassword">Konfirmasi Kata
-                                                    Sandi</label>
+                                            <div class="mb-3 ml-customs">
+                                                <label class="small mb-1" for="inputConfirmPassword">Konfirmasi Password</label>
                                                 <input class="form-control" id="inputConfirmPassword" type="password"
                                                     name="password_confirm" style="width: 90%;">
                                                 @if ($errors->has('password_confirm'))

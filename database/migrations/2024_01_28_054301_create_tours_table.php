@@ -15,19 +15,22 @@ return new class extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_subfacilities')->nullable();
-            $table->unsignedBigInteger('id_type')->nullable();
             $table->unsignedBigInteger('id_testimonis')->nullable();
             $table->string('profile_tour')->nullable();
             $table->string('name');
-            $table->string('description');
-            $table->string('longitud');
-            $table->string('latitud');
-            $table->string('virtual_tour');
+            $table->text('description');
+            $table->string('longitud')->nullable();
+            $table->string('latitud')->nullable();
+            $table->text('history')->nullable();
+            $table->string('maps');
+            $table->string('fasilitas_km');
+            $table->string('fasilitas_tm');
+            $table->string('fasilitas_ti');
+            $table->string('type');
+            $table->string('harga_tiket')->nullable();
+            $table->string('virtual_tour')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_subfacilities')->references('id')->on('subfacilities')->restrictOnDelete();
-            $table->foreign('id_type')->references('id')->on('types')->restrictOnDelete();
             $table->foreign('id_testimonis')->references('id')->on('testimonis')->restrictOnDelete();
         });
     }

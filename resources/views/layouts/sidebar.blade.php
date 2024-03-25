@@ -37,6 +37,14 @@
                 <li><a class="nav-link " href="{{ route('menu-item.index') }}">Menu Item</a></li>
             </ul>
         </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-list"></i>
+                <span>Menu Wisata</span></a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link " href="{{ route('menu-wisata.index') }}">Menu Wisata</a></li>
+                <li><a class="nav-link " href="{{ route('reservasi-wisata.index') }}">Reservasi Tiket</a></li>
+            </ul>
+        </li>
     </ul>
 
 </aside>

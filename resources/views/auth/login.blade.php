@@ -136,6 +136,21 @@
                 font-size: 12px;
             }
         }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .img-login {
+                margin-top: 30%
+            }
+
+            .ctn-login {
+                margin-top: 30%
+            }
+
+            .col-sm-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -152,7 +167,7 @@
                             </div>
                             <div class="col mt-5">
                                 <img src="{{ asset('assets/img/avatar/cuate.png') }}" alt="" srcset=""
-                                    style="width: 100%">
+                                    style="width: 100%" class="img-login">
                             </div>
                         </div>
                     </div>
@@ -162,8 +177,8 @@
                     <div style="background-color:#ffffff;">
                         <div class="card-body">
                             <div class="col mt-5 heading-text">
-                                <h3 style="color: #000000">Selamat datang di desa <img
-                                        src="{{ asset('assets/img/avatar/Wringinsongo.png') }}" alt=""
+                                <h3 class="ctn-login" style="color: #000000">Selamat datang di desa <img
+                                        src="{{ asset('assets/img/avatar/log-wringinsongo.png') }}" alt=""
                                         srcset="" style="width: 35%;"></h3>
                             </div>
                             <div class="col mt-4 welcome-text">

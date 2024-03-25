@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\tours;
 use App\Http\Requests\StoretoursRequest;
 use App\Http\Requests\UpdatetoursRequest;
+use Illuminate\Http\Request;
+
 
 class ToursController extends Controller
 {
@@ -13,10 +15,31 @@ class ToursController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->query('wisata');
+
+        if ($search) {
+            $tours = Tours::where('name', 'like', '%' . $search . '%')->paginate(5);
+        } else {
+            $tours = Tours::paginate(5);
+        }
+
+        if ($tours->isEmpty() && $search) {
+            return view('layout-users.wisata', compact('tours', 'search'))->with('error', 'Destinasi Wisata tidak ditemukan!');
+        }
+
+        return view('layout-users.wisata', compact('tours', 'search'));
     }
+
+
+    public function detail($id)
+    {
+        $tour = Tours::find($id);
+        return view('layout-users.detailWisata', compact('tour'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

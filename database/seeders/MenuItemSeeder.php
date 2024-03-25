@@ -66,6 +66,18 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'menu-item.index',
                     'menu_group_id' => 4,
                 ],
+                [
+                    'name' => 'Menu Wisata',
+                    'route' => 'wisata-management/menu-wisata',
+                    'permission_name' => 'menu-wisata.index',
+                    'menu_group_id' => 5,
+                ],
+                [
+                    'name' => 'Reservasi Tiket',
+                    'route' => 'wisata-management/reservasi-wisata',
+                    'permission_name' => 'reservasi-wisata.index',
+                    'menu_group_id' => 5,
+                ]
             ]
         );
     }

@@ -31,7 +31,7 @@
                                                 class="card-title font-weight-bold d-block mx-2 profile-title-card4 text-center">
                                                 Data Transaksi</h5>
                                         </div>
-                                        <div class="card-body dt-res">
+                                        <div class="card-body dt-res" data-aos="fade-right">
                                             <div class="row align-items-center">
                                                 <div class="col-md-4 d-flex justify-content-center">
                                                     <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid"
@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body dt-res">
+                                        <div class="card-body dt-res" data-aos="fade-right">
                                             <div class="row align-items-center">
                                                 <div class="col-md-4 d-flex justify-content-center">
                                                     <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid"
@@ -85,7 +85,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body dt-res">
+                                        <div class="card-body dt-res" data-aos="fade-right">
                                             <div class="row align-items-center">
                                                 <div class="col-md-4 d-flex justify-content-center">
                                                     <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid"
@@ -112,7 +112,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body dt-res">
+                                        <div class="card-body dt-res" data-aos="fade-right">
                                             <div class="row align-items-center">
                                                 <div class="col-md-4 d-flex justify-content-center">
                                                     <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid"
@@ -139,7 +139,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body dt-res">
+                                        <div class="card-body dt-res" data-aos="fade-right">
                                             <div class="row align-items-center">
                                                 <div class="col-md-4 d-flex justify-content-center">
                                                     <img src="{{ asset('assets/img/avatar/balai.png') }}" class="img-fluid"

@@ -25,6 +25,18 @@
             overflow: auto;
         }
 
+        .regist-kr{
+            background-color:rgba(31, 60, 136, 0.90);
+        }
+
+        .regist-kn{
+            background-color:#fff;
+        }
+
+        .ctn-register{
+            color: #000000
+        }
+
         .heading-text h3 {
             margin-left: 30px;
         }
@@ -66,7 +78,6 @@
 
         .text-link-register {
             color: #EE6F57;
-
         }
 
         .btn.btn-lg {
@@ -132,7 +143,17 @@
                 padding: 0.45rem 1.25rem;
                 font-size: 12px;
             }
+
         }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+                .img-register{
+                    margin-top: 58%
+                }
+                .ctn-register{
+                    margin-top: 50%
+                }
+            }
     </style>
 </head>
 
@@ -141,7 +162,7 @@
         <section class="section full-screen-section p-0">
             <div class="row d-flex justify-content-between m-0">
                 <div class="col-md-6 col-sm-6 col-lg-6 full-height-card">
-                    <div style="background-color:rgba(31, 60, 136, 0.90);">
+                    <div class="regist-kr">
                         <div class="card-body">
                             <div class="col mt-1">
                                 <img src="{{ asset('assets/img/avatar/Wringinsongo.png') }}" alt=""
@@ -149,17 +170,17 @@
                             </div>
                             <div class="col mt-5">
                                 <img src="{{ asset('assets/img/avatar/cuate.png') }}" alt="" srcset=""
-                                    style="width: 100%">
+                                    style="width: 100%" class="img-register">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-lg-6 full-height-card">
-                    <div style="background-color:#fff;">
+                    <div class="regist-kn">
                         <div class="card-body">
                             <div class="col mt-5 welcome-text">
-                                <h3 style="color: #000000">Registrasi</h3>
+                                <h3 class="ctn-register">Registrasi</h3>
                             </div>
 
                             <div class="input-container">
