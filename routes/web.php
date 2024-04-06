@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ToursController;
 use App\Http\Controllers\DetailWisataController;
+use App\Http\Controllers\ProfileAdminController;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -48,6 +50,10 @@ Route::get('/contact-us', function () {
     return view('layout-users/contact');
 });
 
+Route::get('/contoh-detail', function () {
+    return view('layout-users/contohDetail');
+});
+
 Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
 
 Route::get('/about-us', function () {
@@ -57,17 +63,19 @@ Route::get('/about-us', function () {
 Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
 Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
 
-Route::get('/profileAdmin', function () {
-    return view('profile-admin.index');
-});
+
+Route::get('/profileAdmin', [ProfileAdminController::class, 'index']);
+Route::post('/profileAdmin/update', [ProfileAdminController::class, 'update'])->name('profileadmin.update');
 
 Route::get('/reservasi-user', function () {
     return view('layout-users/reservasi');
 });
 
-Route::get('/transaksi-user', function () {
-    return view('layout-users/transaksi');
-});
+Route::get('/transaksi-user', [CartController::class, 'index'])->name('transaksi.user');
+
+Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.show');
+Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
+Route::get('/transaksi-user/detail/{reference}', [CartController::class, 'detail'])->name('cart.detail');
 
 Route::get('/testimoni', function () {
     return view('layout-users/testimoni');
@@ -95,6 +103,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('wisata-management')->group(function () {
         Route::resource('menu-wisata', MenuWisataController::class);
         Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
+        Route::post('/check-tour-name', [MenuWisataController::class, 'checkTourName'])->name('check-tour-name');
         Route::resource('reservasi-wisata', ReservasiWisataController::class);
     });
 

@@ -1,5 +1,5 @@
 body {
-    font-family: 'Poppins';
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .bg-primary-nav {
@@ -8,16 +8,29 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.bg-default {
+    background-color: #265073;
+}
+
+.header-navb {
+    height: 200px;
+}
+
 a.btn-login {
     border-color: #265073;
     border-radius: 15px;
     color: #265073;
     margin-left: 20px;
     margin-right: 10px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
 }
 
-a.btn-login:hover {
-    background-color: #265073;
+a.btn-login:hover,
+a.btn-login:active {
+    background-color: #265073 !important;
     border-color: #265073;
     color: white !important;
 }
@@ -31,12 +44,17 @@ a.btn-regis {
     border-color: #eb9481;
     color: white;
     border-radius: 15px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
 }
 
-a.btn-regis:hover {
-    background-color: #EE6F57;
+a.btn-regis:hover,
+a.btn-regis:active {
+    background-color: #EE6F57 !important;
     border-color: #EE6F57;
-    color: white;
+    color: white !important;
 }
 
 a.btn-regis:focus {
@@ -48,6 +66,11 @@ a.btn-regis:focus {
     position: relative;
     transition: color 0.5s ease;
     overflow: hidden;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    padding-right: 15px;
+    line-height: 20px;
 }
 
 .navbar-nav li.nav-item.active a.link-navbar {
@@ -73,6 +96,13 @@ a.btn-regis:focus {
     color: #EE6F57 !important;
 }
 
+.nav-prof {
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+}
+
 .myfooter {
     background-color: #265073;
 }
@@ -88,8 +118,23 @@ a.btn-regis:focus {
     text-decoration: none;
 }
 
+.foot-map {
+    line-height: 1px;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
 .contact-list {
-    margin-top: 25px;
+    margin-top: 26px;
+}
+
+.kontak-km {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: 2px;
 }
 
 /* landingpage */
@@ -138,6 +183,10 @@ a.btn-regis:focus {
     color: #000000;
     padding-top: 20px;
     padding-bottom: 50px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
 }
 
 .welcome-fill {
@@ -176,6 +225,7 @@ h3.text-center.mt-4.font-weight-bold {
 
 .card-wringinsongo-view-mobile .card-text {
     font-size: 14px;
+    line-height: 23px;
 }
 
 .card-wringinsongo-view-mobile .fas.fa-info-circle {
@@ -192,6 +242,20 @@ h3.text-center.mt-4.font-weight-bold {
 
 .card-wringinsongo-view-mobile .fas.fa-brain {
     color: #265073 !important;
+}
+
+.title-choose {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+}
+
+.title-ct {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 /* wisata */
@@ -302,16 +366,19 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 .wisata-title {
-    font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-align: center;
-    font-weight: bold;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    padding-right: 15px;
+    line-height: 20px;
 }
 
 .wisata-description {
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: justify;
+    line-height: 23px;
 }
 
 .btn-detailwisata {
@@ -323,12 +390,187 @@ h3.text-center.mt-4.font-weight-bold {
     text-decoration: none;
     margin-top: auto;
     font-size: 14px;
+    line-height: 23px;
 }
 
 .btn-detailwisata:hover,
 .btn-detailwisata:active {
     background-color: #1F3C88 !important;
     color: #fff !important;
+}
+
+/* detail wisata */
+
+.header-img-top {
+    width: 100%;
+    height: 500px;
+    margin-top: -100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.header-img-top:hover {
+    filter: brightness(95%);
+    transform: scale(1.02);
+}
+
+.image-container {
+    position: relative;
+    text-align: center;
+}
+
+.image-container:hover .icon-virtual-tour {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.icon-virtual-tour {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: #fff;
+    background-color: #00000050;
+    border-radius: 50%;
+    padding: 10px;
+    box-sizing: content-box;
+    transition: transform 0.3s ease, background-color 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-virtual-tour:hover {
+    background-color: #0000009d;
+}
+
+.head-tittle-dw {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 45px;
+    color: #ffffff;
+}
+
+.checked {
+    color: orange;
+}
+
+.maps-icn {
+    color: #ffffff;
+    border: 1px solid #fff;
+    border-radius: 5%;
+    font-size: 30px;
+    margin-top: 20px;
+    padding-top: -5px;
+}
+
+.maps-icn:hover {
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.btn-mapsl {
+    background-color: #265073 !important;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+}
+
+.btn-mapsl:hover,
+.btn-mapsl:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+    border-radius: 15px;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom: 2px solid #265073;
+    color: #265073;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom: 2px solid #EE6F57;
+    color: #EE6F57;
+}
+
+.tab-content {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 3px solid #265073;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.facility-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #265073;
+    transition: transform 0.3s ease;
+    transform-origin: top;
+    transform: scaleY(0);
+    z-index: 0;
+}
+
+.facility-card:hover .overlay {
+    transform: scaleY(1);
+}
+
+.facility-card .card-title,
+.facility-card .card-text,
+.facility-card i.material-icons {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+}
+
+.facility-card:hover .card-title,
+.facility-card:hover .card-text,
+.facility-card:hover i.material-icons {
+    color: white;
+}
+
+.reserv-tiket {
+    background-color: #265073 !important;
+    color: #ffffff !important;
+    border-radius: 15px;
+    width: 100%;
+    border: none;
+}
+
+.reserv-tiket:hover,
+.reserv-tiket:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+    border-radius: 15px;
+}
+
+.tesp-dw {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
 }
 
 /* about */
@@ -338,24 +580,30 @@ h3.text-center.mt-4.font-weight-bold {
 
 .about-h {
     color: #000000;
-    font-size: 20px;
-    text-align: center;
-    margin-top: 12px;
+    font-size: 25px;
+    text-align: left;
+    margin-top: 0px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 45px;
 }
 
 .titl-about {
     color: #000000;
-    font-size: 28px;
     text-align: center;
     margin-bottom: 30px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
 }
 
 .img-about-desc {
-    width: 69%;
-    margin-top: 5px;
+    width: 90%;
+    margin-top: 10px;
     margin-bottom: 5px;
     border: 1px solid rgba(0, 0, 0, 0.096);
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .about-p {
@@ -363,11 +611,12 @@ h3.text-center.mt-4.font-weight-bold {
     font-size: 14px;
     text-align: justify;
     margin-right: 32px;
-    margin-top: 15px;
+    margin-top: 10px;
     background-color: #f9f7f7e0;
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.096);
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    line-height: 23px;
 }
 
 /* contact us */
@@ -584,7 +833,7 @@ h3.text-center.mt-4.font-weight-bold {
     font-size: 16px;
 }
 
-.btn-byr:hover, 
+.btn-byr:hover,
 .btn-byr:active {
     background-color: #1F3C88 !important;
     color: #ffffff !important;
@@ -827,34 +1076,40 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 .btn-corrousell {
-    background-color: #265073 !important;
-    color: #fff;
+    background-color: #ffffff !important;
+    color: #265073;
+    font-weight: 600;
+    line-height: 16px;
     border: none;
     border-radius: 15px;
-    padding: 10px 15px;
+    padding: 15px 20px;
     text-decoration: none;
     margin-top: auto;
-    font-size: 14px;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
 .btn-corrousell:hover,
 .btn-corrousell:active {
-    background-color: #1c3b56 !important;
-    color: #fff !important;
+    background-color: #265073 !important;
+    color: #ffffff !important;
 }
 
 .tittle-carausel {
-    font-size: 50px;
+    font-size: 66px;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     font-weight: bold;
     background-color: transparent;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 99px;
 }
 
 .p-carausel {
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    line-height: 26px;
 }
 
 .carousel-caption {
@@ -887,7 +1142,7 @@ h3.text-center.mt-4.font-weight-bold {
 
 .wisata-infox {
     position: absolute;
-    bottom: -50px;
+    bottom: -100px;
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -903,6 +1158,9 @@ h3.text-center.mt-4.font-weight-bold {
 
 .land-wisata-tiitle {
     margin-bottom: 0;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -932,6 +1190,9 @@ h3.text-center.mt-4.font-weight-bold {
 
     .kontak-km {
         margin-top: 20px;
+        font-family: Poppins, sans-serif;
+        font-weight: 700;
+        line-height: 20px;
     }
 
     .contact-list {

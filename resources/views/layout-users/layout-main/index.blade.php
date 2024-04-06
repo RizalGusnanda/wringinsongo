@@ -46,26 +46,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item {{ Request::is('landing') ? 'active' : '' }} mr-4">
+                    <li class="nav-item {{ Request::is('landing') ? 'active' : '' }}">
                         <a class="nav-link link-navbar" href="{{ url('/landing') }}">Home</a>
                     </li>
-                    <li class="nav-item {{ Request::is('wisata') ? 'active' : '' }} mr-4">
+                    <li class="nav-item {{ Request::is('wisata') ? 'active' : '' }}">
                         <a class="nav-link link-navbar" href="{{ url('/wisata') }}">Wisata</a>
                     </li>
-                    <li class="nav-item {{ Request::is('contact-us') ? 'active' : '' }} mr-4">
+                    <li class="nav-item {{ Request::is('contact-us') ? 'active' : '' }}">
                         <a class="nav-link link-navbar" href="{{ url('/contact-us') }}">Contact Us</a>
                     </li>
-                    <li class="nav-item {{ Request::is('about-us') ? 'active' : '' }} mr-4">
+                    <li class="nav-item {{ Request::is('about-us') ? 'active' : '' }}">
                         <a class="nav-link link-navbar" href="{{ url('/landing') }}#about-section">About Us</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav ml-auto navbar-button">
                     @if (!auth()->user())
-                        <li class="nav-item">
+                        <li class="nav-item nav-prof">
                             <a class="px-4 py-1 btn mr-2 btn-login" href="/log-in">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-prof">
                             <a class="px-4 py-1 btn btn-regis" href="/register">Daftar</a>
                         </li>
                     @else
@@ -79,33 +79,33 @@
                                     <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                         class="rounded-circle mr-1" style="width: 35px; height: 35px;">
                                 @endif
-                                <div class="d-sm-none d-lg-inline-block" style="color: #000000">
+                                <div class="d-sm-none d-lg-inline-block nav-prof" style="color: #000000">
                                     Hai, {{ strlen(auth()->user()->name) > 6 ? ucfirst(strtolower(substr(auth()->user()->name, 0, 6))) . '..' : ucfirst(strtolower(auth()->user()->name)) }}
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 @if (Auth::user()->hasRole('user'))
-                                    <a href="/profile-user" class="dropdown-item has-icon">
+                                    <a href="/profile-user" class="dropdown-item has-icon nav-prof">
                                         <i class="far fa-user mx-1 mr-2"></i> Profile
                                     </a>
                                 @endif
                                 @if (Auth::user()->hasRole('super-admin'))
-                                    <a href="/profile-user" class="dropdown-item has-icon">
+                                    <a href="/profile-user" class="dropdown-item has-icon nav-prof">
                                         <i class="far fa-user mx-1 mr-2"></i> Profile
                                     </a>
                                 @endif
                                 @if (auth()->user()->hasRole('user'))
-                                    <a href="/transaksi-user" class="dropdown-item has-icon">
+                                    <a href="/transaksi-user" class="dropdown-item has-icon nav-prof">
                                         <i class="fas fa-exchange-alt mx-1 mr-2"></i> Transaksi
                                     </a>
-                                    <a href="/reservasi-user" class="dropdown-item has-icon">
+                                    <a href="/reservasi-user" class="dropdown-item has-icon nav-prof">
                                         <i class="far fa-calendar-check mx-1 mr-2"></i> Status Reservasi
                                     </a>
                                 @endif
                                 <hr class="my-0" style="background-color: rgba(249, 249, 249, 0.2);">
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="dropdown-item has-icon text-danger">
+                                    class="dropdown-item has-icon text-danger nav-prof">
                                     <i class="fas fa-sign-out-alt mx-1 mr-2"></i> Keluar
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -129,21 +129,19 @@
                     <div class="col-md-3">
                         <a href="#" class="footer-site-logo d-block mb-4"><img
                                 src="{{ asset('assets/img/avatar/foot-logo.png') }}" class="img-fluid"></a>
-                        <p class="footer-text">Kami adalah platform inovatif yang <br> menyediakan informasi destinasi
-                            wisata yang <br> berada di Desa Wringinsongo.</p>
+                        <p class="footer-text">Kami adalah platform inovatif yang menyediakan informasi destinasi
+                            wisata yang berada di Desa Wringinsongo.</p>
                     </div>
 
                     <div class="col-md-4">
                         <h5 class="kontak-km">Kontak Kami</h5>
                         <ul class="list-unstyled contact-list">
-                            <li><a href="#" class="foot1 text-white">wringinsongo.tumpang@malangkab.go.id</a>
-                            </li>
-                            <li><a href="#" class="foot2 text-white">Jl. Glanggang Raya, Sumberringin,
-                                    Wringinsongo, Kec. Tumpang, Kabupaten Malang</a></li>
+                            <li><a href="#" class="foot1 text-white">wringinsongo.tumpang@malangkab.go.id</a></li>
+                            <li><a href="#" class="foot2 text-white">Jl. Glanggang Raya, Sumberingin, Wringinsongo, Kecamatan Tumpang, Kabupaten Malang</a></li>
                             <li><a href="#" class="foot3 text-white">kode pos : 65156</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 foot-mapland">
                         <iframe style="line-height: 1px; height: 100%; width: 100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7899.560742001325!2d112.74192151372598!3d-7.9941460594679565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62f6242f74193%3A0xec28cbb1957c0d90!2sWringinsongo%2C%20Tumpang%2C%20Malang%20Regency%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1711298927487!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>

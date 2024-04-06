@@ -1,5 +1,8 @@
 @extends('layout-users.layout-main.index')
 @section('content')
+<section>
+    
+</section>
     <section class="search">
         <div class="container">
             <div class="card-search-wisata">
@@ -7,14 +10,12 @@
                     <h1 class="title-wisata">Cari wisata sesuai kebutuhanmu</h1>
                     <div class="search-column">
                         <form action="{{ url('/wisata') }}" class="search-form" method="GET">
-                            <!-- Ganti URL dengan URL tujuan -->
                             <div class="search-input-container">
                                 <div class="search-icon">
                                     <i class="material-icons">cast_for_education</i>
                                 </div>
                                 <input type="text" name="wisata" placeholder="Cari destinasi wisata"
                                     class="search-input" value="{{ $search ?? '' }}">
-                                <!-- Tambahkan value untuk menampilkan kueri pencarian sebelumnya -->
                                 <button type="submit" class="search-button">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -44,10 +45,18 @@
                             <div class="card-wisata d-flex">
                                 <img src="{{ Storage::url($tour->profile_tour) }}" class="img-wisata" alt="Wisata Image">
                                 <div class="wisata-info">
-                                    <h2 class="wisata-title">{{ $tour->name }}</h2>
-                                    <p class="wisata-description">{!! strlen($tour->description) > 270 ? substr($tour->description, 0, 270) . '...' : $tour->description !!}</p>
+                                    <div class="row">
+                                        <div class="md-3">
+                                            <h4 class="wisata-title">{{ strtoupper($tour->name) }}</h4>
+                                        </div>
+                                        <div class="md-9">
+                                            <p class="wisata-description">{!! strlen($tour->description) > 260 ? substr($tour->description, 0, 260) . '...' : $tour->description !!}</p>
+                                        </div>
+                                    </div>
                                     <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata">Lihat
                                         Detail</a>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>

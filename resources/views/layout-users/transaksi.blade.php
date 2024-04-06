@@ -36,35 +36,49 @@
                                         </div>
                                         <div class="card-body">
 
-                                            <div class="col-md-12" data-aos="fade-right">
-                                                <div class="card tr-crd">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title tr-wisata"> Wisata Wringinsongo</h5>
-                                                        <div class="d-flex justify-content-between align-items-center mt-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <i class="fas fa-exclamation-circle fa-2x text-warning mr-2"></i>
-                                                                <span class="status-text">Belum Terbayar</span>
-                                                            </div>
-                                                            <button class="btn btn-byr">Bayar</button>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-5 tr-jdl">
-                                                                <p class="card-text tr-at"><strong>Atas Nama</strong></p>
-                                                                <p class="card-text tr-tgl"><strong>Tanggal Kunjungan</strong></p>
-                                                                <p class="card-text tr-jml"><strong>Jumlah Tiket</strong></p>
-                                                                <p class="card-text tr-tb"><strong>Total Biaya</strong></p>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <p class="card-text tr-at">: Rojali</p>
-                                                                <p class="card-text tr-tgl">: 24 Agustus 2024</p>
-                                                                <p class="card-text tr-jml">: 5 tiket</p>
-                                                                <p class="card-text tr-tb">: Rp. 100.000</p>
+                                            @foreach ($cart as $key => $cat)
+                                                <form action="{{ route('cart.show', ['id' => $cart->first()->cardId]) }}"
+                                                    method="get">
+                                                    <div class="col-md-12" data-aos="fade-right">
+                                                        <div class="card tr-crd">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title tr-wisata"> {{ $cat->name_tour }}</h5>
+                                                                <div
+                                                                    class="d-flex justify-content-between align-items-center mt-3">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i
+                                                                            class="fas fa-exclamation-circle fa-2x text-warning mr-2"></i>
+                                                                        <span class="status-text">Belum Terbayar</span>
+                                                                    </div>
+                                                                    <button class="btn btn-byr">Bayar</button>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-5 tr-jdl">
+                                                                        <p class="card-text tr-at"><strong>Atas
+                                                                                Nama</strong></p>
+                                                                        <p class="card-text tr-tgl"><strong>Tanggal
+                                                                                Kunjungan</strong></p>
+                                                                        <p class="card-text tr-jml"><strong>Jumlah
+                                                                                Tiket</strong></p>
+                                                                        <p class="card-text tr-tb"><strong>Total
+                                                                                Biaya</strong></p>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <p class="card-text tr-at">: {{ $cat->name }}</p>
+                                                                        <p class="card-text tr-tgl">: {{ $cat->date }}
+                                                                        </p>
+                                                                        <p class="card-text tr-jml">:
+                                                                            {{ $cat->tickets_count }}</p>
+                                                                        <p class="card-text tr-tb">: {{ $cat->total_price }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12" data-aos="fade-right">
+                                                </form>
+                                            @endforeach
+                                            {{-- <div class="col-md-12" data-aos="fade-right">
                                                 <div class="card tr-crd">
                                                     <div class="card-body">
                                                         <h5 class="card-title tr-wisata"> Wisata Wringinsongo</h5>
@@ -90,8 +104,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
+                                            </div> --}}
+
                                         </div>
 
 
@@ -104,7 +118,8 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                            <a class="page-link" href="#" tabindex="-1"
+                                                aria-disabled="true">Previous</a>
                                         </li>
                                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>

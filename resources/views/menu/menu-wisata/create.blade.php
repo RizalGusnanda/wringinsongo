@@ -26,6 +26,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                        <div class="invalid-feedback" id="name-error"></div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4">
@@ -200,7 +201,9 @@
                         <label for="harga_tiket	">Harga Tiket</label>
                         <input type="text" class="form-control @error('harga_tiket') is-invalid @enderror"
                             id="harga_tiket" name="harga_tiket" placeholder="Masukkan Harga Tiket"
-                            value="{{ old('harga_tiket') }}">
+                            value="{{ old('harga_tiket') }}" onkeydown="return onlyNumbers(event)"
+                            oninvalid="this.setCustomValidity('Harga wisata harus diisi')"
+                            oninput="setCustomValidity('')">
                         @error('harga_tiket')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -263,34 +266,74 @@
                 if (this.value === "wisata bertiket") {
                     hargaTiketWrapper.style.display = "block";
                     document.getElementById("harga_tiket").setAttribute("required",
-                    true);
+                        true);
                 } else {
                     hargaTiketWrapper.style.display = "none";
                     document.getElementById("harga_tiket").removeAttribute(
-                    "required");
+                        "required");
                 }
             });
 
             if (typeSelect.value === "wisata bertiket") {
                 hargaTiketWrapper.style.display = "block";
                 document.getElementById("harga_tiket").setAttribute("required",
-                true);
+                    true);
             } else {
                 hargaTiketWrapper.style.display = "none";
                 document.getElementById("harga_tiket").removeAttribute(
-                "required");
+                    "required");
             }
         });
 
+        function onlyNumbers(e) {
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if ((charCode < 48 || charCode > 57) && (charCode > 31)) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+@endsection
+
+@push('customScript')
+    <script>
+        $(".summernote").summernote({
+            styleWithSpan: false,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ],
+        });
+    </script>
+    <script>
         $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 200,
-                callbacks: {
-                    onBlur: function() {
-                        $(this).val($(this).summernote('code'));
-                    }
+            $('#name').on('keyup', function() {
+                var name = $(this).val();
+                if (name.length > 2) {
+                    $.ajax({
+                        url: '{{ route('check-tour-name') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'name': name
+                        },
+                        success: function(data) {
+                            if (data.exists) {
+                                $('#name').addClass('is-invalid');
+                                $('#name-error').text(
+                                    'Nama wisata sudah ada. Silakan pilih nama lain.');
+                            } else {
+                                $('#name').removeClass('is-invalid');
+                                $('#name-error').text('');
+                            }
+                        }
+                    });
                 }
             });
         });
     </script>
-@endsection
+@endpush

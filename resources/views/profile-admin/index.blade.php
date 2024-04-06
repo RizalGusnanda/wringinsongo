@@ -16,7 +16,13 @@
             </div>
         </div>
 
-        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+        @if (session('danger'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('danger') }}
+            </div>
+        @endif
+
+        <form action="{{ route('profileadmin.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-4">
@@ -52,24 +58,39 @@
                                 <label class="small mb-1" for="inputUsername">Username</label>
                                 <input class="form-control" id="inputUsername" type="text" name="username"
                                     value="{{ auth()->user()->name }}">
+                                @if ($errors->has('username'))
+                                    <span class="text-danger">{{ $errors->first('username') }}</span>
+                                @endif
                             </div>
                             <div class="mb-3">
-                                <label class="small mb-1" for="inputEmailAddress">Alamat Email</label>
+                                <label class="small mb-1" for="inputEmailAddress">Alamat Email (harus @gmail.com)</label>
                                 <input class="form-control" id="inputEmailAddress" type="email" name="email"
-                                    value="{{ auth()->user()->email }}">
+                                    placeholder="example@gmail.com" value="{{ auth()->user()->email }}">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputPassword">Password Sekarang</label>
                                 <input class="form-control" id="inputPassword" type="password" name="password_current">
+                                @if ($errors->has('password_current'))
+                                    <span class="text-danger">{{ $errors->first('password_current') }}</span>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputNewPassword">Password Baru</label>
                                 <input class="form-control" id="inputNewPassword" type="password" name="password_new">
+                                @if ($errors->has('password_new'))
+                                    <span class="text-danger">{{ $errors->first('password_new') }}</span>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputConfirmPassword">Konnfirmasi Password Baru</label>
                                 <input class="form-control" id="inputConfirmPassword" type="password"
-                                    name="password_confirm">
+                                    name="password_new_confirmation">
+                                @if ($errors->has('password_confirm'))
+                                    <span class="text-danger">{{ $errors->first('password_confirm') }}</span>
+                                @endif
                             </div>
 
                             <div class="text-center mt-4">

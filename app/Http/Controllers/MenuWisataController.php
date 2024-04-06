@@ -125,6 +125,14 @@ class MenuWisataController extends Controller
         return back()->with('success', 'Tours imported successfully.');
     }
 
+    public function checkTourName(Request $request)
+    {
+        $tourName = $request->input('name');
+        $exists = Tours::where('name', $tourName)->exists();
+
+        return response()->json(['exists' => $exists]);
+    }
+
     public function destroy($id)
     {
         $tour = Tours::findOrFail($id);

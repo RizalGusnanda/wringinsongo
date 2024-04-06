@@ -164,16 +164,47 @@
                     "required");
             }
         });
-
+    </script>
+@endsection
+@push('customScript')
+    <script>
+        $(".summernote").summernote({
+            styleWithSpan: false,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ],
+        });
+    </script>
+    <script>
         $(document).ready(function() {
-            $('.summernote').summernote({
-                height: 200,
-                callbacks: {
-                    onBlur: function() {
-                        $(this).val($(this).summernote('code'));
-                    }
+            $('#name').on('keyup', function() {
+                var name = $(this).val();
+                if (name.length > 2) {
+                    $.ajax({
+                        url: '{{ route('check-tour-name') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'name': name
+                        },
+                        success: function(data) {
+                            if (data.exists) {
+                                $('#name').addClass('is-invalid');
+                                $('#name-error').text(
+                                    'Nama wisata sudah ada. Silakan pilih nama lain.');
+                            } else {
+                                $('#name').removeClass('is-invalid');
+                                $('#name-error').text('');
+                            }
+                        }
+                    });
                 }
             });
         });
     </script>
-@endsection
+@endpush

@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             MenuItemSeeder::class,
             CategorySeeder::class,
             ProfilesSeeder::class,
+            ToursSeeder::class,
+            TicketsSeeder::class,
+            CartsSeeder::class,
         ]);
     }
 }
