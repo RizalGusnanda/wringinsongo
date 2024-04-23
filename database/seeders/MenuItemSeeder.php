@@ -77,7 +77,13 @@ class MenuItemSeeder extends Seeder
                     'route' => 'wisata-management/reservasi-wisata',
                     'permission_name' => 'reservasi-wisata.index',
                     'menu_group_id' => 5,
-                ]
+                ],
+                [
+                    'name' => 'Konfirmasi Tiket',
+                    'route' => 'tiket-management/konfirmasi-tiket',
+                    'permission_name' => 'konfirmasi-tiket.index',
+                    'menu_group_id' => 6,
+                ],
             ]
         );
     }

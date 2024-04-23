@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ToursController;
 use App\Http\Controllers\DetailWisataController;
+use App\Http\Controllers\KonfirmasiTiketController;
 use App\Http\Controllers\ProfileAdminController;
 use App\Http\Controllers\TestimonisController;
 use App\Models\User;
@@ -105,6 +106,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
         Route::post('/check-tour-name', [MenuWisataController::class, 'checkTourName'])->name('check-tour-name');
         Route::resource('reservasi-wisata', ReservasiWisataController::class);
+    });
+
+    Route::prefix('tiket-management')->group(function () {
+        Route::resource('konfirmasi-tiket', KonfirmasiTiketController::class);
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {
