@@ -14,6 +14,7 @@
                                 <form action="" method="POST">
                                     @csrf
                                     <div class="form-group">
+                                        <h5 class="text-center">Nama Wisata</h5>
                                         <label for="testimoni" class="font-weight-bold">Testimoni</label>
                                         <textarea class="form-control" id="testimoni" name="testimoni" rows="4" required></textarea>
                                     </div>
@@ -40,39 +41,23 @@
                         </div>
 
                         <div class="row mt-4" id="testimonialCards">
+                            @foreach ($wisataTidakBertiket as $wisata)
+                                @if ($loop->iteration % 3 == 1)
                         </div>
-
                         <div class="row mt-4">
+                            @endif
                             <div class="col-md-4 text-center">
-                                <div class="card">
+                                <div class="card card-same-height">
                                     <div class="card-body">
-                                        <h5 class="card-title">Beach</h5>
-                                        <p class="card-text">Beautiful beaches for a relaxing getaway.</p>
-                                        <a href="#" class="btn btn-primary btn-addts"
-                                            onclick="showTestimonialForm('beach')">Tambah Testimoni</a>
+                                        <h5 class="card-title">{{ $wisata->name }}</h5>
+                                        <p class="card-text card-description">
+                                            {{ \Illuminate\Support\Str::words($wisata->description, 20, '...') }}</p>
+                                        <a href="#" class="btn btn-primary btn-addts card-button"
+                                            onclick="showTestimonialForm('{{ $wisata->name }}')">Tambah Testimoni</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 text-center">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Mountains</h5>
-                                        <p class="card-text">Explore breathtaking mountain landscapes.</p>
-                                        <a href="#" class="btn btn-primary btn-addts"
-                                            onclick="showTestimonialForm('mountains')">Tambah Testimoni</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">City Tours</h5>
-                                        <p class="card-text">Discover the charm of vibrant city life.</p>
-                                        <a href="#" class="btn btn-primary btn-addts"
-                                            onclick="showTestimonialForm('city')">Tambah Testimoni</a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
 
                     </div>
@@ -81,10 +66,10 @@
         </section>
     </main>
     <script>
-        var testimonialAdded = false;
+        var testimonialAdded = {};
 
         function showTestimonialForm(destination) {
-            if (!testimonialAdded) {
+            if (!testimonialAdded[destination]) {
                 var testimonialCardHTML = `
                     <div class="col-md-12" id="testimonialCard_${destination}">
                         <div class="card">
@@ -122,7 +107,7 @@
                 `;
 
                 document.getElementById('testimonialCards').innerHTML += testimonialCardHTML;
-                testimonialAdded = true;
+                testimonialAdded[destination] = true;
             } else {
                 alert("Anda sudah menambahkan testimonial untuk destinasi ini.");
             }
@@ -131,7 +116,28 @@
         function closeTestimonialForm(destination) {
             var testimonialCard = document.getElementById('testimonialCard_' + destination);
             testimonialCard.remove();
-            testimonialAdded = false;
+            testimonialAdded[destination] = false;
         }
     </script>
+
+    <style>
+        .card-same-height {
+            height: 100%;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card-button {
+            margin-top: auto;
+        }
+
+        .card-description {
+            margin-top: 10px;
+        }
+    </style>
 @endsection

@@ -60,7 +60,6 @@
         </div>
     </section>
 
-
     <section>
         <div class="container">
             <div class="image-container">
@@ -101,8 +100,6 @@
                                             <button class="btn btn-secondary" id="tambahTiket">+</button>
                                         </div>
                                     </div>
-
-
                                 </div>
                                 <div class="row mb-3 align-items-center">
                                     <div class="col-12">
@@ -151,44 +148,32 @@
         <div class="container">
             <div id="carouselExampleControls" class="carousel slide mt-4" data-bs-ride="carousel" data-aos="slide-up">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col">
-                                <img src="{{ asset('assets/img/avatar/') }}" class="d-block w-100" alt="Gambar 1">
-                            </div>
-                            <div class="col">
-                                <img src="{{ asset('assets/img/avatar/dummy2.jpg') }}" class="d-block w-100"
-                                    alt="Gambar 2">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col">
-                                <img src="{{ asset('assets/img/avatar/dummy3.jpg') }}" class="d-block w-100"
-                                    alt="Gambar 3">
-                            </div>
-                            <div class="col">
-                                <img src="{{ asset('assets/img/avatar/dummy4.jpg') }}" class="d-block w-100"
-                                    alt="Gambar 4">
+                    @foreach ($tour->subimages->chunk(2) as $chunkIndex => $imageChunk)
+                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                            <div class="row">
+                                @foreach ($imageChunk as $subimage)
+                                    <div class="col-md-6">
+                                        <img src="{{ Storage::url($subimage->subimages) }}" class="d-block w-100" alt="...">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                @if ($tour->subimages->count() > 2)
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                @endif
             </div>
         </div>
     </section>
-
+    
     <section>
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-up">

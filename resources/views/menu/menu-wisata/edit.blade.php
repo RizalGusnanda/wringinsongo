@@ -43,6 +43,25 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="additional_images">Gambar Pendukung</label>
+                        <div class="d-flex flex-wrap tour-image-preview" id="additionalImagesContainer">
+                            @foreach ($tour->subimages as $index => $image)
+                                <div class="p-2 image-preview-wrapper" id="inputGroup{{ $index }}">
+                                    <div class="img-thumbnail">
+                                        <img src="{{ asset('storage/' . $image->subimages) }}"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                        <button class="btn btn-danger remove-image specific-remove" type="button"
+                                            onclick="removeInput('{{ $index }}', '{{ $image->id }}')">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button type="button" id="addImageBtn" class="btn btn-primary mt-2">Tambah Gambar</button>
+                        <div id="imagePreviewContainer" class="d-flex flex-wrap"></div>
+                    </div>
+                    <div class="form-group">
                         <label for="history">Sejarah</label>
                         <textarea class="form-control summernote @error('history') is-invalid @enderror" id="history" name="history"
                             rows="3">{{ old('history', $tour->history) }}</textarea>
@@ -98,7 +117,8 @@
                             <option value="wisata tidak bertiket"
                                 {{ $tour->type == 'wisata tidak bertiket' ? 'selected' : '' }}>Wisata Tidak Bertiket
                             </option>
-                            <option value="wisata bertiket" {{ $tour->type == 'wisata bertiket' ? 'selected' : '' }}>Wisata
+                            <option value="wisata bertiket" {{ $tour->type == 'wisata bertiket' ? 'selected' : '' }}>
+                                Wisata
                                 Bertiket</option>
                         </select>
                         @error('type')
@@ -127,7 +147,51 @@
             </div>
         </div>
     </section>
+    <style>
+        .tour-image-preview .img-thumbnail {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .tour-image-preview .img-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tour-image-preview .specific-remove {
+            display: none;
+            opacity: 0.8;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .tour-image-preview .img-thumbnail:hover .specific-remove {
+            display: block;
+        }
+
+        .tour-image-preview .specific-remove i {
+            color: white;
+        }
+    </style>
+@endsection
+@push('customScript')
     <script>
+        $(".summernote").summernote({
+            styleWithSpan: false,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ],
+        });
+
         function previewImage(event, previewId) {
             var reader = new FileReader();
             reader.onload = function() {
@@ -164,23 +228,7 @@
                     "required");
             }
         });
-    </script>
-@endsection
-@push('customScript')
-    <script>
-        $(".summernote").summernote({
-            styleWithSpan: false,
-            height: 200,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'clear']],
-                ['fontname', ['fontname']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-            ],
-        });
-    </script>
-    <script>
+
         $(document).ready(function() {
             $('#name').on('keyup', function() {
                 var name = $(this).val();
@@ -206,5 +254,62 @@
                 }
             });
         });
+
+        $('#addImageBtn').on('click', function() {
+            var index = $('.additional-image-input').length;
+            var newInputGroup = $(`
+        <div class="input-group mb-3" id="inputGroup${index}">
+            <input type="file" class="form-control additional-image-input" name="additional_images[]" accept="image/*" onchange="previewAdditionalImage(this, ${index})">
+            <div class="input-group-append">
+                <button class="btn btn-danger remove-image" type="button" onclick="removeInput(${index})">Hapus</button>
+            </div>
+        </div>
+    `);
+            $('#additionalImagesContainer').append(newInputGroup);
+        });
+
+        function previewAdditionalImage(input, index) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var imgElement = document.createElement("img");
+                    imgElement.src = e.target.result;
+                    imgElement.style.width = "200px";
+                    imgElement.style.height = "200px";
+                    imgElement.style.marginRight = "10px";
+                    imgElement.classList.add("img-preview");
+                    document.getElementById('imagePreviewContainer').appendChild(imgElement);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removeInput(index, imageId = null) {
+            if (imageId) {
+                $.ajax({
+                    url: '{{ route('menu-wisata.delete-image') }}',
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'id': imageId
+                    },
+                    success: function(data) {
+                        console.log('Image removed');
+                    }
+                });
+            }
+            var inputGroup = document.getElementById('inputGroup' + index);
+            if (inputGroup) {
+                inputGroup.remove();
+            }
+            var imgElements = document.querySelectorAll('.img-preview');
+            if (imgElements.length > 0) {
+                imgElements.forEach(function(img, idx) {
+                    if (idx >= index) {
+                        img.remove();
+                    }
+                });
+            }
+        }
     </script>
 @endpush

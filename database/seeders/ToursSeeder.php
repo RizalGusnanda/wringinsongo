@@ -15,8 +15,10 @@ class ToursSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tours')->insert([
-            'name' => 'wisata wringinsongo',
+        // Menambahkan data ke tabel tours
+        $tourId = DB::table('tours')->insertGetId([
+            'profile_tour' => 'wisata_images/alam_sawah.jpg',
+            'name' => 'Wisata Desa Wringinsongo',
             'description' => 'ini adalah deskripsi wisata',
             'history' => 'ini sejarah wisata',
             'maps' => 'https://maps.app.goo.gl/WeW2Qrm6esgRBCfe6',
@@ -24,9 +26,16 @@ class ToursSeeder extends Seeder
             'fasilitas_tm' => 'Fasilitas Tersedia',
             'fasilitas_ti' => 'Fasilitas Tersedia',
             'type' => 'wisata bertiket',
-            'harga_tiket' => '10000',
+            'harga_tiket' => '5000',
             'created_at' => now(),
             'updated_at' => now(),
+        ]);
+
+        DB::table('tours_subimages')->insert([
+            ['id_tour' => $tourId, 'subimages' => 'wisata_images/dm-1.png'],
+            ['id_tour' => $tourId, 'subimages' => 'wisata_images/dm-2.png'],
+            ['id_tour' => $tourId, 'subimages' => 'wisata_images/dm-3.png'],
+            ['id_tour' => $tourId, 'subimages' => 'wisata_images/dm-4.png'],
         ]);
     }
 }

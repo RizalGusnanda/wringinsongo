@@ -35,7 +35,10 @@ class ToursController extends Controller
 
     public function detail($id)
     {
-        $tour = Tours::find($id);
+        $tour = Tours::with('subimages')->find($id);
+        if (!$tour) {
+            abort(404);
+        }
         return view('layout-users.detailWisata', compact('tour'));
     }
 

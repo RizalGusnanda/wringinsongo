@@ -55,70 +55,13 @@
                             </div>
                         @enderror
                     </div>
-                    {{-- <div class="form-group row">
-                        <div class="col-md-4">
-                            <label for="image1">Gambar 1</label>
-                            <input type="file" class="form-control-file @error('image1') is-invalid @enderror"
-                                id="image1" name="image1" accept="image/*" onchange="previewImage(event, 'preview1')">
-                            @error('image1')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="col-md-8">
-                            <img id="preview1" src="#" alt="Preview"
-                                style="display: none; width: 250px; height: 250px;">
-                        </div>
+                    <div class="form-group">
+                        <label for="additional_images">Gambar Pendukung</label>
+                        <div id="additionalImagesContainer"></div>
+                        <button type="button" id="addImageBtn" class="btn btn-primary">Tambah Gambar</button>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-4">
-                            <label for="image2">Gambar 2</label>
-                            <input type="file" class="form-control-file @error('image2') is-invalid @enderror"
-                                id="image2" name="image2" accept="image/*" onchange="previewImage(event, 'preview2')">
-                            @error('image2')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="col-md-8">
-                            <img id="preview2" src="#" alt="Preview"
-                                style="display: none; width: 250px; height: 250px;">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-4">
-                            <label for="image3">Gambar 3</label>
-                            <input type="file" class="form-control-file @error('image3') is-invalid @enderror"
-                                id="image3" name="image3" accept="image/*" onchange="previewImage(event, 'preview3')">
-                            @error('image3')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="col-md-8">
-                            <img id="preview3" src="#" alt="Preview"
-                                style="display: none; width: 250px; height: 250px;">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-4">
-                            <label for="image4">Gambar 4</label>
-                            <input type="file" class="form-control-file @error('image4') is-invalid @enderror"
-                                id="image4" name="image4" accept="image/*" onchange="previewImage(event, 'preview4')">
-                            @error('image4')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="col-md-8">
-                            <img id="preview4" src="#" alt="Preview"
-                                style="display: none; width: 250px; height: 250px;">
-                        </div>
-                    </div> --}}
+                    <div id="imagePreviewContainer" class="mt-2 mb-3"></div>
+
                     <div class="form-group">
                         <label for="history">Sejarah</label>
                         <textarea class="form-control summernote @error('history') is-invalid @enderror" id="history" name="history"
@@ -241,7 +184,22 @@
             margin: auto;
         }
     </script>
+@endsection
+
+@push('customScript')
     <script>
+        $(".summernote").summernote({
+            styleWithSpan: false,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ],
+        });
+
         function previewImage(event, previewId) {
             const input = event.target;
             const preview = document.getElementById(previewId);
@@ -292,24 +250,7 @@
             }
             return true;
         }
-    </script>
-@endsection
 
-@push('customScript')
-    <script>
-        $(".summernote").summernote({
-            styleWithSpan: false,
-            height: 200,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'clear']],
-                ['fontname', ['fontname']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-            ],
-        });
-    </script>
-    <script>
         $(document).ready(function() {
             $('#name').on('keyup', function() {
                 var name = $(this).val();
@@ -335,5 +276,64 @@
                 }
             });
         });
+
+        function previewAdditionalImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var imgElement = document.createElement("img");
+                    imgElement.src = e.target.result;
+                    imgElement.style.width = "250px";
+                    imgElement.style.height = "250px";
+                    imgElement.style.marginRight = "10px";
+                    imgElement.classList.add("img-preview");
+
+                    var container = document.getElementById("imagePreviewContainer");
+                    container.appendChild(imgElement);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#addImageBtn').on('click', function() {
+            var index = $('.additional-image-input').length;
+            var newInputGroup = $(`
+                <div class="input-group mb-3" id="inputGroup${index}">
+                    <input type="file" class="form-control additional-image-input" name="additional_images[]" accept="image/*" onchange="previewAdditionalImage(this, ${index})">
+                    <div class="input-group-append">
+                        <button class="btn btn-danger remove-image" type="button" onclick="removeInput(${index})">Hapus</button>
+                    </div>
+                </div>
+            `);
+            $('#additionalImagesContainer').append(newInputGroup);
+        });
+
+        window.previewAdditionalImage = function(input, index) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var imgId = 'previewImg' + index;
+                    var existingImg = document.getElementById(imgId);
+                    if (!existingImg) {
+                        var imgElement = document.createElement('img');
+                        imgElement.id = imgId;
+                        imgElement.src = e.target.result;
+                        imgElement.style.width = '200px';
+                        imgElement.style.height = '200px';
+                        imgElement.style.marginRight = '10px';
+                        imgElement.classList.add('img-preview');
+                        document.getElementById('imagePreviewContainer').appendChild(imgElement);
+                    } else {
+                        existingImg.src = e.target.result;
+                    }
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        window.removeInput = function(index) {
+            $('#inputGroup' + index).remove();
+            $('#previewImg' + index).remove();
+        };
     </script>
 @endpush

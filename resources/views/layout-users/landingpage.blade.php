@@ -3,7 +3,7 @@
 
     <style>
         .deskripsi-wrg {
-            background-image: url('{{ asset('assets/img/avatar/pemancingan.jpg') }}');
+            background-image: url('{{ asset('assets/img/avatar/pemancingan.png') }}');
             background-size: cover;
         }
 
@@ -27,7 +27,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="{{ asset('assets/img/avatar/dummy1.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ asset('assets/img/avatar/dummy1.png') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="tittle-carausel">Wringinsongo</h1>
                         <p class="p-carausel">Desa Wringinsongo: Meretas Jejak Alam yang Memikat, Menyambut Petualangan
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
-                    <img src="{{ asset('assets/img/avatar/dummy5.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ asset('assets/img/avatar/dummy5.png') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="tittle-carausel">Wringinsongo</h1>
                         <p class="p-carausel">Di Tengah Hijauan Alam, Desa Wringinsongo Menawarkan Keunikan Wisata yang
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('assets/img/avatar/dummy4.jpg') }}" class="d-block w-100" alt="...">
+                    <img src="{{ asset('assets/img/avatar/dummy4.png') }}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h1 class="tittle-carausel">Wringinsongo</h1>
                         <p class="p-carausel">Jelajahi Pesona Alam yang Mempesona: Desa Wringinsongo, Destinasi
@@ -189,7 +189,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <div class="img-container hero-height position-relative">
-                        <img src="{{ asset('assets/img/avatar/right.jpg') }}" alt="Gambar 2">
+                        <img src="{{ asset('assets/img/avatar/right.png') }}" alt="Gambar 2">
                         <a href="#" class="play-btn" data-toggle="modal" data-target="#videoModal">
                             <button class="btn btn-play" data-bs-toggle="modal" data-bs-target="#videoModal">
                                 <i class="fas fa-play-circle fa-3x"></i>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\testimonis;
 use App\Http\Requests\StoretestimonisRequest;
 use App\Http\Requests\UpdatetestimonisRequest;
+use App\Models\Tours;
 
 class TestimonisController extends Controller
 {
@@ -15,7 +16,9 @@ class TestimonisController extends Controller
      */
     public function index()
     {
-        //
+        $wisataTidakBertiket = Tours::where('type', 'wisata tidak bertiket')->get();
+
+        return view('layout-users.testimoni', compact('wisataTidakBertiket'));
     }
 
     /**

@@ -13,4 +13,10 @@ class Tours extends Model
         'history', 'maps', 'fasilitas_km', 'fasilitas_tm', 'fasilitas_ti', 'type',
         'harga_tiket', 'virtual_tour', 'id_testimonis'
     ];
+
+    public function subimages()
+    {
+        return $this->hasMany(Tours_subimages::class, 'id_tour');
+    }
+
 }

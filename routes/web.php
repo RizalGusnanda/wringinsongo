@@ -21,6 +21,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ToursController;
 use App\Http\Controllers\DetailWisataController;
 use App\Http\Controllers\ProfileAdminController;
+use App\Http\Controllers\TestimonisController;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -77,9 +78,7 @@ Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.
 Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
 Route::get('/transaksi-user/detail/{reference}', [CartController::class, 'detail'])->name('cart.detail');
 
-Route::get('/testimoni', function () {
-    return view('layout-users/testimoni');
-});
+Route::get('/testimoni', [TestimonisController::class, 'index']);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     // Route::get('/dashboard', function () {
@@ -102,6 +101,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::prefix('wisata-management')->group(function () {
         Route::resource('menu-wisata', MenuWisataController::class);
+        Route::post('menu-wisata/delete-image', [MenuWisataController::class, 'deleteImage'])->name('menu-wisata.delete-image');
         Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
         Route::post('/check-tour-name', [MenuWisataController::class, 'checkTourName'])->name('check-tour-name');
         Route::resource('reservasi-wisata', ReservasiWisataController::class);

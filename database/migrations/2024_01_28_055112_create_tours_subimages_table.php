@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('tours_subimages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tours')->nullable();
-            $table->unsignedBigInteger('id_subimage')->nullable();
+            $table->unsignedBigInteger('id_tour')->nullable();
+            $table->string('subimages')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_tours')->references('id')->on('tours')->restrictOnDelete();
-            $table->foreign('id_subimage')->references('id')->on('subimages')->restrictOnDelete();
+            $table->foreign('id_tour')->references('id')->on('tours')->onDelete('cascade');
         });
     }
 

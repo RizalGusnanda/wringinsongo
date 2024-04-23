@@ -8,6 +8,7 @@ use App\Models\Tours;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Imports\ToursImport;
+use App\Models\Tours_subimages;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MenuWisataController extends Controller
@@ -63,12 +64,22 @@ class MenuWisataController extends Controller
             $tour->profile_tour = 'wisata_images/' . $filename;
         }
 
-        if ($tour->save()) {
-            return redirect()->route('menu-wisata.index')->with('success', 'Data wisata berhasil disimpan.');
-        } else {
-            return redirect()->route('menu-wisata.index')->with('error', 'Gagal menyimpan data wisata. Silakan coba lagi.');
+        $tour->save();
+
+        if ($request->has('additional_images')) {
+            foreach ($request->file('additional_images') as $file) {
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('wisata_images', $filename, 'public');
+                Tours_subimages::create([
+                    'id_tour' => $tour->id,
+                    'subimages' => $path
+                ]);
+            }
         }
+
+        return redirect()->route('menu-wisata.index')->with('success', 'Data wisata berhasil disimpan.');
     }
+
 
     public function edit($id)
     {
@@ -103,7 +114,6 @@ class MenuWisataController extends Controller
 
         if ($request->hasFile('profile_tour')) {
             Storage::delete('public/' . $tour->profile_tour);
-
             $filename = Str::random(40) . '.' . $request->file('profile_tour')->getClientOriginalExtension();
             $request->file('profile_tour')->storeAs('wisata_images', $filename, 'public');
             $tour->profile_tour = 'wisata_images/' . $filename;
@@ -111,8 +121,30 @@ class MenuWisataController extends Controller
 
         $tour->save();
 
+        if ($request->has('additional_images')) {
+            foreach ($request->file('additional_images') as $file) {
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('wisata_images', $filename, 'public');
+                Tours_subimages::create([
+                    'id_tour' => $tour->id,
+                    'subimages' => $path
+                ]);
+            }
+        }
+
         return redirect()->route('menu-wisata.index')->with('success', 'Data wisata berhasil diperbarui.');
     }
+
+
+    public function deleteImage(Request $request)
+    {
+        $image = Tours_subimages::findOrFail($request->id);
+        Storage::delete('public/' . $image->subimages);
+        $image->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'Image deleted successfully']);
+    }
+
 
     public function import(Request $request)
     {
