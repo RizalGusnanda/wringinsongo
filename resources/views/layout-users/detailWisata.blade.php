@@ -64,7 +64,7 @@
         <div class="container">
             <div class="image-container">
                 <img src="{{ Storage::url($tour->profile_tour) }}" class="header-img-top mb-2" alt="Detail Wisata">
-                <a href="#" class="icon-virtual-tour">
+                <a href="{{ url('/virtual-tour') }}" class="icon-virtual-tour">
                     <span class="material-icons">360</span>
                 </a>
             </div>

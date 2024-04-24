@@ -52,8 +52,8 @@ Route::get('/contact-us', function () {
     return view('layout-users/contact');
 });
 
-Route::get('/contoh-detail', function () {
-    return view('layout-users/contohDetail');
+Route::get('/virtual-tour', function () {
+    return view('layout-users/virtual');
 });
 
 Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
