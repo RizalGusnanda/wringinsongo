@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item {{ Request::is('landing') ? 'active' : '' }}">
-                        <a class="nav-link link-navbar" href="{{ url('/landing') }}">Home</a>
+                        <a class="nav-link link-navbar" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item {{ Request::is('wisata') ? 'active' : '' }}">
                         <a class="nav-link link-navbar" href="{{ url('/wisata') }}">Wisata</a>

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('profile_tour')->nullable();
             $table->string('name');
             $table->text('description');
-            $table->string('longitud')->nullable();
-            $table->string('latitud')->nullable();
             $table->text('history')->nullable();
             $table->string('maps');
             $table->string('fasilitas_km');
@@ -28,7 +26,6 @@ return new class extends Migration
             $table->string('fasilitas_ti');
             $table->string('type');
             $table->string('harga_tiket')->nullable();
-            $table->string('virtual_tour')->nullable();
             $table->timestamps();
 
             $table->foreign('id_testimonis')->references('id')->on('testimonis')->restrictOnDelete();

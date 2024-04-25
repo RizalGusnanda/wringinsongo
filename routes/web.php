@@ -58,6 +58,8 @@ Route::get('/about-us', function () {
     return view('layout-users/about');
 });
 
+Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
+
 Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.show');
 Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
 Route::get('/transaksi-user/detail/{reference}', [CartController::class, 'detail'])->name('cart.detail');
@@ -71,8 +73,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // layout-user
     Route::get('/landing', [LandingController::class, 'show']);
-
-    Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
 
     Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
     Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
@@ -106,6 +106,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('menu-wisata/delete-image', [MenuWisataController::class, 'deleteImage'])->name('menu-wisata.delete-image');
         Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
         Route::post('/check-tour-name', [MenuWisataController::class, 'checkTourName'])->name('check-tour-name');
+        Route::post('/check-maps', [MenuWisataController::class, 'checkMaps'])->name('check-maps');
         Route::resource('reservasi-wisata', ReservasiWisataController::class);
     });
 

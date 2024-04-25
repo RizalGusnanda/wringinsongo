@@ -165,6 +165,13 @@ class MenuWisataController extends Controller
         return response()->json(['exists' => $exists]);
     }
 
+    public function checkMaps(Request $request)
+    {
+        $exists = Tours::where('maps', $request->maps)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+
+
     public function destroy($id)
     {
         $tour = Tours::findOrFail($id);

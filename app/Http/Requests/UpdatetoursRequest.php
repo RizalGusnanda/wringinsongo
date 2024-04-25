@@ -31,7 +31,7 @@ class UpdatetoursRequest extends FormRequest
             'fasilitas_km' => 'required|in:Fasilitas Tersedia,Fasilitas Tidak Tersedia',
             'fasilitas_tm' => 'required|in:Fasilitas Tersedia,Fasilitas Tidak Tersedia',
             'fasilitas_ti' => 'required|in:Fasilitas Tersedia,Fasilitas Tidak Tersedia',
-            'maps' => 'required|url|starts_with:https://maps.app.goo.gl/',
+            'maps' => 'required|url|starts_with:https://maps.app.goo.gl/|unique:tours,maps',
             'type' => 'required|string|in:wisata tidak bertiket,wisata bertiket',
             'harga_tiket' => 'nullable|numeric',
         ];

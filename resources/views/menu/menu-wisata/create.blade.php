@@ -126,6 +126,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                        <div class="invalid-feedback" id="maps-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="type">Jenis Wisata</label>
@@ -270,6 +271,32 @@
                             } else {
                                 $('#name').removeClass('is-invalid');
                                 $('#name-error').text('');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#maps').on('blur', function() {
+                var maps = $(this).val();
+                if (maps !== '') {
+                    $.ajax({
+                        url: '{{ route('check-maps') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'maps': maps
+                        },
+                        success: function(data) {
+                            if (data.exists) {
+                                $('#maps').addClass('is-invalid');
+                                $('#maps-error').text(
+                                    'Lokasi sudah ada. Harap masukkan lokasi lain.');
+                            } else {
+                                $('#maps').removeClass('is-invalid');
+                                $('#maps-error').text('');
                             }
                         }
                     });
