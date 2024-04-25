@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Menu\MenuGroupController;
 use App\Http\Controllers\Menu\MenuItemController;
@@ -46,9 +47,9 @@ Route::get('/log-in', function () {
 
 Route::get('/wisata', [ToursController::class, 'index']);
 
-Route::get('/contact-us', function () {
-    return view('layout-users/contact');
-});
+Route::get('/contact-us', [ContactController::class, 'index']);
+Route::post('/contact-us/send', [ContactController::class, 'send']);
+
 
 Route::get('/virtual-tour', function () {
     return view('layout-users/virtual');
