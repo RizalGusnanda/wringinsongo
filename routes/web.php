@@ -40,8 +40,6 @@ use App\Models\Category;
 
 Route::get('/', [LandingController::class, 'show']);
 
-Route::get('/landing', [LandingController::class, 'show']);
-
 Route::get('/log-in', function () {
     return view('auth/login');
 });
@@ -56,24 +54,9 @@ Route::get('/virtual-tour', function () {
     return view('layout-users/virtual');
 });
 
-Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
-
 Route::get('/about-us', function () {
     return view('layout-users/about');
 });
-
-Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
-Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
-
-
-Route::get('/profileAdmin', [ProfileAdminController::class, 'index']);
-Route::post('/profileAdmin/update', [ProfileAdminController::class, 'update'])->name('profileadmin.update');
-
-Route::get('/reservasi-user', function () {
-    return view('layout-users/reservasi');
-});
-
-Route::get('/transaksi-user', [CartController::class, 'index'])->name('transaksi.user');
 
 Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.show');
 Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
@@ -85,8 +68,26 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Route::get('/dashboard', function () {
     //     return view('home', ['users' => User::get(),]);
     // });
+
+    // layout-user
+    Route::get('/landing', [LandingController::class, 'show']);
+
+    Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
+
+    Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
+    Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
+
+    Route::get('/reservasi-user', function () {
+        return view('layout-users/reservasi');
+    });
+
+    Route::get('/transaksi-user', [CartController::class, 'index'])->name('transaksi.user');
+    // end-layout-user
+
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    //user list
+
+    Route::get('/profileAdmin', [ProfileAdminController::class, 'index']);
+    Route::post('/profileAdmin/update', [ProfileAdminController::class, 'update'])->name('profileadmin.update');
 
     Route::prefix('user-management')->group(function () {
         Route::resource('user', UserController::class);

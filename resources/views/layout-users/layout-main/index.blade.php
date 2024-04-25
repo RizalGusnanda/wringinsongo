@@ -56,7 +56,7 @@
                         <a class="nav-link link-navbar" href="{{ url('/contact-us') }}">Contact Us</a>
                     </li>
                     <li class="nav-item {{ Request::is('about-us') ? 'active' : '' }}">
-                        <a class="nav-link link-navbar" href="{{ url('/landing') }}#about-section">About Us</a>
+                        <a class="nav-link link-navbar" href="{{ url('/') }}#about-section">About Us</a>
                     </li>
                 </ul>
 
