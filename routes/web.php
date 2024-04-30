@@ -24,6 +24,7 @@ use App\Http\Controllers\DetailWisataController;
 use App\Http\Controllers\KonfirmasiTiketController;
 use App\Http\Controllers\ProfileAdminController;
 use App\Http\Controllers\TestimonisController;
+use App\Http\Controllers\ToursVirtualController;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -50,10 +51,7 @@ Route::get('/wisata', [ToursController::class, 'index']);
 Route::get('/contact-us', [ContactController::class, 'index']);
 Route::post('/contact-us/send', [ContactController::class, 'send']);
 
-
-Route::get('/virtual-tour', function () {
-    return view('layout-users/virtual');
-});
+Route::get('/virtual-tour', [ToursVirtualController::class, 'index']);
 
 Route::get('/about-us', function () {
     return view('layout-users/about');

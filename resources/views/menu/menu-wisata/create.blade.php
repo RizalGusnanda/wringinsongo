@@ -73,6 +73,12 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="virtual_tour">Gambar Virtual Tour</label>
+                        <div id="virtualToursContainer"></div>
+                        <button type="button" id="addVirtualTourBtn" class="btn btn-primary">Tambah Gambar</button>
+                    </div>
+                    <div id="virtualTourPreviewContainer" class="mt-2 mb-3"></div>
+                    <div class="form-group">
                         <label for="facilities">Fasilitas</label>
                         <div class="form-group">
                             <label for="fasilitas_km">Kamar Mandi</label>
@@ -362,5 +368,61 @@
             $('#inputGroup' + index).remove();
             $('#previewImg' + index).remove();
         };
+
+        $('#addVirtualTourBtn').on('click', function() {
+            var index = $('.virtual-tour-input').length;
+            var newInputGroup = $(`
+        <div class="input-group mb-3" id="virtualTourGroup${index}">
+            <input type="file" class="form-control virtual-tour-input" name="virtual_tours[]" accept="image/*" onchange="previewVirtualTour(this, ${index})">
+            <div class="input-group-append">
+                <button class="btn btn-danger remove-virtual-tour" type="button" onclick="removeVirtualTour(${index})">Hapus</button>
+            </div>
+        </div>
+    `);
+            $('#virtualToursContainer').append(newInputGroup);
+        });
+
+        window.previewVirtualTour = function(input, index) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var imgId = 'previewVirtualTour' + index;
+                    var existingImg = document.getElementById(imgId);
+                    if (!existingImg) {
+                        var imgElement = document.createElement('img');
+                        imgElement.id = imgId;
+                        imgElement.src = e.target.result;
+                        imgElement.classList.add('virtual-tour-img');
+                        document.getElementById('virtualTourPreviewContainer').appendChild(imgElement);
+                    } else {
+                        existingImg.src = e.target.result;
+                    }
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+
+        window.removeVirtualTour = function(index) {
+            $('#virtualTourGroup' + index).remove();
+            $('#previewVirtualTour' + index).remove();
+        };
     </script>
+    <style>
+        .virtual-tour-img {
+            width: 500px;
+            height: 200px;
+            margin-bottom: 15px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .virtual-tour-img {
+                width: 100%;
+                height: 96px;
+                margin-bottom: 10px;
+                margin-right: 0px;
+            }
+        }
+    </style>
 @endpush

@@ -15,7 +15,7 @@ class ToursVirtualController extends Controller
      */
     public function index()
     {
-        //
+        return view('layout-users.virtual');
     }
 
     /**

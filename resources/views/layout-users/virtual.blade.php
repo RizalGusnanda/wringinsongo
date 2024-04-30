@@ -119,8 +119,8 @@
                         height: '500px'
                     });
 
-                    var panorama = new PANOLENS.ImagePanorama(
-                        'https://pchen66.github.io/Panolens/examples/asset/textures/equirectangular/tunnel.jpg');
+                    var panorama = new PANOLENS.ImagePanorama('{{ asset("storage/virtual_tour/contoh2.JPG") }}');
+
                     var viewer = new PANOLENS.Viewer({
                         output: 'console',
                         container: container[0]
