@@ -80,7 +80,8 @@
                                         class="rounded-circle mr-1" style="width: 35px; height: 35px;">
                                 @endif
                                 <div class="d-sm-none d-lg-inline-block nav-prof" style="color: #000000">
-                                    Hai, {{ strlen(auth()->user()->name) > 6 ? ucfirst(strtolower(substr(auth()->user()->name, 0, 6))) . '..' : ucfirst(strtolower(auth()->user()->name)) }}
+                                    Hai,
+                                    {{ strlen(auth()->user()->name) > 6 ? ucfirst(strtolower(substr(auth()->user()->name, 0, 6))) . '..' : ucfirst(strtolower(auth()->user()->name)) }}
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -136,13 +137,18 @@
                     <div class="col-md-4">
                         <h5 class="kontak-km">Kontak Kami</h5>
                         <ul class="list-unstyled contact-list">
-                            <li><a href="#" class="foot1 text-white">wringinsongo.tumpang@malangkab.go.id</a></li>
-                            <li><a href="#" class="foot2 text-white">Jl. Glanggang Raya, Sumberingin, Wringinsongo, Kecamatan Tumpang, Kabupaten Malang</a></li>
+                            <li><a href="#" class="foot1 text-white">wringinsongo.tumpang@malangkab.go.id</a>
+                            </li>
+                            <li><a href="#" class="foot2 text-white">Jl. Glanggang Raya, Sumberingin,
+                                    Wringinsongo, Kecamatan Tumpang, Kabupaten Malang</a></li>
                             <li><a href="#" class="foot3 text-white">kode pos : 65156</a></li>
                         </ul>
                     </div>
                     <div class="col-md-5 foot-mapland">
-                        <iframe style="line-height: 1px; height: 100%; width: 100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7899.560742001325!2d112.74192151372598!3d-7.9941460594679565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62f6242f74193%3A0xec28cbb1957c0d90!2sWringinsongo%2C%20Tumpang%2C%20Malang%20Regency%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1711298927487!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe style="line-height: 1px; height: 100%; width: 100%;"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7899.560742001325!2d112.74192151372598!3d-7.9941460594679565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62f6242f74193%3A0xec28cbb1957c0d90!2sWringinsongo%2C%20Tumpang%2C%20Malang%20Regency%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1711298927487!5m2!1sen!2sid"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -150,7 +156,7 @@
     </section>
 
 
- @stack('customScript')
+    @stack('customScript')
     <!-- General JS Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

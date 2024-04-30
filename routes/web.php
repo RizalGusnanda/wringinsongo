@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleAndPermission\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\ReservasiWisataController;
+use App\Http\Controllers\PendapatanWisataController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ToursController;
@@ -106,11 +107,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
         Route::post('/check-tour-name', [MenuWisataController::class, 'checkTourName'])->name('check-tour-name');
         Route::post('/check-maps', [MenuWisataController::class, 'checkMaps'])->name('check-maps');
-        Route::resource('reservasi-wisata', ReservasiWisataController::class);
+        Route::resource('pendapatan-wisata', PendapatanWisataController::class);
     });
 
     Route::prefix('tiket-management')->group(function () {
         Route::resource('konfirmasi-tiket', KonfirmasiTiketController::class);
+        Route::resource('reservasi-wisata', ReservasiWisataController::class);
     });
 
     Route::group(['prefix' => 'role-and-permission'], function () {

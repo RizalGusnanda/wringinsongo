@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="card-body">
 
-                                            <div class="col-md-12" data-aos="fade-right">
+                                            <div class="col-md-12">
                                                 <div class="card tr-crd">
                                                     <div class="card-body">
                                                         <h5 class="card-title tr-wisata"> {{ $cart->name_tour }}</h5>
@@ -50,7 +50,8 @@
                                                             </div>
                                                         </div>
 
-                                                        <h6 class="card-title text-center mt-3">Pilih Metode Pembayaran</h6>
+                                                        <h5 class="card-title text-center mt-3 mb-5">Pilih Metode Pembayaran
+                                                        </h5>
                                                         <div class="col-12">
                                                             @foreach ($channels as $channel)
                                                                 <form action="{{ route('cart.store') }}" method="POST">
@@ -63,21 +64,30 @@
                                                                             value="{{ $channel->code }}">
 
                                                                         <div class="card">
-                                                                            <img src="{{ asset('assets/img/bank/' . $channel->code . '.png') }}"
-                                                                                style="width: 25%; height: 100px; padding: 15px;"
-                                                                                class="card-img-top equal-image"
-                                                                                alt="{{ $channel->name }}">
-                                                                            <div class="card-body text-center"
-                                                                                style="padding: 0px;">
-                                                                                <p class="card-text"
-                                                                                    style="color: #000000; font-size: 14px; margin-top: -60px;">
-                                                                                    {{ $channel->name }}</p>
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary"
-                                                                                    style="margin-left: 550px; margin-top: -80px">Bayar</button>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <img src="{{ asset('assets/img/bank/' . $channel->code . '.png') }}"
+                                                                                        style="width: 60%; height: 100px;"
+                                                                                        class="card-img-top equal-image p-3"
+                                                                                        alt="{{ $channel->name }}">
+                                                                                </div>
+                                                                                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                                                                    <div class="card-body text-center">
+                                                                                        <div class="row">
+                                                                                            <div class="col-6">
+                                                                                                <h6 class="card-text">
+                                                                                                    {{ $channel->name }}
+                                                                                                </h6>
+                                                                                            </div>
+                                                                                            <div class="col-6">
+                                                                                                <button type="submit"
+                                                                                                    class="btn btn-tran-byr px-4">Bayar</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
 
                                                                 </form>

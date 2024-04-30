@@ -136,7 +136,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Menu Wisata List</h4>
+                            <h4>Wisata List</h4>
                             {{-- <div class="card-header-action">
                                 <a class="btn btn-icon icon-left btn-primary"
                                     href="{{ route('menu-wisata.create') }}">Create
@@ -153,9 +153,9 @@
                             <div class="card-header-action">
                                 <div class="row w-100 no-gutters justify-content-between">
                                     <div class="col-auto mr-2">
-                                        <a class="btn btn-icon icon-left btn-primary"
+                                        <a class="btn btn-icon icon-left btn-primary mb-3"
                                             href="{{ route('menu-wisata.create') }}">Create New Wisata</a>
-                                        <a class="btn btn-info btn-primary active import">
+                                        <a class="btn btn-info btn-primary active import mb-3">
                                             <i class="fa fa-download" aria-hidden="true"></i>
                                             Import Wisata</a>
                                     </div>

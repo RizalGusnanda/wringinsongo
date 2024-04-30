@@ -27,6 +27,7 @@
 
             .header-img-top {
                 height: 300px;
+                margin-top: -80px;
             }
 
             .d-flex {
@@ -102,6 +103,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3 align-items-center">
+                                    <div class="col-6 text-end">
+                                        <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan:</label>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="date" class="form-control" id="tanggalKunjungan"
+                                            name="tanggal_kunjungan" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 align-items-center">
                                     <div class="col-12">
                                         <button class="btn reserv-tiket">Reservasi Tiket</button>
                                     </div>
@@ -153,7 +164,8 @@
                             <div class="row">
                                 @foreach ($imageChunk as $subimage)
                                     <div class="col-md-6">
-                                        <img src="{{ Storage::url($subimage->subimages) }}" class="d-block w-100" alt="...">
+                                        <img src="{{ Storage::url($subimage->subimages) }}" class="d-block w-100 mb-2"
+                                            alt="...">
                                     </div>
                                 @endforeach
                             </div>
@@ -161,11 +173,13 @@
                     @endforeach
                 </div>
                 @if ($tour->subimages->count() > 2)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -173,7 +187,7 @@
             </div>
         </div>
     </section>
-    
+
     <section>
         <div class="container">
             <div class="row justify-content-center" data-aos="fade-up">

@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Reservasi Tiket</h1>
+            <h1>Pendapatan Wisata</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Components</a></div>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="section-body">
-            <h2 class="section-title">Reservasi Management</h2>
+            <h2 class="section-title">Pendapatan Management</h2>
             <div class="row">
                 <div class="col-12">
                     @include('layouts.alert')
@@ -21,9 +21,9 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Menu Item List</h4>
+                            <h4>Pendapatan Wisata List</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="">Eksport Rekap Pembayaran</a>
+                                <a class="btn btn-icon icon-left btn-primary" href="">Eksport Pendapatan</a>
                                 {{-- <a class="btn btn-info btn-primary active import">
                                     <i class="fa fa-download" aria-hidden="true"></i>
                                     Import Menu Item</a>
@@ -32,7 +32,7 @@
                                     Export Menu Item</a> --}}
                                 <a class="btn btn-info btn-primary active search">
                                     <i class="fa fa-search" aria-hidden="true"></i>
-                                    Search Pembayaran</a>
+                                    Search Wisata</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -70,14 +70,11 @@
                                     <tbody>
                                         <tr>
                                             <th>#</th>
-                                            <th>Id Pembayaran</th>
-                                            <th>Nama User</th>
                                             <th>Nama Wisata</th>
                                             <th>harga tiket</th>
                                             <th>total tiket</th>
-                                            <th>total pembayaran</th>
+                                            <th>total pendapatan</th>
                                             <th>tanggal</th>
-                                            <th>status</th>
                                         </tr>
                                         
                                     </tbody>

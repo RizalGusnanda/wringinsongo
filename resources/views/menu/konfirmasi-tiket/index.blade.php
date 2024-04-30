@@ -20,7 +20,7 @@
                 <div class="col-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h4>Menu Item List</h4>
+                            <h4>Tiket List</h4>
                             <div class="card-header-action">
                                 {{-- <a class="btn btn-icon icon-left btn-primary" href="">Eksport Rekap Pembayaran</a> --}}
                                 {{-- <a class="btn btn-info btn-primary active import">
@@ -63,6 +63,25 @@
                                         <a class="btn btn-secondary" href="">Reset</a>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-md">
+                                    <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Id Pembayaran</th>
+                                            <th>Nama User</th>
+                                            <th>Nama Wisata</th>
+                                            <th>Tanggal Kedatangan</th>
+                                            <th>total tiket</th>
+                                            <th>status</th>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-center">
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>

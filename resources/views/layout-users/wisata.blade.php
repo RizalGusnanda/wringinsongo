@@ -1,8 +1,5 @@
 @extends('layout-users.layout-main.index')
 @section('content')
-<section>
-    
-</section>
     <section class="search">
         <div class="container">
             <div class="card-search-wisata">
@@ -55,8 +52,6 @@
                                     </div>
                                     <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata">Lihat
                                         Detail</a>
-                                    
-                                    
                                 </div>
                             </div>
                         </div>
@@ -75,16 +70,17 @@
                             </li>
                         @else
                             <li class="page-item">
-                                <a class="page-link" href="{{ $tours->previousPageUrl() }}" tabindex="-1" aria-disabled="true">Previous</a>
+                                <a class="page-link" href="{{ $tours->previousPageUrl() }}" tabindex="-1"
+                                    aria-disabled="true">Previous</a>
                             </li>
                         @endif
-                        
+
                         @foreach ($tours->getUrlRange(1, $tours->lastPage()) as $page => $url)
                             <li class="page-item {{ $page == $tours->currentPage() ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>
                         @endforeach
-            
+
                         @if ($tours->hasMorePages())
                             <li class="page-item">
                                 <a class="page-link" href="{{ $tours->nextPageUrl() }}">Next</a>

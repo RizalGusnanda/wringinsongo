@@ -124,80 +124,26 @@
         </div>
     </section>
 
-    {{-- <section data-aos="fade-up" class="mt-3">
-        <div class="container">
-            <h3 class="text-center title-land-wis">WISATA BUDAYA</h3>
-            <div class="row mb-4">
-                @if (isset($tours))
-                    <div class="row">
-                        @foreach ($tours as $tour)
-                            <div class="col-md-3">
-                                <a href="{{ url('/detail-wisata/' . $tour->id) }}">
-                                    <div class="card-lswisata mb-4">
-                                        <img src="{{ asset('storage/' . $tour->profile_tour) }}" class="img-fluid"
-                                            alt="Wisata Image">
-                                        <div class="wisata-infox">
-                                            <h5 class="land-wisata-tiitle">{{ $tour->name }}</h5>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <p class="text-center">{{ $message }}</p>
-                @endif
-            </div>
-        </div>
-    </section> --}}
-
-    {{-- <section id="about-section" class="bg-about">
-            <div class="container py-5">
-                <div class="row align-items">
-                    <div class="col-lg-5 col-md-4 col-sm-12 position-relative">
-                        <img class="img-fluid landing" src="{{ asset('assets/img/avatar/balai.png') }}" alt="Trulli">
-                        <a href="#" class="play-btn" data-toggle="modal" data-target="#videoModal">
-                            <i class="fas fa-play-circle fa-3x"
-                                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255, 255, 255, 0.5);"></i>
-                        </a>
-                    </div>
-                    <div class="col-lg-7 col-md-8 col-sm-12">
-                        <h1 class="about-h">Desa Wringinsongo</h1>
-                        <p class="about-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis justo a elit
-                            rhoncus ultricies. Suspendisse potenti. Sed non sem eu nisi auctor finibus. Sed tristique urna
-                            vel malesuada fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis
-                            justo a elit rhoncus ultricies. Suspendisse potenti. Sed non sem eu nisi auctor finibus. Sed
-                            tristique urna vel malesuada fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Nulla quis justo a elit rhoncus ultricies. Suspendisse potenti. Sed non sem eu nisi auctor
-                            finibus. Sed tristique urna vel malesuada fringilla. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Nulla quis justo a elit rhoncus ultricies. Suspendisse potenti. Sed non sem eu
-                            nisi auctor finibus. Sed tristique urna vel malesuada fringilla.</p>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
     <section id="about-section" class="bg-about" data-aos="fade-up">
         <div class="container py-5">
             <h1 class="titl-about">ABOUT US</h1>
             <div class="row h-200 justify-content-center">
-                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                <div class="col-md-3 d-flex justify-content-center align-items-center mb-2">
                     <div class="img-container equal-height-img">
                         <img src="{{ asset('assets/img/avatar/kolam.jpg') }}" alt="Gambar 1">
                     </div>
                 </div>
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <div class="img-container hero-height position-relative">
+                    <div class="img-container hero-height position-relative mb-2">
                         <img src="{{ asset('assets/img/avatar/right.png') }}" alt="Gambar 2">
-                        <a href="#" class="play-btn" data-toggle="modal" data-target="#videoModal">
+                        {{-- <a href="#" class="play-btn" data-toggle="modal" data-target="#videoModal">
                             <button class="btn btn-play" data-bs-toggle="modal" data-bs-target="#videoModal">
                                 <i class="fas fa-play-circle fa-3x"></i>
                             </button>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
-                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                <div class="col-md-3 d-flex justify-content-center align-items-center mb-2">
                     <div class="img-container equal-height-img">
                         <img src="{{ asset('assets/img/avatar/candi.jpg') }}" alt="Gambar 3">
                     </div>
@@ -279,16 +225,6 @@
             </div>
         </div> --}}
     <!-- Akhir Video -->
-
-    {{-- <section>
-            <div class="container mt-3">
-                <div class="col-md-12">
-                    <iframe id="map" style="height: 500px; width: 100%;"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11575.18917064869!2d112.73856472969604!3d-7.99359457883066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62f6242f74193%3A0xec28cbb1957c0d90!2sWringinsongo%2C%20Kec.%20Tumpang%2C%20Kabupaten%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1710736935981!5m2!1sid!2sid&q=food+and+drink&layer=c&zoom=15"
-                        frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                </div>
-            </div>
-        </section> --}}
 
     <section id="list-wisata" data-aos="fade-up" class="mt-3">
         <div class="container">

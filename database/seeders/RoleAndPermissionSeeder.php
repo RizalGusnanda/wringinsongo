@@ -81,6 +81,11 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'menu-wisata.edit']);
         Permission::create(['name' => 'menu-wisata.destroy']);
 
+        Permission::create(['name' => 'pendapatan-wisata.index']);
+        Permission::create(['name' => 'pendapatan-wisata.create']);
+        Permission::create(['name' => 'pendapatan-wisata.edit']);
+        Permission::create(['name' => 'pendapatan-wisata.destroy']);
+
         Permission::create(['name' => 'reservasi-wisata.index']);
         Permission::create(['name' => 'reservasi-wisata.create']);
         Permission::create(['name' => 'reservasi-wisata.edit']);

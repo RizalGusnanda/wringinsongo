@@ -25,14 +25,14 @@
                         <div class="card-header">
                             <h4>Roles List</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('role.create') }}">Create New
+                                {{-- <a class="btn btn-icon icon-left btn-primary" href="{{ route('role.create') }}">Create New
                                     Role</a>
                                 <a class="btn btn-info btn-primary active import">
                                     <i class="fa fa-download" aria-hidden="true"></i>
                                     Import Role</a>
                                 <a class="btn btn-info btn-primary active" href="{{ route('role.export') }}">
                                     <i class="fa fa-upload" aria-hidden="true"></i>
-                                    Export Role</a>
+                                    Export Role</a> --}}
                                 <a class="btn btn-info btn-primary active search">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     Search Role</a>
@@ -74,14 +74,14 @@
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Guard Name</th>
-                                            <th class="text-right">Action</th>
+                                            {{-- <th class="text-right">Action</th> --}}
                                         </tr>
                                         @foreach ($roles as $key => $role)
                                             <tr>
                                                 <td>{{ $roles->firstItem() + $key }}</td>
                                                 <td>{{ $role->name }}</td>
                                                 <td>{{ $role->guard_name }}</td>
-                                                <td class="text-right">
+                                                {{-- <td class="text-right">
                                                     <div class="d-flex justify-content-end">
                                                         <a href="{{ route('role.edit', $role->id) }}"
                                                             class="btn btn-sm btn-info btn-icon "><i
@@ -96,7 +96,7 @@
                                                                 <i class="fas fa-times"></i> Delete </button>
                                                         </form>
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

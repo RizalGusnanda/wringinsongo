@@ -1052,7 +1052,7 @@ h3.text-center.mt-4.font-weight-bold {
     flex-direction: column;
 }
 
-.btn-play {
+/* .btn-play {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1063,7 +1063,7 @@ h3.text-center.mt-4.font-weight-bold {
 .btn-play:hover {
     color: #265073;
     background-color: transparent;
-}
+} */
 
 .deskripsi-wrg {
     padding: 10px;
@@ -1162,7 +1162,54 @@ h3.text-center.mt-4.font-weight-bold {
     font-weight: 700;
 }
 
+.btn-tran-byr {
+    border-radius: 20px;
+    background-color: #265073 !important;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.btn-tran-byr:hover,
+.btn-tran-byr:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
+.btn-bankst {
+    background-color: #265073 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-bankst:hover,
+.btn-bankst:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
 @media (max-width: 768px) {
+
+    .carousel-caption {
+        display: block !important;
+        transform: none;
+        text-align: center;
+    }
+
+    .tittle-carausel,
+    .title-choose,
+    .titl-about,
+    .title-land-wis {
+        font-size: 22px;
+    }
+
+    .p-carausel,
+    .btn-corrousell {
+        font-size: 14px;
+    }
+
+    .title-ct {
+        font-size: 16px;
+    }
+
     .nav-item {
         text-align: center;
         background-color: #ffffff;
@@ -1199,7 +1246,7 @@ h3.text-center.mt-4.font-weight-bold {
     }
 
     .about-h {
-        font-size: 24px;
+        font-size: 20px;
         text-align: center;
     }
 
@@ -1232,10 +1279,28 @@ h3.text-center.mt-4.font-weight-bold {
         padding-top: 30px;
     }
 
-    .title-wisata {
-        color: #FFFFFF;
-        font-size: 20px;
+    .card-wisata {
+        flex-direction: column !important;
+        align-items: center;
         text-align: center;
+    }
+
+    .img-wisata {
+        margin-bottom: 20px;
+    }
+
+    .wisata-info {
+        flex-basis: 100% !important;
+    }
+
+    .wisata-title {
+        font-size: 20px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .wisata-description {
+        font-size: 14px !important;
+        line-height: 20px !important;
     }
 
     .wringin,
@@ -1338,7 +1403,6 @@ h3.text-center.mt-4.font-weight-bold {
     .col-6 {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         margin-left: 0;
     }
 
