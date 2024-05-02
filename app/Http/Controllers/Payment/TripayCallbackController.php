@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Payment;
 
-// use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 
 class TripayCallbackController extends Controller
 {
@@ -28,7 +28,6 @@ class TripayCallbackController extends Controller
         }
 
         $data = json_decode($json);
-        // dd($data);
         $reference = $data->reference;
         $status = strtoupper((string) $data->status);
 
@@ -38,14 +37,14 @@ class TripayCallbackController extends Controller
         |--------------------------------------------------------------------------
         */
         if (1 === (int) $data->is_closed_payment) {
-            // $transaksi = Pembayaran::where('reference', $reference)->first();
+
             $transaksi = DB::table('payments')->select('payments.*')->where('payments.reference', $reference)->first();
 
             if (!$transaksi) {
                 return 'No $transaksi found for this unique ref: ' . $reference;
             }
 
-            $transaksi->update(['status' => $status]);
+            DB::table('payments')->where('reference', $reference)->update(['status' => $status]);
             return response()->json(['success' => true]);
         }
 
@@ -66,15 +65,15 @@ class TripayCallbackController extends Controller
 
         switch ($data->status) {
             case 'PAID':
-                $transaksi->update(['status' => 'PAID']);
+                DB::table('payments')->where('reference', $reference)->update(['status' => 'PAID']);
                 return response()->json(['success' => true]);
 
             case 'EXPIRED':
-                $transaksi->update(['status' => 'UNPAID']);
+                DB::table('payments')->where('reference', $reference)->update(['status' => 'UNPAID']);
                 return response()->json(['success' => true]);
 
             case 'FAILED':
-                $transaksi->update(['status' => 'UNPAID']);
+                DB::table('payments')->where('reference', $reference)->update(['status' => 'UNPAID']);
                 return response()->json(['success' => true]);
 
             default:
