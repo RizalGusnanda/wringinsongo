@@ -86,37 +86,42 @@
                     <div class="col-md-6">
                         <div class="card shadow">
                             <div class="card-body">
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-6 text-end">Harga Tiket:</div>
-                                    <div class="col-6 text-start">
-                                        {{ $tour->harga_tiket ? 'Rp.' . number_format($tour->harga_tiket, 0, ',', '.') : 'Rp. -' }}
-                                        /orang</div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-6 text-end">Jumlah Tiket:</div>
-                                    <div class="col-6">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <button class="btn btn-secondary" id="kurangTiket">-</button>
-                                            <span id="jumlahTiket">1</span>
-                                            <button class="btn btn-secondary" id="tambahTiket">+</button>
+                                <form action="{{ route('detail-wisata.reserve', ['id' => $tour->id]) }}" method="post">
+                                    @csrf
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-6 text-end">Harga Tiket:</div>
+                                        <div class="col-6 text-start">
+                                            {{ $tour->harga_tiket ? 'Rp.' . number_format($tour->harga_tiket, 0, ',', '.') : 'Rp. -' }}
+                                            /orang</div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-6 text-end">Jumlah Tiket:</div>
+                                        <div class="col-6">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button class="btn btn-secondary" id="kurangTiket">-</button>
+                                                <span id="jumlahTiket">1</span>
+                                                <input type="hidden" id="hiddenJumlahTiket" name="jumlah_tiket"
+                                                    value="1">
+                                                <button class="btn btn-secondary" id="tambahTiket">+</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-6 text-end">
-                                        <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan:</label>
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-6 text-end">
+                                            <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan:</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="date" class="form-control" id="tanggalKunjungan"
+                                                name="tanggal_kunjungan" required>
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <input type="date" class="form-control" id="tanggalKunjungan"
-                                            name="tanggal_kunjungan" required>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-12">
-                                        <button class="btn reserv-tiket">Reservasi Tiket</button>
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-12">
+                                            <button class="btn reserv-tiket">Reservasi Tiket</button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -288,17 +293,20 @@
         document.addEventListener('DOMContentLoaded', function() {
             const tambahBtn = document.getElementById('tambahTiket');
             const kurangBtn = document.getElementById('kurangTiket');
-            const jumlahTiket = document.getElementById('jumlahTiket');
+            const jumlahTiketSpan = document.getElementById('jumlahTiket');
+            const hiddenJumlahTiketInput = document.getElementById('hiddenJumlahTiket');
 
             tambahBtn.addEventListener('click', function() {
-                let jumlah = parseInt(jumlahTiket.innerText);
-                jumlahTiket.innerText = jumlah + 1;
+                let jumlah = parseInt(jumlahTiketSpan.innerText);
+                jumlahTiketSpan.innerText = jumlah + 1;
+                hiddenJumlahTiketInput.value = jumlah + 1;
             });
 
             kurangBtn.addEventListener('click', function() {
-                let jumlah = parseInt(jumlahTiket.innerText);
+                let jumlah = parseInt(jumlahTiketSpan.innerText);
                 if (jumlah > 1) {
-                    jumlahTiket.innerText = jumlah - 1;
+                    jumlahTiketSpan.innerText = jumlah - 1;
+                    hiddenJumlahTiketInput.value = jumlah - 1;
                 }
             });
         });

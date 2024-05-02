@@ -18,7 +18,7 @@ class CartsSeeder extends Seeder
         DB::table('carts')->insert([
             'id_ticket' => 1,
             'id_tour' => 1,
-            'total_price' => '500000',
+            'total_price' => '25000',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

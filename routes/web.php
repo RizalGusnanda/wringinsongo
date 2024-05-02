@@ -23,6 +23,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ToursController;
 use App\Http\Controllers\DetailWisataController;
 use App\Http\Controllers\KonfirmasiTiketController;
+use App\Http\Controllers\Payment\TripayCallbackController;
 use App\Http\Controllers\ProfileAdminController;
 use App\Http\Controllers\TestimonisController;
 use App\Http\Controllers\ToursVirtualController;
@@ -40,7 +41,7 @@ use App\Models\Category;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('callback', [TripayCallbackController::class, 'handle']);
 Route::get('/', [LandingController::class, 'show']);
 
 Route::get('/log-in', function () {
@@ -59,7 +60,7 @@ Route::get('/about-us', function () {
 });
 
 Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
-
+Route::post('/detail-wisata/{id}/reserve', [DetailWisataController::class, 'reserveTicket'])->name('detail-wisata.reserve');
 Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.show');
 Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
 Route::get('/transaksi-user/detail/{reference}', [CartController::class, 'detail'])->name('cart.detail');

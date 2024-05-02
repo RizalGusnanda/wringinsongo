@@ -39,7 +39,7 @@ class TripayCallbackController extends Controller
         */
         if (1 === (int) $data->is_closed_payment) {
             // $transaksi = Pembayaran::where('reference', $reference)->first();
-            $transaksi = DB::table('pembayarans')->select('pembayarans.*')->where('pembayarans.reference', $reference)->first();
+            $transaksi = DB::table('payments')->select('payments.*')->where('payments.reference', $reference)->first();
 
             if (!$transaksi) {
                 return 'No $transaksi found for this unique ref: ' . $reference;
@@ -55,7 +55,7 @@ class TripayCallbackController extends Controller
         | Proses callback untuk open payment
         |--------------------------------------------------------------------------
         */
-        $transaksi = DB::table('pembayarans')->select('pembayarans.*')->where('pembayarans.reference', $reference)->where('pembayarans.status', 'UNPAID')->first();
+        $transaksi = DB::table('payments')->select('payments.*')->where('payments.reference', $reference)->where('payments.status', 'UNPAID')->first();
         if (!$transaksi) {
             return '$transaksi not found or current status is not UNPAID';
         }
