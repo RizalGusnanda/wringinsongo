@@ -37,46 +37,48 @@
                                         <div class="card-body">
 
                                             @foreach ($cart as $key => $cat)
-                                                <form action="{{ route('cart.show', ['id' => $cart->first()->cardId]) }}"
-                                                    method="get">
-                                                    <div class="col-md-12" data-aos="fade-right">
-                                                        <div class="card tr-crd">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title tr-wisata"> {{ $cat->name_tour }}</h5>
-                                                                <div
-                                                                    class="d-flex justify-content-between align-items-center mt-3">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i
-                                                                            class="fas fa-exclamation-circle fa-2x text-warning mr-2"></i>
-                                                                        <span class="status-text">Belum Terbayar</span>
-                                                                    </div>
-                                                                    <button class="btn btn-byr">Bayar</button>
+                                                {{-- <form action="{{ route('cart.show', ['id' => $cart->first()->cardId]) }}"
+                                                    method="get"> --}}
+                                                {{-- <form action="" method="" enctype="multipart/form-data"> --}}
+                                                {{-- <input type="hidden" name="cart" value="{{ json_encode($cart) }}"> --}}
+                                                <div class="col-md-12" data-aos="fade-right">
+                                                    <div class="card tr-crd">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title tr-wisata"> {{ $cat->name_tour }}</h5>
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center mt-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i
+                                                                        class="fas fa-exclamation-circle fa-2x text-warning mr-2"></i>
+                                                                    <span class="status-text">Belum Terbayar</span>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="col-5 tr-jdl">
-                                                                        <p class="card-text tr-at"><strong>Atas
-                                                                                Nama</strong></p>
-                                                                        <p class="card-text tr-tgl"><strong>Tanggal
-                                                                                Kunjungan</strong></p>
-                                                                        <p class="card-text tr-jml"><strong>Jumlah
-                                                                                Tiket</strong></p>
-                                                                        <p class="card-text tr-tb"><strong>Total
-                                                                                Biaya</strong></p>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p class="card-text tr-at">: {{ $cat->name }}</p>
-                                                                        <p class="card-text tr-tgl">: {{ $cat->date }}
-                                                                        </p>
-                                                                        <p class="card-text tr-jml">:
-                                                                            {{ $cat->tickets_count }}</p>
-                                                                        <p class="card-text tr-tb">: {{ $cat->total_price }}
-                                                                        </p>
-                                                                    </div>
+                                                                <button class="btn btn-byr" id="btn-byr">Bayar</button>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-5 tr-jdl">
+                                                                    <p class="card-text tr-at"><strong>Atas
+                                                                            Nama</strong></p>
+                                                                    <p class="card-text tr-tgl"><strong>Tanggal
+                                                                            Kunjungan</strong></p>
+                                                                    <p class="card-text tr-jml"><strong>Jumlah
+                                                                            Tiket</strong></p>
+                                                                    <p class="card-text tr-tb"><strong>Total
+                                                                            Biaya</strong></p>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <p class="card-text tr-at">: {{ $cat->name }}</p>
+                                                                    <p class="card-text tr-tgl">: {{ $cat->date }}
+                                                                    </p>
+                                                                    <p class="card-text tr-jml">:
+                                                                        {{ $cat->tickets_count }}</p>
+                                                                    <p class="card-text tr-tb">: {{ $cat->total_price }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </div>
+                                                {{-- </form> --}}
                                             @endforeach
                                             {{-- <div class="col-md-12" data-aos="fade-right">
                                                 <div class="card tr-crd">
@@ -136,7 +138,40 @@
                 </div>
             </div>
         </section>
-
-
+        <div id="snap-container"></div>
     </main>
 @endsection
+@push('customScript')
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="env('MIDTRANS_CLIENT_KEY')"></script>
+    <script type="text/javascript">
+        document.getElementById('btn-byr').addEventListener('click', function() {
+            fetch('/payment/initiate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                        //     'content')
+                    },
+                    body: JSON.stringify({
+                        amount: 10000
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('test', data.token);
+                    if (data.token) {
+                        window.snap.pay(data.token, {
+                            onSuccess: function(result) {},
+                            onPending: function(result) {},
+                            onError: function(result) {}
+                        });
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+@endpush
+
+@push('customStyle')
+@endpush

@@ -18,15 +18,15 @@ class CartController extends Controller
      */
     public function index()
     {
-    $user = Auth::id();
-    $cart =  DB::table('carts')->select('carts.id as cardId','carts.total_price','tickets.tickets_count','tickets.date','tours.name as name_tour','tours.harga_tiket', 'users.name')
-      ->Join('tickets','carts.id_ticket', '=', 'tickets.id')
-      ->Join('tours','carts.id_tour', '=', 'tours.id')
-      ->Join('users','tickets.id_users', '=', 'users.id')
-      ->where('users.id' , $user)->get();
+        $user = Auth::id();
+        $cart =  DB::table('carts')->select('carts.id as cardId', 'carts.total_price', 'tickets.tickets_count', 'tickets.date', 'tours.name as name_tour', 'tours.harga_tiket', 'users.name')
+            ->Join('tickets', 'carts.id_ticket', '=', 'tickets.id')
+            ->Join('tours', 'carts.id_tour', '=', 'tours.id')
+            ->Join('users', 'tickets.id_users', '=', 'users.id')
+            ->where('users.id', $user)->get();
 
 
-     return view('layout-users.transaksi', ['cart' => $cart]);
+        return view('layout-users.transaksi', ['cart' => $cart]);
     }
 
     /**
@@ -38,7 +38,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $method = $request->method;
-        $cart = DB::table('carts')->where('id', $request->id)->first(); 
+        $cart = DB::table('carts')->where('id', $request->id)->first();
         $tour = DB::table('tours')->where('id', $request->id)->first();
         $profile = DB::table('profiles')->where('id', $request->id)->first();
 
@@ -46,22 +46,22 @@ class CartController extends Controller
 
             return back()->withErrors('Entity not found.');
         }
-        $tripay = new TripayController();
-        $transaksi = $tripay->requestTransaksi($method, $profile, $cart, $tour);
+        // $tripay = new TripayController();
+        // $transaksi = $tripay->requestTransaksi($method, $profile, $cart, $tour);
 
         DB::table('payments')->insert([
             'id_user' => Auth::user()->id,
             'id_cart' => $cart->id,
             'id_tours' => $tour->id,
             'id_profile' => $profile->id,
-            'reference' => $transaksi->reference,
-            'merchant_ref' => $transaksi->merchant_ref,
-            'total_amount' => $transaksi->amount,
-            'status' => $transaksi->status,
+            // 'reference' => $transaksi->reference,
+            // 'merchant_ref' => $transaksi->merchant_ref,
+            // 'total_amount' => $transaksi->amount,
+            // 'status' => $transaksi->status,
         ]);
 
         return redirect()->route('cart.detail', [
-            'reference' => $transaksi->reference,
+            // 'reference' => $transaksi->reference,
         ])->with('success', 'Silakan melihat instruksi sebelum pembayaran ');
     }
 
@@ -78,13 +78,13 @@ class CartController extends Controller
         $channels = $tripay->getPaymentChannels();
         // $ambi =  DB::table('carts')->find($id);
 
-        $cart =  DB::table('carts')->select('carts.id','carts.total_price','tickets.tickets_count','tickets.date','tours.name as name_tour','tours.harga_tiket', 'users.name')
-      ->Join('tickets','carts.id_ticket', '=', 'tickets.id')
-      ->Join('tours','carts.id_tour', '=', 'tours.id')
-      ->Join('users','tickets.id_users', '=', 'users.id')
-      ->where('carts.id',$id)->where('users.id' , $user)->first();
+        $cart =  DB::table('carts')->select('carts.id', 'carts.total_price', 'tickets.tickets_count', 'tickets.date', 'tours.name as name_tour', 'tours.harga_tiket', 'users.name')
+            ->Join('tickets', 'carts.id_ticket', '=', 'tickets.id')
+            ->Join('tours', 'carts.id_tour', '=', 'tours.id')
+            ->Join('users', 'tickets.id_users', '=', 'users.id')
+            ->where('carts.id', $id)->where('users.id', $user)->first();
 
-    //   dd($cart);
+        //   dd($cart);
 
         return view('layout-users.checkout', ['cart' => $cart, 'channels' => $channels]);
     }
