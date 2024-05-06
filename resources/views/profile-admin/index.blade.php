@@ -10,18 +10,6 @@
         </div>
         <h2 class="section-title">Profile Superadmin</h2>
 
-        <div class="row">
-            <div class="col-12">
-                @include('layouts.alert')
-            </div>
-        </div>
-
-        @if (session('danger'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('danger') }}
-            </div>
-        @endif
-
         <form action="{{ route('profileadmin.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -103,3 +91,37 @@
         </form>
     </section>
 @endsection
+@push('customScript')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if ($message = Session::get('success'))
+        <script>
+            Swal.fire({
+                title: 'Sukses!',
+                text: '{{ $message }}',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                position: 'top-end',
+                timerProgressBar: true,
+                showCloseButton: true
+            });
+        </script>
+    @endif
+
+    @if (session('danger'))
+        <script>
+            Swal.fire({
+                title: 'Oops...',
+                text: '{{ session('danger') }}',
+                icon: 'error',
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                timerProgressBar: true,
+                showCloseButton: true
+            });
+        </script>
+    @endif
+@endpush

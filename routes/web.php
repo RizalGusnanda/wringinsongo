@@ -53,6 +53,8 @@ Route::get('/contact-us', [ContactController::class, 'index']);
 Route::post('/contact-us/send', [ContactController::class, 'send']);
 
 Route::get('/virtual-tour', [ToursVirtualController::class, 'index']);
+Route::get('/virtual-tour/{id}', [ToursVirtualController::class, 'show']);
+
 
 Route::get('/about-us', function () {
     return view('layout-users/about');
@@ -104,6 +106,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::prefix('wisata-management')->group(function () {
         Route::resource('menu-wisata', MenuWisataController::class);
         Route::post('menu-wisata/delete-image', [MenuWisataController::class, 'deleteImage'])->name('menu-wisata.delete-image');
+        Route::post('menu-wisata/delete-virtual-tour-image', [MenuWisataController::class, 'deleteVirtualTourImage'])->name('menu-wisata.delete-virtual-tour-image');
         Route::post('menu-wisata/import', [MenuWisataController::class, 'import'])->name('menu-wisata.import');
         Route::post('/check-tour-name', [MenuWisataController::class, 'checkTourName'])->name('check-tour-name');
         Route::post('/check-maps', [MenuWisataController::class, 'checkMaps'])->name('check-maps');

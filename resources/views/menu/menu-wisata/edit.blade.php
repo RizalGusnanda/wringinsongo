@@ -44,21 +44,20 @@
                     </div>
                     <div class="form-group">
                         <label for="additional_images">Gambar Pendukung</label>
-                        <div class="d-flex flex-wrap tour-image-preview" id="additionalImagesContainer">
+                        <div class="d-flex flex-wrap additional-image-preview" id="additionalImagesContainer">
                             @foreach ($tour->subimages as $index => $image)
                                 <div class="p-2 image-preview-wrapper" id="inputGroup{{ $index }}">
                                     <div class="img-thumbnail">
-                                        <img src="{{ asset('storage/' . $image->subimages) }}"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="{{ asset('storage/' . $image->subimages) }}">
                                         <button class="btn btn-danger remove-image specific-remove" type="button"
-                                            onclick="removeInput('{{ $index }}', '{{ $image->id }}')">
+                                            onclick="removeExistingImage('{{ $index }}', '{{ $image->id }}')">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        <button type="button" id="addImageBtn" class="btn btn-primary mt-2">Tambah Gambar</button>
+                        <button type="button" id="addImageBtn" class="btn btn-primary mt-2 mb-2">Tambah Gambar</button>
                         <div id="imagePreviewContainer" class="d-flex flex-wrap"></div>
                     </div>
                     <div class="form-group">
@@ -68,6 +67,26 @@
                         @error('history')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="virtual_tours">Gambar Virtual Tour</label>
+                        <div class="d-flex flex-wrap virtual-image-preview" id="virtualToursContainer">
+                            @foreach ($tour->virtualTours as $index => $virtualTour)
+                                <div class="p-2 image-preview-wrapper" id="virtualTourGroup{{ $index }}">
+                                    <div class="img-vt">
+                                        <img src="{{ asset('storage/' . $virtualTour->virtual_tours) }}">
+                                        <button class="btn btn-danger remove-image virtual-remove" type="button"
+                                            onclick="removeExistingVirtualTourImage('{{ $index }}', '{{ $virtualTour->id }}')">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button type="button" id="addVirtualTourBtn" class="btn btn-primary mt-2 mb-2">Tambah
+                            Gambar</button>
+                        <div id="virtualPreviewContainer" class="d-flex flex-wrap"></div>
                     </div>
                     <div class="form-group">
                         <label for="fasilitas_km">Fasilitas Kamar Mandi</label>
@@ -148,37 +167,67 @@
         </div>
     </section>
     <style>
-        .tour-image-preview .img-thumbnail {
+        .additional-image-preview .img-thumbnail {
             position: relative;
             width: 200px;
             height: 200px;
             overflow: hidden;
         }
 
-        .tour-image-preview .img-thumbnail img {
+        .additional-image-preview .img-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .tour-image-preview .specific-remove {
+        .additional-image-preview .specific-remove {
             display: none;
             opacity: 0.8;
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 7px;
+            left: 6px;
         }
 
-        .tour-image-preview .img-thumbnail:hover .specific-remove {
+        .additional-image-preview .img-thumbnail:hover .specific-remove {
             display: block;
         }
 
-        .tour-image-preview .specific-remove i {
+        .additional-image-preview .specific-remove i {
+            color: white;
+        }
+
+        .virtual-image-preview .img-vt {
+            position: relative;
+            width: 70%;
+            overflow: hidden;
+            margin: 5px;
+        }
+
+        .virtual-image-preview .img-vt img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .virtual-image-preview .virtual-remove {
+            display: none;
+            opacity: 0.8;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+        }
+
+        .virtual-image-preview .img-vt:hover .virtual-remove {
+            display: block;
+        }
+
+        .virtual-image-preview .virtual-remove i {
             color: white;
         }
     </style>
 @endsection
 @push('customScript')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(".summernote").summernote({
             styleWithSpan: false,
@@ -193,14 +242,28 @@
         });
 
         function previewImage(event, previewId) {
-            var reader = new FileReader();
-            reader.onload = function() {
+            var file = event.target.files[0];
+            if (file.size > 5120000) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar adalah 5MB.'
+                });
+                event.target.value = "";
                 var output = document.getElementById(previewId);
-                output.src = reader.result;
-                output.style.display = 'block';
+                output.src = '';
+                output.style.display = 'none';
+            } else {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var output = document.getElementById(previewId);
+                    output.src = reader.result;
+                    output.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(event.target.files[0]);
         }
+
 
         document.addEventListener("DOMContentLoaded", function() {
             const typeSelect = document.getElementById("type");
@@ -258,57 +321,181 @@
         $('#addImageBtn').on('click', function() {
             var index = $('.additional-image-input').length;
             var newInputGroup = $(`
-        <div class="input-group mb-3" id="inputGroup${index}">
-            <input type="file" class="form-control additional-image-input" name="additional_images[]" accept="image/*" onchange="previewAdditionalImage(this, ${index})">
+        <div class="input-group mb-3" id="inputGroupNew${index}">
+            <input type="file" class="form-control additional-image-input" name="additional_images[]" accept="image/*" onchange="previewAdditionalImage(this, 'inputGroupNew${index}')">
             <div class="input-group-append">
-                <button class="btn btn-danger remove-image" type="button" onclick="removeInput(${index})">Hapus</button>
+                <button class="btn btn-danger remove-image" type="button" onclick="removeInput('inputGroupNew${index}')">Hapus</button>
             </div>
         </div>
     `);
             $('#additionalImagesContainer').append(newInputGroup);
         });
 
-        function previewAdditionalImage(input, index) {
-            if (input.files && input.files[0]) {
+        function previewAdditionalImage(input, groupId) {
+            var file = input.files[0];
+            if (file.size > 5242880) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar pendukung adalah 5MB.'
+                });
+                input.value = "";
+            } else {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var imgElement = document.createElement("img");
                     imgElement.src = e.target.result;
                     imgElement.style.width = "200px";
                     imgElement.style.height = "200px";
-                    imgElement.style.marginRight = "10px";
                     imgElement.classList.add("img-preview");
-                    document.getElementById('imagePreviewContainer').appendChild(imgElement);
+                    var container = document.getElementById('imagePreviewContainer');
+                    container.appendChild(imgElement);
                 }
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(file);
             }
         }
 
-        function removeInput(index, imageId = null) {
-            if (imageId) {
-                $.ajax({
-                    url: '{{ route('menu-wisata.delete-image') }}',
-                    type: 'POST',
-                    data: {
-                        '_token': '{{ csrf_token() }}',
-                        'id': imageId
-                    },
-                    success: function(data) {
-                        console.log('Image removed');
-                    }
-                });
-            }
-            var inputGroup = document.getElementById('inputGroup' + index);
+        function removeInput(groupId) {
+            var inputGroup = document.getElementById(groupId);
             if (inputGroup) {
                 inputGroup.remove();
             }
-            var imgElements = document.querySelectorAll('.img-preview');
-            if (imgElements.length > 0) {
-                imgElements.forEach(function(img, idx) {
-                    if (idx >= index) {
-                        img.remove();
+            var imgPreview = document.getElementById('preview' + groupId);
+            if (imgPreview) {
+                imgPreview.remove();
+            }
+        }
+
+        function removeExistingImage(index, imageId) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus saja!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (imageId) {
+                        $.ajax({
+                            url: '{{ route('menu-wisata.delete-image') }}',
+                            type: 'POST',
+                            data: {
+                                '_token': '{{ csrf_token() }}',
+                                'id': imageId
+                            },
+                            success: function(data) {
+                                console.log('Image removed');
+                                var inputGroup = document.getElementById('inputGroup' + index);
+                                if (inputGroup) {
+                                    inputGroup.remove();
+                                }
+
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Gambar Anda telah dihapus.',
+                                    'success'
+                                );
+                            }
+                        });
+                    } else {
+                        var inputGroup = document.getElementById('inputGroup' + index);
+                        if (inputGroup) {
+                            inputGroup.remove();
+                        }
                     }
+                }
+            });
+        }
+
+        $('#addVirtualTourBtn').on('click', function() {
+            var index = $('.virtual-tour-input').length;
+            var newInputGroup = $(`
+        <div class="input-group mb-3" id="virtualTourGroupNew${index}">
+            <input type="file" class="form-control virtual-tour-input" name="virtual_tours[]" accept="image/*" onchange="previewVirtualImage(this, 'virtualTourGroupNew${index}')">
+            <div class="input-group-append">
+                <button class="btn btn-danger remove-image" type="button" onclick="removePreviewVirtualTourInput('virtualTourGroupNew${index}')">Hapus</button>
+            </div>
+        </div>
+    `);
+            $('#virtualToursContainer').append(newInputGroup);
+        });
+
+        function previewVirtualImage(input, groupId) {
+            var file = input.files[0];
+            if (file.size > 15728640) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar virtual tour adalah 15MB.'
                 });
+                input.value = "";
+            } else {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var existingImg = document.getElementById('preview' + groupId);
+                    if (existingImg) {
+                        existingImg.src = e.target.result;
+                    } else {
+                        var imgElement = document.createElement("img");
+                        imgElement.src = e.target.result;
+                        imgElement.style.width = "400px";
+                        imgElement.style.height = "auto";
+                        imgElement.classList.add("img-preview");
+                        imgElement.style.marginRight = "10px";
+                        imgElement.style.marginBottom = "10px";
+                        imgElement.id = 'preview' + groupId;
+                        var container = document.getElementById('virtualPreviewContainer');
+                        container.appendChild(imgElement);
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeExistingVirtualTourImage(index, imageId) {
+            console.log("Function Called: removeExistingVirtualTourImage", index, imageId); // Debugging statement
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus saja!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('menu-wisata.delete-virtual-tour-image') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'id': imageId
+                        },
+                        success: function(data) {
+                            console.log('Success Response', data);
+                            $('#virtualTourGroup' + index).remove();
+                            Swal.fire('Terhapus!', 'Gambar virtual tour Anda telah dihapus.',
+                                'success');
+                        },
+                        error: function(error) {
+                            console.log('Error Response', error);
+                            Swal.fire('Gagal!', 'Terjadi kesalahan, gambar tidak terhapus.', 'error');
+                        }
+                    });
+                }
+            });
+        }
+
+        function removePreviewVirtualTourInput(groupId) {
+            var imgPreview = document.getElementById('preview' + groupId);
+            if (imgPreview) {
+                imgPreview.remove();
+            }
+            var inputGroup = document.getElementById(groupId);
+            if (inputGroup) {
+                inputGroup.remove();
             }
         }
     </script>

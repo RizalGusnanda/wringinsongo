@@ -17,4 +17,9 @@ class Tours extends Model
     {
         return $this->hasMany(Tours_subimages::class, 'id_tour');
     }
+
+    public function virtualTours()
+    {
+        return $this->hasMany(Tours_virtual::class, 'id_tour');
+    }
 }

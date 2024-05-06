@@ -25,7 +25,7 @@ class UpdatetoursRequest extends FormRequest
     {
         return [
             'name' => 'required|string|unique:tours,name,' . $this->tour,
-            'profile_tour' => 'required|',
+            'profile_tour' => 'required|image|max:5120',
             'description' => 'required|string',
             'history' => 'nullable',
             'fasilitas_km' => 'required|in:Fasilitas Tersedia,Fasilitas Tidak Tersedia',
@@ -42,6 +42,7 @@ class UpdatetoursRequest extends FormRequest
         return [
             'name.required' => 'Tour name must be filled in.',
             'profile_tour.required' => 'Tour profile must be uploaded.',
+            'profile_tour.max' => 'The profile image size is too large. Maximum size is 5MB.',
             'description.required' => 'Description must be filled in.',
             'fasilitas_km.required' => 'Bathroom facilities option must be selected.',
             'fasilitas_tm.required' => 'Dining facilities option must be selected.',

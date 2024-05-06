@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Imports\ToursImport;
 use App\Models\Tours_subimages;
+use App\Models\tours_virtual;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MenuWisataController extends Controller
@@ -69,10 +70,22 @@ class MenuWisataController extends Controller
         if ($request->has('additional_images')) {
             foreach ($request->file('additional_images') as $file) {
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('wisata_images', $filename, 'public');
+                $path = $file->storeAs('additional_images', $filename, 'public');
                 Tours_subimages::create([
                     'id_tour' => $tour->id,
                     'subimages' => $path
+                ]);
+            }
+        }
+
+        if ($request->hasFile('virtual_tours')) {
+            foreach ($request->file('virtual_tours') as $file) {
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('virtual_tour', $filename, 'public');
+
+                tours_virtual::create([
+                    'id_tour' => $tour->id,
+                    'virtual_tours' => $path
                 ]);
             }
         }
@@ -102,6 +115,8 @@ class MenuWisataController extends Controller
         ]);
 
         $tour = Tours::findOrFail($id);
+        $original = $tour->getOriginal();
+
         $tour->name = $request->name;
         $tour->description = $request->description;
         $tour->history = $request->history;
@@ -112,37 +127,68 @@ class MenuWisataController extends Controller
         $tour->type = $request->type;
         $tour->harga_tiket = $request->harga_tiket;
 
+        $profileUpdated = false;
         if ($request->hasFile('profile_tour')) {
             Storage::delete('public/' . $tour->profile_tour);
             $filename = Str::random(40) . '.' . $request->file('profile_tour')->getClientOriginalExtension();
             $request->file('profile_tour')->storeAs('wisata_images', $filename, 'public');
             $tour->profile_tour = 'wisata_images/' . $filename;
+            $profileUpdated = true;
         }
 
         $tour->save();
 
+        $additionalImagesUpdated = false;
         if ($request->has('additional_images')) {
             foreach ($request->file('additional_images') as $file) {
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('wisata_images', $filename, 'public');
+                $path = $file->storeAs('additional_images', $filename, 'public');
                 Tours_subimages::create([
                     'id_tour' => $tour->id,
                     'subimages' => $path
                 ]);
+                $additionalImagesUpdated = true;
             }
+        }
+
+        $virtualToursUpdated = false;
+        if ($request->has('virtual_tours')) {
+            foreach ($request->file('virtual_tours') as $file) {
+                $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('virtual_tour', $filename, 'public');
+                tours_virtual::create([
+                    'id_tour' => $tour->id,
+                    'virtual_tours' => $path
+                ]);
+                $virtualToursUpdated = true;
+            }
+        }
+
+        if (!$tour->wasChanged() && !$profileUpdated && !$additionalImagesUpdated && !$virtualToursUpdated) {
+            return redirect()->route('menu-wisata.index')->with('danger', 'Tidak ada data yang diperbarui.');
         }
 
         return redirect()->route('menu-wisata.index')->with('success', 'Data wisata berhasil diperbarui.');
     }
 
 
+
     public function deleteImage(Request $request)
     {
         $image = Tours_subimages::findOrFail($request->id);
-        Storage::delete('public/' . $image->subimages);
+        Storage::disk('public')->delete($image->subimages);
         $image->delete();
 
         return response()->json(['status' => 'success', 'message' => 'Image deleted successfully']);
+    }
+
+    public function deleteVirtualTourImage(Request $request)
+    {
+        $image = tours_virtual::findOrFail($request->id);
+        Storage::delete('public/' . $image->virtual_tours);
+        $image->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'Virtual tour image deleted successfully']);
     }
 
 
@@ -175,6 +221,19 @@ class MenuWisataController extends Controller
     public function destroy($id)
     {
         $tour = Tours::findOrFail($id);
+
+        Storage::delete('public/' . $tour->profile_tour);
+
+        foreach ($tour->subimages as $subimage) {
+            Storage::delete('public/' . $subimage->subimages);
+            $subimage->delete();
+        }
+
+        foreach ($tour->virtualTours as $virtualTour) {
+            Storage::delete('public/' . $virtualTour->virtual_tours);
+            $virtualTour->delete();
+        }
+
         $tour->delete();
 
         return redirect()->route('menu-wisata.index')->with('success', 'Data wisata berhasil dihapus.');

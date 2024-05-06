@@ -2,7 +2,7 @@
 @section('content')
     <main class="bg-light">
         <div class="col-md-6 mx-auto text-center ">
-            <h1 class="font-weight-bold contact-header">Profile User</h1>
+            <h1 class="font-weight-bold contact-header">PROFILE USER</h1>
         </div>
         <section class="centered-section-1">
             <div class="container">
@@ -10,7 +10,6 @@
                     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-lg-12 col-md-10 col-sm-6">
-
                             <div class="bg-primary-section card py-1 card-profile1 mb-4">
                                 @if (session('success'))
                                     <script>
@@ -24,7 +23,6 @@
                                         }
                                     </script>
                                 @endif
-
                                 @if (session('error'))
                                     <script>
                                         window.onload = function() {
@@ -37,7 +35,6 @@
                                         }
                                     </script>
                                 @endif
-
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="profile-widget-description m-4 text-center">
@@ -70,7 +67,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -78,20 +74,18 @@
                                             style="display: flex; flex-direction: column;">
                                             <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card2">Ubah
                                                 Password</h5>
-
-                                            @if ($errors->has('password_current'))
-                                                <div class="alert custom-alert alert-dismissible fade show" role="alert">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="title-close">Password Sekarang Salah</span>
-                                                        <button type="button" class="close" data-bs-dismiss="alert"
-                                                            aria-label="Close">
-                                                            <span>X</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            @endif
-
-
+                                                @if ($errors->has('password_current'))
+                                                <script>
+                                                    window.addEventListener('load', function() {
+                                                        Swal.fire({
+                                                            title: 'Error!',
+                                                            text: 'Password Sekarang Salah',
+                                                            icon: 'error',
+                                                            confirmButtonText: 'Close'
+                                                        });
+                                                    });
+                                                </script>
+                                            @endif                                            
                                             <div class="mb-3 ml-customs">
                                                 <label class="small mb-1" for="inputPassword">Password Sekarang</label>
                                                 <input class="form-control" id="inputPassword" type="password"
@@ -123,14 +117,10 @@
                                 </div>
                             </div>
 
-
                             <div class="bg-primary-section card py-1 mt-4">
                                 <div class="card-body">
-                                    <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card3">Informasi
-                                        Pengguna</h5>
-
-
-
+                                    <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card3">INFORMASI
+                                        PENGGUNA</h5>
                                     <div class="d-flex justify-content-center align-items-center mb-3">
                                         <label class="small mb-1 mr-2" for="inputUsername"
                                             style="min-width: 150px;">Username</label>

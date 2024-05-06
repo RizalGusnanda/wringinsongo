@@ -13,7 +13,7 @@ class Updatetours_subimagesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class Updatetours_subimagesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'subimages.*' => 'required|image|max:5120',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'subimages.*.required' => 'Setiap gambar pendukung wajib diisi.',
+            'subimages.*.image' => 'File harus berupa gambar.',
+            'subimages.*.max' => 'Ukuran gambar pendukung terlalu besar, maksimal adalah 5MB.',
         ];
     }
 }

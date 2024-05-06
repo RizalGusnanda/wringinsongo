@@ -11,7 +11,7 @@ class LandingController extends Controller
     {
         $tours = Tours::take(4)->get();
 
-        if ($tours->count() < 4) {
+        if ($tours->count() < 1) {
             $message = "Data Wisata Tidak Tersedia!";
             return view('layout-users/landingpage', compact('message'));
         }

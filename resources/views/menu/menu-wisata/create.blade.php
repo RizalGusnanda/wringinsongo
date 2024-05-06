@@ -194,6 +194,7 @@
 @endsection
 
 @push('customScript')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(".summernote").summernote({
             styleWithSpan: false,
@@ -310,23 +311,23 @@
             });
         });
 
-        function previewAdditionalImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var imgElement = document.createElement("img");
-                    imgElement.src = e.target.result;
-                    imgElement.style.width = "250px";
-                    imgElement.style.height = "250px";
-                    imgElement.style.marginRight = "10px";
-                    imgElement.classList.add("img-preview");
+        // function previewAdditionalImage(input) {
+        //     if (input.files && input.files[0]) {
+        //         var reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             var imgElement = document.createElement("img");
+        //             imgElement.src = e.target.result;
+        //             imgElement.style.width = "250px";
+        //             imgElement.style.height = "250px";
+        //             imgElement.style.marginRight = "10px";
+        //             imgElement.classList.add("img-preview");
 
-                    var container = document.getElementById("imagePreviewContainer");
-                    container.appendChild(imgElement);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+        //             var container = document.getElementById("imagePreviewContainer");
+        //             container.appendChild(imgElement);
+        //         }
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
 
         $('#addImageBtn').on('click', function() {
             var index = $('.additional-image-input').length;
@@ -343,6 +344,20 @@
 
         window.previewAdditionalImage = function(input, index) {
             if (input.files && input.files[0]) {
+                var file = input.files[0];
+                if (file.size > 5242880) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar pendukung adalah 5MB.'
+                    });
+                    input.value = "";
+                    var existingImg = document.getElementById('previewImg' + index);
+                    if (existingImg) {
+                        existingImg.remove();
+                    }
+                    return;
+                }
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var imgId = 'previewImg' + index;
@@ -353,17 +368,15 @@
                         imgElement.src = e.target.result;
                         imgElement.style.width = '200px';
                         imgElement.style.height = '200px';
-                        imgElement.style.marginRight = '10px';
                         imgElement.classList.add('img-preview');
                         document.getElementById('imagePreviewContainer').appendChild(imgElement);
                     } else {
                         existingImg.src = e.target.result;
                     }
                 }
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(file);
             }
         };
-
         window.removeInput = function(index) {
             $('#inputGroup' + index).remove();
             $('#previewImg' + index).remove();
@@ -384,6 +397,20 @@
 
         window.previewVirtualTour = function(input, index) {
             if (input.files && input.files[0]) {
+                var file = input.files[0];
+                if (file.size > 15728640) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar virtual tour adalah 15MB.'
+                    });
+                    input.value = "";
+                    var existingImg = document.getElementById('previewVirtualTour' + index);
+                    if (existingImg) {
+                        existingImg.remove();
+                    }
+                    return;
+                }
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var imgId = 'previewVirtualTour' + index;
@@ -398,7 +425,7 @@
                         existingImg.src = e.target.result;
                     }
                 }
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(file);
             }
         };
 

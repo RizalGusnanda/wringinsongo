@@ -126,11 +126,11 @@
         </div>
         <div class="section-body">
             <h2 class="section-title">Wisata Management</h2>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-12">
                     @include('layouts.alert')
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row">
                 <div class="col-12">
@@ -234,13 +234,15 @@
                                                             onclick="showTourDetails('{{ $tour->name }}', '{{ $tour->fasilitas_km }}', '{{ $tour->fasilitas_tm }}', '{{ $tour->fasilitas_ti }}', '{{ $tour->maps }}', '{{ $tour->type }}', '{{ $tour->harga_tiket }}')">Show</a>
 
                                                         <a href="{{ route('menu-wisata.edit', $tour->id) }}"
-                                                            class="btn btn-info mr-2">Edit</a>
+                                                            class="btn btn-warning mr-2">Edit</a>
                                                         <form action="{{ route('menu-wisata.destroy', $tour->id) }}"
-                                                            method="POST">
+                                                            method="POST" id="deleteForm{{ $tour->id }}">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger"
-                                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                                                            <button type="button" class="btn btn-danger delete-btn"
+                                                                data-id="{{ $tour->id }}">
+                                                                Delete
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </td>
@@ -283,6 +285,7 @@
     </script>
 @endsection
 @push('customScript')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
             $('.import').click(function(event) {
@@ -302,8 +305,52 @@
                 $(this).prev('label').text(file);
             });
         });
-    </script>
-@endpush
 
-@push('customStyle')
+        $(document).ready(function() {
+            $('.delete-btn').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda tidak akan dapat mengembalikannya!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#deleteForm' + id).submit();
+                    }
+                });
+            });
+        });
+
+        @if ($message = Session::get('success'))
+            Swal.fire({
+                title: 'Sukses!',
+                text: '{{ $message }}',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                position: 'top-end',
+                timerProgressBar: true,
+                showCloseButton: true
+            });
+        @endif
+        @if ($message = Session::get('danger'))
+            Swal.fire({
+                title: 'Gagal!',
+                text: '{{ $message }}',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                position: 'top-end',
+                timerProgressBar: true,
+                showCloseButton: true
+            });
+        @endif
+    </script>
 @endpush

@@ -45,10 +45,13 @@ class ToursVirtualController extends Controller
      * @param  \App\Models\tours_virtual  $tours_virtual
      * @return \Illuminate\Http\Response
      */
-    public function show(tours_virtual $tours_virtual)
+    public function show($id)
     {
-        //
+        $tourVirtuals = tours_virtual::where('id_tour', $id)->get();
+
+        return view('layout-users.virtual', compact('tourVirtuals'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
