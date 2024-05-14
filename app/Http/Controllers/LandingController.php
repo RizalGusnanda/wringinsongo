@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tours;
+use App\Models\tours;
 
 class LandingController extends Controller
 {
