@@ -10,13 +10,13 @@ class Carts extends Model
     use HasFactory;
 
     protected $table = 'carts';
-    protected $fillable = ['id_ticket', 'id_tour', 'total_price', 'status', 'status_confirm'];
-    
+    protected $fillable = ['id_ticket', 'id_tour', 'total_price', 'status', 'status_confirm', 'order_id'];
+
     public function payments()
     {
         return $this->hasOne(Payments::class, 'cart_id');
     }
-    
+
     public function tour()
     {
         return $this->belongsTo(Tours::class, 'id_tour');

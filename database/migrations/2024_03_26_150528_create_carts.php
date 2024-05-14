@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_ticket');
             $table->unsignedBigInteger('id_tour');
+            $table->string('order_id')->nullable();
             $table->string('total_price');
             $table->enum('status', ['pending', 'success'])->default('pending');
             $table->enum('status_confirm', ['pending', 'success'])->default('pending');

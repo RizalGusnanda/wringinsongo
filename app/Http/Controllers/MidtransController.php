@@ -28,6 +28,11 @@ class MidtransController extends Controller
                 'payment_type' => 'midtrans',
                 'raw_response_request' => json_encode($response)
             ]);
+
+            $cart = Carts::where('id', $request->input('cart_id'))->first();
+            $cart->order_id = $response['order_id'];
+            $cart->save();
+
             return response()->json(['status' => 'success', 'token' => $response['token'], 'redirect_url' => $response['redirect_url']]);
         } else {
             // Handle error
@@ -54,11 +59,24 @@ class MidtransController extends Controller
             ]
         );
 
+        $cart = Carts::where('order_id', $response['order_id'])->first();
+
         switch ($status) {
             case 'settlement':
-                $cart = Carts::where('id', $transaction->cart_id)->first();
-                $cart->status = 'success';
-                $cart->save();
+                //midtrans ke closed
+                if ($transaction->status == 'pending' && $cart->status == 'pending') {
+                    $transaction->status = 'success';
+                    $transaction->save();
+
+                    $cart->status = 'success';
+                    $cart->status_confirm = 'success';
+                    $cart->save();
+                } else {
+                    $cart = Carts::where('id', $transaction->cart_id)->first();
+                    $cart->status = 'success';
+                    $cart->save();
+                }
+
                 break;
             case 'pending':
                 break;
