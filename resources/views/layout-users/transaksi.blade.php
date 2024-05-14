@@ -158,7 +158,6 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Response:', data);
                         if (data.status === 'success') {
                             window.snap.pay(data.token, {
                                 onSuccess: function(result) {
