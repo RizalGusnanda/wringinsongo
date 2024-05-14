@@ -1,9 +1,9 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="index.html">Stisla</a>
+        <a href="{{ url('/dashboard') }}"><img src="{{ asset('assets/img/avatar/lg-wri.png') }}" alt=""></a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">St</a>
+        <a href="index.html">WR</a>
     </div>
     <ul class="sidebar-menu">
 
@@ -35,6 +35,21 @@
             <ul class="dropdown-menu">
                 <li><a class="nav-link " href="{{ route('menu-group.index') }}">Menu Group</a></li>
                 <li><a class="nav-link " href="{{ route('menu-item.index') }}">Menu Item</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-list"></i>
+                <span>Menu Wisata</span></a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link " href="{{ route('menu-wisata.index') }}">Menu Wisata</a></li>
+                <li><a class="nav-link " href="{{ route('reservasi-wisata.index') }}">Reservasi Tiket</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-ticket-alt"></i>
+                <span>Menu Tiket</span></a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link " href="{{ route('konfirmasi-tiket.index') }}">Konfirmasi Tiket</a></li>
             </ul>
         </li>
     </ul>

@@ -1,21 +1,36 @@
 body {
-    font-family: 'Poppins';
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .bg-primary-nav {
     background-color: #FFFFFF !important;
+    height: 68px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bg-default {
+    background-color: #265073;
+}
+
+.header-navb {
+    height: 200px;
 }
 
 a.btn-login {
     border-color: #265073;
-    border-radius: 12px;
+    border-radius: 15px;
     color: #265073;
     margin-left: 20px;
     margin-right: 10px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
 }
 
-a.btn-login:hover {
-    background-color: #265073;
+a.btn-login:hover,
+a.btn-login:active {
+    background-color: #265073 !important;
     border-color: #265073;
     color: white !important;
 }
@@ -28,25 +43,64 @@ a.btn-regis {
     background-color: #eb9481;
     border-color: #eb9481;
     color: white;
-    border-radius: 12px;
+    border-radius: 15px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
 }
 
-a.btn-regis:hover {
-    background-color: #EE6F57;
+a.btn-regis:hover,
+a.btn-regis:active {
+    background-color: #EE6F57 !important;
     border-color: #EE6F57;
-    color: white;
+    color: white !important;
 }
 
 a.btn-regis:focus {
     box-shadow: none;
 }
 
-.navbar-nav li.nav-item a.nav-link {
+.navbar-nav li.nav-item a.link-navbar {
     color: #000000;
+    position: relative;
+    transition: color 0.5s ease;
+    overflow: hidden;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    padding-right: 15px;
+    line-height: 20px;
 }
 
-.navbar-nav li.nav-item.active a.nav-link {
+.navbar-nav li.nav-item.active a.link-navbar {
     color: #265073;
+}
+
+.link-navbar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #EE6F57;
+    transition: width 0.5s ease;
+}
+
+.link-navbar:hover::after {
+    width: 100%;
+}
+
+.link-navbar:hover {
+    color: #EE6F57 !important;
+}
+
+.nav-prof {
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
 }
 
 .myfooter {
@@ -64,8 +118,23 @@ a.btn-regis:focus {
     text-decoration: none;
 }
 
+.foot-map {
+    line-height: 1px;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
 .contact-list {
-    margin-top: 25px;
+    margin-top: 26px;
+}
+
+.kontak-km {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: 2px;
 }
 
 /* landingpage */
@@ -114,6 +183,10 @@ a.btn-regis:focus {
     color: #000000;
     padding-top: 20px;
     padding-bottom: 50px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
 }
 
 .welcome-fill {
@@ -147,12 +220,12 @@ a.btn-regis:focus {
 }
 
 h3.text-center.mt-4.font-weight-bold {
-    margin-top: 40px !important;
     margin-bottom: 20px !important;
 }
 
 .card-wringinsongo-view-mobile .card-text {
     font-size: 14px;
+    line-height: 23px;
 }
 
 .card-wringinsongo-view-mobile .fas.fa-info-circle {
@@ -169,6 +242,20 @@ h3.text-center.mt-4.font-weight-bold {
 
 .card-wringinsongo-view-mobile .fas.fa-brain {
     color: #265073 !important;
+}
+
+.title-choose {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+}
+
+.title-ct {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 /* wisata */
@@ -243,12 +330,27 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 .card-wisata {
+    display: flex;
+    align-items: center;
     border: none;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin-bottom: 50px;
     overflow: hidden;
 }
+
+.img-wisata {
+    flex-basis: 40%;
+    height: 250px;
+    object-fit: cover;
+    border-right: 1px solid #eee;
+    transition: transform 0.3s ease;
+}
+
+.card-wisata:hover .img-wisata {
+    transform: scale(1.05);
+}
+
 
 .card-wisata img {
     width: 100%;
@@ -259,25 +361,28 @@ h3.text-center.mt-4.font-weight-bold {
 .wisata-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-basis: 60%;
     padding: 20px;
 }
 
 .wisata-title {
-    font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-align: center;
-    font-weight: bold;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    padding-right: 15px;
+    line-height: 20px;
 }
 
 .wisata-description {
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: justify;
+    line-height: 23px;
 }
 
 .btn-detailwisata {
-    background-color: #265073;
+    background-color: #265073 !important;
     color: #fff;
     border: none;
     border-radius: 15px;
@@ -285,11 +390,187 @@ h3.text-center.mt-4.font-weight-bold {
     text-decoration: none;
     margin-top: auto;
     font-size: 14px;
+    line-height: 23px;
 }
 
-.btn-detailwisata:hover {
-    background-color: #1F3C88;
+.btn-detailwisata:hover,
+.btn-detailwisata:active {
+    background-color: #1F3C88 !important;
+    color: #fff !important;
+}
+
+/* detail wisata */
+
+.header-img-top {
+    width: 100%;
+    height: 500px;
+    margin-top: -100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.header-img-top:hover {
+    filter: brightness(95%);
+    transform: scale(1.02);
+}
+
+.image-container {
+    position: relative;
+    text-align: center;
+}
+
+.image-container:hover .icon-virtual-tour {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.icon-virtual-tour {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
     color: #fff;
+    background-color: #00000050;
+    border-radius: 50%;
+    padding: 10px;
+    box-sizing: content-box;
+    transition: transform 0.3s ease, background-color 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-virtual-tour:hover {
+    background-color: #0000009d;
+}
+
+.head-tittle-dw {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 45px;
+    color: #ffffff;
+}
+
+.checked {
+    color: orange;
+}
+
+.maps-icn {
+    color: #ffffff;
+    border: 1px solid #fff;
+    border-radius: 5%;
+    font-size: 30px;
+    margin-top: 20px;
+    padding-top: -5px;
+}
+
+.maps-icn:hover {
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+.btn-mapsl {
+    background-color: #265073 !important;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+}
+
+.btn-mapsl:hover,
+.btn-mapsl:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+    border-radius: 15px;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom: 2px solid #265073;
+    color: #265073;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom: 2px solid #EE6F57;
+    color: #EE6F57;
+}
+
+.tab-content {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 3px solid #265073;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.facility-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #265073;
+    transition: transform 0.3s ease;
+    transform-origin: top;
+    transform: scaleY(0);
+    z-index: 0;
+}
+
+.facility-card:hover .overlay {
+    transform: scaleY(1);
+}
+
+.facility-card .card-title,
+.facility-card .card-text,
+.facility-card i.material-icons {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+}
+
+.facility-card:hover .card-title,
+.facility-card:hover .card-text,
+.facility-card:hover i.material-icons {
+    color: white;
+}
+
+.reserv-tiket {
+    background-color: #265073 !important;
+    color: #ffffff !important;
+    border-radius: 15px;
+    width: 100%;
+    border: none;
+}
+
+.reserv-tiket:hover,
+.reserv-tiket:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+    border-radius: 15px;
+}
+
+.tesp-dw {
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
 }
 
 /* about */
@@ -299,14 +580,43 @@ h3.text-center.mt-4.font-weight-bold {
 
 .about-h {
     color: #000000;
-    margin-top: 25px;
-    font-size: 28px;
+    font-size: 25px;
+    text-align: left;
+    margin-top: 0px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 45px;
+}
+
+.titl-about {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 45px;
+}
+
+.img-about-desc {
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.096);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .about-p {
     color: #000000;
     font-size: 14px;
     text-align: justify;
+    margin-right: 32px;
+    margin-top: 10px;
+    background-color: #f9f7f7e0;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.096);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    line-height: 23px;
 }
 
 /* contact us */
@@ -398,7 +708,6 @@ h3.text-center.mt-4.font-weight-bold {
 
 .profile-title-card4 {
     color: #265073;
-    padding-top: 10px;
 }
 
 .btn-profile {
@@ -439,7 +748,7 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 .card-kod-res {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .btn-test {
@@ -451,8 +760,8 @@ h3.text-center.mt-4.font-weight-bold {
 
 .btn-testimoni {
     border-radius: 20px;
-    background-color: #265073;
-    color: #ffffff;
+    background-color: #265073 !important;
+    color: #ffffff !important;
 }
 
 .btn-testimoni:hover {
@@ -462,7 +771,8 @@ h3.text-center.mt-4.font-weight-bold {
 
 .dt-res {
     border: 1px solid #ccc;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px 0 rgba(51, 73, 94, 0.15);
+    border-radius: 15px;
 }
 
 .pagination .page-item.active .page-link {
@@ -474,7 +784,7 @@ h3.text-center.mt-4.font-weight-bold {
 .pagination .page-item.disabled .page-link {
     background-color: #f8f9fa;
     border-color: #dee2e6;
-    color: #000000;
+    color: #ccc;
 }
 
 .pagination .page-link {
@@ -518,32 +828,65 @@ h3.text-center.mt-4.font-weight-bold {
 
 .btn-byr {
     border-radius: 20px;
-    background-color: #265073;
+    background-color: #265073 !important;
     color: #ffffff;
     font-size: 16px;
 }
 
-.btn-byr:hover {
-    background-color: #1F3C88;
-    color: #ffffff;
+.btn-byr:hover,
+.btn-byr:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
 }
 
 .tr-crd {
     box-shadow: 4px rgba(0, 0, 0, 0.1);
     border: 2px solid #ccc;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .btn-testim {
     border-radius: 20px;
-    background-color: #265073;
+    background-color: #265073 !important;
     color: #ffffff;
-    width: auto;
+    font-size: 16px;
 }
 
-.btn-testim:hover {
-    background-color: #1F3C88;
+.btn-testim:hover,
+.btn-testim:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
+.btn-testimsc {
+    border-radius: 20px 0 0 20px;
+    background-color: #265073 !important;
     color: #ffffff;
+    font-size: 16px;
+}
+
+.btn-testimsc:hover,
+.btn-testimsc:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
+.btn-addts {
+    border-radius: 20px;
+    background-color: #265073 !important;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.btn-addts:hover,
+.btn-addts:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
+.btn-xcls {
+    border-radius: 20px;
+    margin-top: 10px;
 }
 
 .custom-alert {
@@ -571,13 +914,13 @@ h3.text-center.mt-4.font-weight-bold {
     color: #FFFFFF;
 }
 
-.close-alrt{
+.close-alrt {
     background-color: #63ed7a;
     border: none;
     color: #FFFFFF;
 }
 
-.alert-dgr{
+.alert-dgr {
     background-color: #fc544b;
     width: 96%;
     margin: auto;
@@ -590,26 +933,318 @@ h3.text-center.mt-4.font-weight-bold {
     font-size: 16px;
 }
 
-.close-alrt2{
+.close-alrt2 {
     background-color: #fc544b;
     border: none;
     color: #FFFFFF;
 }
 
-.close{
+.close {
     background-color: #fc544b;
     border: none;
     color: #FFFFFF;
 }
 
+.ml-customs {
+    margin-left: 30px;
+}
+
+.card-wringinsongo-view-mobile {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+.card-wringinsongo-view-mobile::before,
+.card-wringinsongo-view-mobile::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.card-wringinsongo-view-mobile::before {
+    top: -100%;
+    background: linear-gradient(to bottom, #265073, #265073);
+}
+
+.card-wringinsongo-view-mobile:hover::before {
+    top: 0;
+}
+
+.card-wringinsongo-view-mobile:hover::after {
+    opacity: 1;
+}
+
+.card-wringinsongo-view-mobile:hover {
+    color: #ffffff;
+}
+
+.card-wringinsongo-view-mobile .card-body {
+    position: relative;
+    z-index: 2;
+}
+
+.card-wringinsongo-view-mobile:hover .fas {
+    color: #ffffff !important;
+}
+
+.carousel-item img {
+    height: 670px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    color: transparent;
+    background-color: #212529;
+    max-width: 50px;
+    border-radius: 20px;
+}
+
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img-container .col-md-3,
+.img-container .col-md-6 {
+    display: flex;
+    align-items: center;
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.096);
+    transition: transform 0.3s ease;
+}
+
+.img-container img:hover {
+    transform: scale(1.05);
+}
+
+.equal-height-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.hero-height {
+    height: 365px;
+    overflow: hidden;
+}
+
+.equal-height-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.description-abt {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* .btn-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-play:hover {
+    color: #265073;
+    background-color: transparent;
+} */
+
+.deskripsi-wrg {
+    padding: 10px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.deskripsi-wrg:hover {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-corrousell {
+    background-color: #ffffff !important;
+    color: #265073;
+    font-weight: 600;
+    line-height: 16px;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-corrousell:hover,
+.btn-corrousell:active {
+    background-color: #265073 !important;
+    color: #ffffff !important;
+}
+
+.tittle-carausel {
+    font-size: 66px;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    background-color: transparent;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+    line-height: 99px;
+}
+
+.p-carausel {
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    line-height: 26px;
+}
+
+.carousel-caption {
+    right: 0;
+    left: 0;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-lswisata {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-lswisata img {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.card-lswisata:hover img {
+    transform: scale(1.1);
+}
+
+.wisata-infox {
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    color: #fff;
+    transition: bottom 0.3s ease;
+    text-align: center;
+}
+
+.card-lswisata:hover .wisata-infox {
+    bottom: 0;
+}
+
+.land-wisata-tiitle {
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+}
+
+.btn-tran-byr {
+    border-radius: 20px;
+    background-color: #265073 !important;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.btn-tran-byr:hover,
+.btn-tran-byr:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
+.btn-bankst {
+    background-color: #265073 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-bankst:hover,
+.btn-bankst:active {
+    background-color: #1F3C88 !important;
+    color: #ffffff !important;
+}
+
+.mage-reser {
+    width: 100%; 
+    height: 130px;
+}
 
 @media (max-width: 768px) {
+
+    .carousel-caption {
+        display: block !important;
+        transform: none;
+        text-align: center;
+    }
+
+    .tittle-carausel,
+    .title-choose,
+    .titl-about,
+    .title-land-wis {
+        font-size: 22px;
+    }
+
+    .p-carausel,
+    .btn-corrousell {
+        font-size: 14px;
+    }
+
+    .title-ct {
+        font-size: 16px;
+    }
+
+    .nav-item {
+        text-align: center;
+        background-color: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.055);
+    }
+
+    .nav-item:hover {
+        text-align: center;
+        background-color: #f8f9fa;
+        border: 1px solid rgba(0, 0, 0, 0.055);
+    }
+
+    a.btn-login {
+        margin: 5px;
+    }
+
+    a.btn-regis {
+        margin: 5px;
+    }
+
     .navbar-nav {
         margin-top: 20px;
     }
 
     .kontak-km {
         margin-top: 20px;
+        font-family: Poppins, sans-serif;
+        font-weight: 700;
+        line-height: 20px;
     }
 
     .contact-list {
@@ -617,8 +1252,13 @@ h3.text-center.mt-4.font-weight-bold {
     }
 
     .about-h {
-        font-size: 24px;
+        font-size: 20px;
         text-align: center;
+    }
+
+    .titl-about {
+        text-align: center;
+        margin-bottom: 10px;
     }
 
     .landing {
@@ -630,13 +1270,43 @@ h3.text-center.mt-4.font-weight-bold {
     }
 
     .card-contact {
-        padding-top: 0px !important;
+        padding-top: 20px !important;
     }
 
-    .title-wisata {
-        color: #FFFFFF;
-        font-size: 20px;
+    .about-p {
+        font-size: 14px;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .contact-header {
+        color: #EE6F57;
+        font-size: 24px;
+        padding-top: 30px;
+    }
+
+    .card-wisata {
+        flex-direction: column !important;
+        align-items: center;
         text-align: center;
+    }
+
+    .img-wisata {
+        margin-bottom: 20px;
+    }
+
+    .wisata-info {
+        flex-basis: 100% !important;
+    }
+
+    .wisata-title {
+        font-size: 20px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .wisata-description {
+        font-size: 14px !important;
+        line-height: 20px !important;
     }
 
     .wringin,
@@ -693,6 +1363,7 @@ h3.text-center.mt-4.font-weight-bold {
         margin: 0 auto;
         width: 95%;
         box-sizing: border-box;
+        margin-bottom: 15px;
     }
 
     .profile-widget-description,
@@ -716,7 +1387,6 @@ h3.text-center.mt-4.font-weight-bold {
 
     .btn-test {
         width: 100%;
-        margin-top: 20px;
         justify-content: center;
     }
 
@@ -738,7 +1408,6 @@ h3.text-center.mt-4.font-weight-bold {
     .col-6 {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         margin-left: 0;
     }
 
@@ -757,9 +1426,35 @@ h3.text-center.mt-4.font-weight-bold {
         width: 86%;
     }
 
+    .mage-reser {
+        width: 250px !important; 
+        height: 200px !important;
+    }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+
+    .nav-item {
+        text-align: center;
+        background-color: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.055);
+    }
+
+    .nav-item:hover {
+        text-align: center;
+        background-color: #f8f9fa;
+        border: 1px solid rgba(0, 0, 0, 0.055);
+    }
+
+    a.btn-login {
+        margin: 5px;
+    }
+
+    a.btn-regis {
+        margin: 5px;
+    }
+
     .welcome-title {
         text-align: center;
         width: 700px;
@@ -779,17 +1474,22 @@ h3.text-center.mt-4.font-weight-bold {
 
     .about-h {
         font-size: 24px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 5px;
     }
 
     .about-p {
         font-size: 14px;
+        margin-left: 0px;
+        margin-left: 0px;
     }
 
     .landing {
-        max-width: 85%;
+        max-width: 95%;
         height: auto;
-        margin-top: 30px;
-        padding-right: 20px;
+        margin-top: 67px;
+        margin-left: 8px;
     }
 
     .search-input {
@@ -818,6 +1518,11 @@ h3.text-center.mt-4.font-weight-bold {
     .card-profile-img {
         width: 120px;
         height: 120px;
+    }
+
+    .mage-reser {
+        width: 100px !important; 
+        height: 160px !important;
     }
 
 }

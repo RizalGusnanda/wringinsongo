@@ -25,6 +25,9 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'user.management']);
         Permission::create(['name' => 'role.permission.management']);
         Permission::create(['name' => 'menu.management']);
+        Permission::create(['name' => 'wisata.management']);
+        Permission::create(['name' => 'tiket.management']);
+
         //user
         Permission::create(['name' => 'user.index']);
         Permission::create(['name' => 'user.create']);
@@ -71,6 +74,27 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'menu-item.create']);
         Permission::create(['name' => 'menu-item.edit']);
         Permission::create(['name' => 'menu-item.destroy']);
+
+        
+        Permission::create(['name' => 'menu-wisata.index']);
+        Permission::create(['name' => 'menu-wisata.create']);
+        Permission::create(['name' => 'menu-wisata.edit']);
+        Permission::create(['name' => 'menu-wisata.destroy']);
+
+        Permission::create(['name' => 'pendapatan-wisata.index']);
+        Permission::create(['name' => 'pendapatan-wisata.create']);
+        Permission::create(['name' => 'pendapatan-wisata.edit']);
+        Permission::create(['name' => 'pendapatan-wisata.destroy']);
+
+        Permission::create(['name' => 'reservasi-wisata.index']);
+        Permission::create(['name' => 'reservasi-wisata.create']);
+        Permission::create(['name' => 'reservasi-wisata.edit']);
+        Permission::create(['name' => 'reservasi-wisata.destroy']);
+
+        Permission::create(['name' => 'konfirmasi-tiket.index']);
+        Permission::create(['name' => 'konfirmasi-tiket.create']);
+        Permission::create(['name' => 'konfirmasi-tiket.edit']);
+        Permission::create(['name' => 'konfirmasi-tiket.destroy']);
 
         // create roles 
         $roleUser = Role::create(['name' => 'user']);

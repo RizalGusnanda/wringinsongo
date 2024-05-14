@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Tours_subimages extends Model
 {
     use HasFactory;
+    protected $fillable = ['id_tour', 'subimages'];
 }

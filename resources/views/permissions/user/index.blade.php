@@ -25,9 +25,9 @@
                         <div class="card-header">
                             <h4>List User Assigned To Role</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary"
+                                {{-- <a class="btn btn-icon icon-left btn-primary"
                                     href="{{ route('assign.user.create') }}">Assign
-                                    User To Role</a>
+                                    User To Role</a> --}}
                             </div>
                         </div>
                         <div class="card-body">
