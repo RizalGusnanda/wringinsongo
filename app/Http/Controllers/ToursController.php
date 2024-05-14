@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tours;
+use App\Models\Tours;
 use App\Http\Requests\StoretoursRequest;
 use App\Http\Requests\UpdatetoursRequest;
 use App\Models\Carts;
