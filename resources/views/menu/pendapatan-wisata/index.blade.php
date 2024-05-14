@@ -23,35 +23,15 @@
                         <div class="card-header">
                             <h4>Pendapatan Wisata List</h4>
                             <div class="card-header-action">
-                                <a class="btn btn-icon icon-left btn-primary" href="">Eksport Pendapatan</a>
-                                {{-- <a class="btn btn-info btn-primary active import">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    Import Menu Item</a>
-                                <a class="btn btn-info btn-primary active" href="{{ route('menu-item.export') }}">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>
-                                    Export Menu Item</a> --}}
-                                <a class="btn btn-info btn-primary active search">
+                                <a class="btn btn-icon icon-left btn-primary" href="{{ route('pendapatan-wisata.export', request()->query()) }}">Eksport Pendapatan</a>
+                                <a class="btn btn-info btn-primary active search-toggle">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                     Search Wisata</a>
                             </div>
                         </div>
                         <div class="card-body">
-                            {{-- <div class="show-import" style="display: none">
-                                <div class="custom-file">
-                                    <form action="{{ route('menu-item.import') }}" method="post"
-                                        enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <label class="custom-file-label" for="file-upload">Choose File</label>
-                                        <input type="file" id="file-upload" class="custom-file-input" name="import_file">
-                                        <br /> <br />
-                                        <div class="footer text-right">
-                                            <button class="btn btn-primary">Import File</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div> --}}
                             <div class="show-search mb-3" style="display: none">
-                                <form id="search" method="GET" action="">
+                                <form id="search" method="GET" action="{{ route('pendapatan-wisata.index') }}">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="role">Menu Item</label>
@@ -67,20 +47,27 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
-                                    <tbody>
+                                    <tbody class="text-center">
                                         <tr>
                                             <th>#</th>
                                             <th>Nama Wisata</th>
                                             <th>harga tiket</th>
                                             <th>total tiket</th>
                                             <th>total pendapatan</th>
-                                            <th>tanggal</th>
                                         </tr>
-                                        
+                                        @foreach ($tours as $tour)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $tour->name }}</td>
+                                                <td>{{ 'Rp. ' . number_format($tour->harga_tiket, 0, ',', '.') }}</td>
+                                                <td>{{ $tour->carts->sum('total_tickets') }}</td>
+                                                <td>{{ 'Rp. ' . number_format($tour->carts->sum('total_pendapatan'), 0, ',', '.') }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    
+                                    {{ $tours->links() }}
                                 </div>
                             </div>
                         </div>
@@ -88,6 +75,18 @@
                 </div>
             </div>
         </div>
-
     </section>
 @endsection
+
+@push('customScript')
+    <script>
+        $(document).ready(function() {
+            $('.search-toggle').click(function() {
+                $('.show-search').toggle();
+            });
+        });
+    </script>
+@endpush
+
+@push('customStyle')
+@endpush

@@ -43,6 +43,7 @@ class MenuWisataController extends Controller
         return view('menu.menu-wisata.create');
     }
 
+
     public function store(UpdatetoursRequest $request)
     {
         $validated = $request->validated();
@@ -99,6 +100,7 @@ class MenuWisataController extends Controller
         $tour = Tours::findOrFail($id);
         return view('menu.menu-wisata.edit', compact('tour'));
     }
+
 
     public function update(Request $request, $id)
     {
@@ -172,15 +174,15 @@ class MenuWisataController extends Controller
     }
 
 
-
     public function deleteImage(Request $request)
     {
         $image = Tours_subimages::findOrFail($request->id);
         Storage::disk('public')->delete($image->subimages);
         $image->delete();
 
-        return response()->json(['status' => 'success', 'message' => 'Image deleted successfully']);
+        return response()->json(['status' => 'success', 'message' => 'Gambar berhasil dihapus.']);
     }
+
 
     public function deleteVirtualTourImage(Request $request)
     {
@@ -188,7 +190,7 @@ class MenuWisataController extends Controller
         Storage::delete('public/' . $image->virtual_tours);
         $image->delete();
 
-        return response()->json(['status' => 'success', 'message' => 'Virtual tour image deleted successfully']);
+        return response()->json(['status' => 'success', 'message' => 'Gambar virtual tur berhasil dihapus.']);
     }
 
 
@@ -200,8 +202,9 @@ class MenuWisataController extends Controller
 
         Excel::import(new ToursImport, request()->file('import_file'));
 
-        return back()->with('success', 'Tours imported successfully.');
+        return back()->with('success', 'Wisata berhasil diimpor.');
     }
+
 
     public function checkTourName(Request $request)
     {
@@ -210,6 +213,7 @@ class MenuWisataController extends Controller
 
         return response()->json(['exists' => $exists]);
     }
+
 
     public function checkMaps(Request $request)
     {
@@ -235,7 +239,6 @@ class MenuWisataController extends Controller
         }
 
         $tour->delete();
-
         return redirect()->route('menu-wisata.index')->with('success', 'Data wisata berhasil dihapus.');
     }
 }

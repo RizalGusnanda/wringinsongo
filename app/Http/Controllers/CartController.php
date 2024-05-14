@@ -16,18 +16,40 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::id();
-        $cart =  DB::table('carts')->select('carts.id as cardId', 'carts.total_price', 'tickets.tickets_count', 'tickets.date', 'tours.name as name_tour', 'tours.harga_tiket', 'users.name')
+        $profile = DB::table('profiles')
+            ->select('profiles.id', 'profiles.user_id', 'profiles.address', 'profiles.phone_number', 'users.name', 'users.email')
+            ->leftJoin('users', 'profiles.user_id', '=', 'users.id')
+            ->where('user_id', $user)->first();
+
+        $sort = $request->query('sort', 'all');
+
+        $cartQuery = DB::table('carts')->select(
+            'carts.id as cardId',
+            'carts.total_price',
+            'tickets.tickets_count',
+            'tickets.date',
+            'tours.name as name_tour',
+            'tours.harga_tiket',
+            'users.name',
+            'carts.status'
+        )
             ->Join('tickets', 'carts.id_ticket', '=', 'tickets.id')
             ->Join('tours', 'carts.id_tour', '=', 'tours.id')
             ->Join('users', 'tickets.id_users', '=', 'users.id')
-            ->where('users.id', $user)->get();
+            ->where('users.id', $user);
 
+        if ($sort != 'all') {
+            $cartQuery = $cartQuery->where('carts.status', $sort);
+        }
 
-        return view('layout-users.transaksi', ['cart' => $cart]);
+        $cart = $cartQuery->paginate(5)->appends(['sort' => $sort]);
+
+        return view('layout-users.transaksi')->with(['cart' => $cart, 'profile' => $profile]);
     }
+
 
     /**
      * Store a newly created resource in storage.

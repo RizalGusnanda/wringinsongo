@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_testimonis')->nullable();
             $table->string('profile_tour')->nullable();
             $table->string('name');
             $table->text('description');
@@ -27,8 +26,6 @@ return new class extends Migration
             $table->string('type');
             $table->string('harga_tiket')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_testimonis')->references('id')->on('testimonis')->restrictOnDelete();
         });
     }
 

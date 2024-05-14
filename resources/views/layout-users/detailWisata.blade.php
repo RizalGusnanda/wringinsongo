@@ -70,11 +70,15 @@
                 </a>
             </div>
             <div class="text-center mb-1" data-aos="fade-down">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <= $averageRating)
+                        <span class="fa fa-star checked"></span>
+                    @elseif ($i - 0.5 == $averageRating)
+                        <span class="fas fa-star-half-alt checked"></span>
+                    @else
+                        <span class="far fa-star"></span>
+                    @endif
+                @endfor
             </div>
         </div>
     </section>
@@ -86,37 +90,46 @@
                     <div class="col-md-6">
                         <div class="card shadow">
                             <div class="card-body">
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-6 text-end">Harga Tiket:</div>
-                                    <div class="col-6 text-start">
-                                        {{ $tour->harga_tiket ? 'Rp.' . number_format($tour->harga_tiket, 0, ',', '.') : 'Rp. -' }}
-                                        /orang</div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-6 text-end">Jumlah Tiket:</div>
-                                    <div class="col-6">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <button class="btn btn-secondary" id="kurangTiket">-</button>
-                                            <span id="jumlahTiket">1</span>
-                                            <button class="btn btn-secondary" id="tambahTiket">+</button>
+                                <form method="POST" action="{{ route('reservation.store', $tour->id) }}">
+                                    @csrf
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-6 text-end">Harga Tiket:</div>
+                                        <div class="col-6 text-start">
+                                            {{ $tour->harga_tiket ? 'Rp.' . number_format($tour->harga_tiket, 0, ',', '.') : 'Rp. -' }}
+                                            /orang</div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-6 text-end">Jumlah Tiket:</div>
+                                        <div class="col-6">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button class="btn btn-secondary" id="kurangTiket">-</button>
+                                                <span id="jumlahTiket">1</span>
+                                                <input type="hidden" name="jumlah_tiket" id="inputJumlahTiket"
+                                                    value="1">
+                                                <button class="btn btn-secondary" id="tambahTiket">+</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-6 text-end">
-                                        <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan:</label>
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-6 text-end">
+                                            <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan:</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="date" class="form-control" id="tanggalKunjungan"
+                                                name="tanggal_kunjungan" required>
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <input type="date" class="form-control" id="tanggalKunjungan"
-                                            name="tanggal_kunjungan" required>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-3 align-items-center">
-                                    <div class="col-12">
-                                        <button class="btn reserv-tiket">Reservasi Tiket</button>
+                                    <div class="row mb-3 align-items-center">
+                                        <div class="col-12">
+                                            @if (Auth::check())
+                                                <button type="submit" class="btn reserv-tiket">Reservasi Tiket</button>
+                                            @else
+                                                <a href="{{ url('/log-in') }}" class="btn reserv-tiket">Reservasi Tiket</a>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -124,7 +137,6 @@
             @endif
         </div>
     </section>
-
 
     <section class="mb-5" data-aos="fade-up">
         <div class="container">
@@ -229,78 +241,60 @@
         <div class="container">
             <h2 class="text-center mb-4 tesp-dw">TESTIMONI PENGUNJUNG</h2>
             <div id="testimoniList">
-                <div class="card mb-3" data-aos="fade-right">
-                    <div class="card-body">
-                        <h5 class="card-title">John Doe</h5>
-                        <div class="text-warning mb-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="card-text">Tempat yang indah dengan pemandangan alam yang menakjubkan. Sangat
-                            direkomendasikan untuk dikunjungi!</p>
-                    </div>
-                </div>
-                <div class="card mb-3" data-aos="fade-right">
-                    <div class="card-body">
-                        <h5 class="card-title">Jane Doe</h5>
-                        <div class="text-warning mb-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="card-text">Pengalaman yang luar biasa! Staf sangat ramah dan pemandangan
-                            sangat menakjubkan.</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button id="lihatSelengkapnya" class="btn btn-outline-primary">Lihat Selengkapnya</button>
-                </div>
-            </div>
-            <div id="testimoniTambahan" style="display: none;">
-                <div class="card mb-3" data-aos="fade-right">
-                    <div class="card-body">
-                        <h5 class="card-title">Michael Smith</h5>
-                        <div class="text-warning mb-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="card-text">Sangat menyenangkan! Hanya sayangnya fasilitas toilet agak kurang
-                            terawat.</p>
-                    </div>
-                </div>
+                @include('partials.testimonials', ['testimonials' => $testimonials])
             </div>
         </div>
     </section>
     <script>
-        document.getElementById("lihatSelengkapnya").addEventListener("click", function() {
-            document.getElementById("testimoniTambahan").style.display = "block";
-            this.style.display = "none";
-        });
-
         document.addEventListener('DOMContentLoaded', function() {
             const tambahBtn = document.getElementById('tambahTiket');
             const kurangBtn = document.getElementById('kurangTiket');
-            const jumlahTiket = document.getElementById('jumlahTiket');
+            const displayJumlahTiket = document.getElementById('jumlahTiket');
+            const inputJumlahTiket = document.getElementById('inputJumlahTiket');
 
             tambahBtn.addEventListener('click', function() {
-                let jumlah = parseInt(jumlahTiket.innerText);
-                jumlahTiket.innerText = jumlah + 1;
+                let jumlah = parseInt(displayJumlahTiket.innerText);
+                jumlah++;
+                displayJumlahTiket.innerText = jumlah;
+                inputJumlahTiket.value = jumlah;
             });
 
             kurangBtn.addEventListener('click', function() {
-                let jumlah = parseInt(jumlahTiket.innerText);
+                let jumlah = parseInt(displayJumlahTiket.innerText);
                 if (jumlah > 1) {
-                    jumlahTiket.innerText = jumlah - 1;
+                    jumlah--;
+                    displayJumlahTiket.innerText = jumlah;
+                    inputJumlahTiket.value = jumlah;
                 }
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('#testimoniList .pagination a');
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    fetchTestimonials(this.href);
+                });
+            });
+        });
+
+        function fetchTestimonials(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newTestimonials = doc.querySelector('#testimoniList');
+                    document.querySelector('#testimoniList').innerHTML = newTestimonials.innerHTML;
+                    const newLinks = document.querySelectorAll('#testimoniList .pagination a');
+                    newLinks.forEach(link => {
+                        link.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            fetchTestimonials(this.href);
+                        });
+                    });
+                });
+        }
     </script>
 @endsection

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\tours;
 use App\Http\Requests\StoretoursRequest;
 use App\Http\Requests\UpdatetoursRequest;
+use App\Models\Carts;
+use App\Models\Tickets;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ToursController extends Controller
@@ -32,81 +35,59 @@ class ToursController extends Controller
         return view('layout-users.wisata', compact('tours', 'search'));
     }
 
-
-    public function detail($id)
+    public function detail($id, Request $request)
     {
-        $tour = Tours::with('subimages')->find($id);
+        $tour = Tours::with(['subimages', 'testimonis.user'])->find($id);
         if (!$tour) {
             abort(404);
         }
-        return view('layout-users.detailWisata', compact('tour'));
+
+        $averageRating = $tour->testimonis()->average('rating');
+        $averageRating = round($averageRating * 2) / 2;
+
+        $testimonials = $tour->testimonis()->with('user')->paginate(5);
+
+        if ($request->ajax()) {
+            return view('partials.testimonials', compact('testimonials'))->render();
+        }
+
+        return view('layout-users.detailWisata', compact('tour', 'averageRating', 'testimonials'));
     }
 
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function storeReservation(Request $request, $tour_id)
     {
-        //
-    }
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Silahkan login untuk melakukan reservasi.');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoretoursRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoretoursRequest $request)
-    {
-        //
-    }
+        $user = Auth::user();
+        $profile = $user->profile;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\tours  $tours
-     * @return \Illuminate\Http\Response
-     */
-    public function show(tours $tours)
-    {
-        //
-    }
+        if (!$profile || !$profile->isComplete()) {
+            return redirect()->route('profile.index')->with('error', 'Silahkan lengkapi profile anda terlebih dahulu.');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\tours  $tours
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(tours $tours)
-    {
-        //
-    }
+        $tour = Tours::findOrFail($tour_id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatetoursRequest  $request
-     * @param  \App\Models\tours  $tours
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatetoursRequest $request, tours $tours)
-    {
-        //
-    }
+        $ticket = new Tickets([
+            'id_users' => $user->id,
+            'id_tours' => $tour_id,
+            'date' => $request->tanggal_kunjungan,
+            'tickets_count' => $request->jumlah_tiket,
+        ]);
+        $ticket->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\tours  $tours
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(tours $tours)
-    {
-        //
+        $total_price = $tour->harga_tiket * $request->jumlah_tiket;
+
+        $cart = new Carts([
+            'id_ticket' => $ticket->id,
+            'id_tour' => $tour_id,
+            'total_price' => $total_price,
+            'status' => 'pending',
+        ]);
+        $cart->save();
+
+        return redirect()->route('cart.store')->with('success', 'Reservasi berhasil dibuat.');
     }
 }

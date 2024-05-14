@@ -98,7 +98,7 @@
                                         class="text-link-register">REGISTRASI</a>
                                 </div>
                                 <div class="simp-foot">
-                                    Copyright &copy; 2024 Design By Muchamad Rizal Gusnanda Atmaja
+                                    Copyright &copy; 2024 Desa Wringinsongo
                                 </div>
                             </div>
                         </div>

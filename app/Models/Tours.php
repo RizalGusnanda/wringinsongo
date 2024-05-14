@@ -10,7 +10,7 @@ class Tours extends Model
     use HasFactory;
     protected $fillable = [
         'id_type', 'profile_tour', 'name', 'description', 'history', 'maps', 'fasilitas_km', 'fasilitas_tm', 'fasilitas_ti', 'type',
-        'harga_tiket', 'id_testimonis'
+        'harga_tiket'
     ];
 
     public function subimages()
@@ -21,5 +21,20 @@ class Tours extends Model
     public function virtualTours()
     {
         return $this->hasMany(Tours_virtual::class, 'id_tour');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Tickets::class, 'id_tours');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Carts::class, 'id_tour');
+    }
+
+    public function testimonis()
+    {
+        return $this->hasMany(Testimonis::class, 'id_tour');
     }
 }

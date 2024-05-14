@@ -18,11 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('id_ticket');
             $table->unsignedBigInteger('id_tour');
             $table->string('total_price');
+            $table->enum('status', ['pending', 'success'])->default('pending');
+            $table->enum('status_confirm', ['pending', 'success'])->default('pending');
             $table->timestamps();
 
             $table->foreign('id_ticket')->references('id')->on('tickets')->restrictOnDelete();
             $table->foreign('id_tour')->references('id')->on('tours')->restrictOnDelete();
-            
         });
     }
 

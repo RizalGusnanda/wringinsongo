@@ -16,11 +16,15 @@ return new class extends Migration
         Schema::create('testimonis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_users')->nullable();
+            $table->unsignedBigInteger('id_tour')->nullable();
+            $table->unsignedBigInteger('id_cart')->nullable();
             $table->text('reviews');
             $table->integer('rating');
             $table->timestamps();
 
-            $table->foreign('id_users')->references('id')->on('users')->restrictOnDelete();
+            $table->foreign('id_users')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_tour')->references('id')->on('tours')->onDelete('cascade');
+            $table->foreign('id_cart')->references('id')->on('carts')->onDelete('cascade');
         });
     }
 
@@ -31,6 +35,11 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('testimonis', function (Blueprint $table) {
+            $table->dropForeign(['id_users']);
+            $table->dropForeign(['id_tour']);
+            $table->dropForeign(['id_cart']);
+        });
         Schema::dropIfExists('testimonis');
     }
 };

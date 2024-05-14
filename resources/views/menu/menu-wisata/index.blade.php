@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -155,9 +155,9 @@
                                     <div class="col-auto mr-2">
                                         <a class="btn btn-icon icon-left btn-primary mb-3"
                                             href="{{ route('menu-wisata.create') }}">Create New Wisata</a>
-                                        <a class="btn btn-info btn-primary active import mb-3">
+                                        {{-- <a class="btn btn-info btn-primary active import mb-3">
                                             <i class="fa fa-download" aria-hidden="true"></i>
-                                            Import Wisata</a>
+                                            Import Wisata</a> --}}
                                     </div>
                                     <div class="col">
                                         <div class="search-input-container">
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="show-import mb-4" style="display: none">
+                            {{-- <div class="show-import mb-4" style="display: none">
                                 <div class="custom-file">
                                     <form action="{{ route('menu-wisata.import') }}" method="post"
                                         enctype="multipart/form-data">
@@ -188,7 +188,7 @@
                                         <button class="btn btn-primary">Import File</button>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="show-search mb-3" style="display: none">
                                 <form id="search" method="GET" action="">
                                     <div class="form-row">
@@ -232,7 +232,6 @@
                                                     <div class="d-flex justify-content-center">
                                                         <a href="javascript:void(0)" class="btn btn-success mr-2"
                                                             onclick="showTourDetails('{{ $tour->name }}', '{{ $tour->fasilitas_km }}', '{{ $tour->fasilitas_tm }}', '{{ $tour->fasilitas_ti }}', '{{ $tour->maps }}', '{{ $tour->type }}', '{{ $tour->harga_tiket }}')">Show</a>
-
                                                         <a href="{{ route('menu-wisata.edit', $tour->id) }}"
                                                             class="btn btn-warning mr-2">Edit</a>
                                                         <form action="{{ route('menu-wisata.destroy', $tour->id) }}"

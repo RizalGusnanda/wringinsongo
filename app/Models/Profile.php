@@ -21,4 +21,9 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function isComplete()
+    {
+        return $this->address && $this->phone_number && $this->gender;
+    }
 }

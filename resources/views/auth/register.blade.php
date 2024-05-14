@@ -112,7 +112,7 @@
                                         class="text-link-register">MASUK</a>
                                 </div>
                                 <div class="simple-footer pb-4">
-                                    Copyright &copy; 2024 Design By Muchamad Rizal Gusnanda Atmaja
+                                    Copyright &copy; 2024 Desa Wringinsongo
                                 </div>
                             </div>
                         </div>

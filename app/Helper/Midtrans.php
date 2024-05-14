@@ -26,13 +26,24 @@ class Midtrans
     {
         $orderId = $this->generateUniqueOrderId($request);
         $payload = $this->preprocessTransactionDetails($orderId, $request);
-
-        return $this->getTransactionToken($payload);
+        $response = $this->getTransactionToken($payload);
+        // dd($res)
+        if (isset($response['token'])) {
+            // Ensure the order_id is also returned as part of the response for later use
+            return [
+                'status' => 'success',
+                'token' => $response['token'],
+                'redirect_url' => $response['redirect_url'],
+                'order_id' => $orderId,
+            ];
+        } else {
+            return ['status' => 'error', 'message' => 'Failed to create transaction', 'data' => $response];
+        }
     }
+
 
     protected function generateUniqueOrderId(Request $request)
     {
-        // Assuming you might want to include user or session details
         return 'ORDER-' . uniqid();
     }
 
@@ -41,7 +52,7 @@ class Midtrans
         return [
             "transaction_details" => [
                 "order_id" => $orderId,
-                "gross_amount" => $request->input('amount', 10000)
+                "gross_amount" => $request->input('amount')
             ],
             "credit_card" => [
                 "secure" => $this->is3ds

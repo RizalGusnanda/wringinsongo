@@ -74,7 +74,7 @@
                                             style="display: flex; flex-direction: column;">
                                             <h5 class="card-title font-weight-bold d-block mx-2 profile-title-card2">Ubah
                                                 Password</h5>
-                                                @if ($errors->has('password_current'))
+                                            @if ($errors->has('password_current'))
                                                 <script>
                                                     window.addEventListener('load', function() {
                                                         Swal.fire({
@@ -85,7 +85,7 @@
                                                         });
                                                     });
                                                 </script>
-                                            @endif                                            
+                                            @endif
                                             <div class="mb-3 ml-customs">
                                                 <label class="small mb-1" for="inputPassword">Password Sekarang</label>
                                                 <input class="form-control" id="inputPassword" type="password"
@@ -186,7 +186,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -212,28 +211,6 @@
 
                 profileImage.style.maxWidth = "200px";
                 profileImage.style.maxHeight = "200px";
-            });
-
-            document.querySelectorAll('.close-alrt').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var alert = this.closest('.alert');
-                    alert.style.display = 'none';
-                });
-            });
-
-            document.querySelectorAll('.close-alrt2').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var alert = this.closest('.alert');
-                    alert.style.display = 'none';
-                });
-            });
-
-            var closeButtons = document.querySelectorAll('close');
-            closeButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var alert = this.closest('.alert');
-                    alert.style.display = 'none';
-                });
             });
 
             document.getElementById('inputPhoneNumber').addEventListener('input', function(e) {
