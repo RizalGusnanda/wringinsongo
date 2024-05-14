@@ -17,9 +17,9 @@ class Midtrans
     {
         $this->serverKey = env('MIDTRANS_SERVER_KEY');
         $this->clientKey = env('MIDTRANS_CLIENT_KEY');
-        $this->isProduction = env('MIDTRANS_IS_PRODUCTION', false);
-        $this->isSanitized = env('MIDTRANS_IS_SANITIZED', true);
-        $this->is3ds = env('MIDTRANS_IS_3DS', true);
+        $this->isProduction = env('MIDTRANS_IS_PRODUCTION');
+        $this->isSanitized = env('MIDTRANS_IS_SANITIZED');
+        $this->is3ds = env('MIDTRANS_IS_3DS');
     }
 
     public function createTransaction(Request $request)
@@ -68,9 +68,10 @@ class Midtrans
 
     protected function getTransactionToken(array $payload)
     {
-        $url = $this->isProduction ?
-            "https://app.midtrans.com/snap/v1/transactions" :
-            "https://app.sandbox.midtrans.com/snap/v1/transactions";
+        $url =
+            // $this->isProduction ?
+            "https://app.midtrans.com/snap/v1/transactions";
+        // :"https://app.sandbox.midtrans.com/snap/v1/transactions";
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',

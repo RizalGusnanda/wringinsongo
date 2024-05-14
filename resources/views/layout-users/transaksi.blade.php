@@ -11,17 +11,17 @@
 
                         <div class="bg-primary-section card py-1 card-profile-tr mb-4">
                             @if (session('success'))
-                                    <script>
-                                        window.onload = function() {
-                                            Swal.fire({
-                                                title: 'Success!',
-                                                text: '{{ session('success') }}',
-                                                icon: 'success',
-                                                confirmButtonText: 'Close'
-                                            })
-                                        }
-                                    </script>
-                                @endif
+                                <script>
+                                    window.onload = function() {
+                                        Swal.fire({
+                                            title: 'Success!',
+                                            text: '{{ session('success') }}',
+                                            icon: 'success',
+                                            confirmButtonText: 'Close'
+                                        })
+                                    }
+                                </script>
+                            @endif
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="profile-widget-description px-4 mt-4">
@@ -132,7 +132,7 @@
 @endsection
 @push('customScript')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+    <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js"
         data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
     <script type="text/javascript">
         document.querySelectorAll('.btn-byr').forEach(button => {
@@ -164,7 +164,9 @@
                                 onSuccess: function(result) {
                                     console.log('Payment success:', result);
                                     updateTransactionStatus(result);
-                                    location.reload();
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 2000);
                                 },
                                 onPending: function(result) {
                                     console.log('Payment pending:', result);

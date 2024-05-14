@@ -70,6 +70,8 @@ Route::get('/testimoni', [TestimonisController::class, 'index']);
 Route::post('/testimoni/store', [TestimonisController::class, 'store']);
 
 
+Route::post('/payment/initiate', [MidtransController::class, 'initiatePayment'])->name('payment.initiate');
+Route::post('/payment/callback', [MidtransController::class, 'paymentCallback'])->name('payment.callback');
 Route::group(['middleware' => ['auth', 'verified', 'role:user']], function () {
 
     Route::get('/landing', [LandingController::class, 'show']);
@@ -81,8 +83,6 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user']], function () {
 
     Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.show');
     Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
-    Route::post('/payment/initiate', [MidtransController::class, 'initiatePayment'])->name('payment.initiate');
-    Route::post('/payment/callback', [MidtransController::class, 'paymentCallback'])->name('payment.callback');
     Route::get('/transaksi-user', [CartController::class, 'index'])->name('transaksi.user');
 
 });

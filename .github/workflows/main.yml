@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           script: |
             cd /var/www/wisata-wringinsongo/
-            git pull
-            composer install --no-interaction --prefer-dist --optimize-autoloader
-            php artisan migrate:fresh --seed
-            php artisan optimize
+            sudo git pull
+            sudo composer install --no-interaction --prefer-dist --optimize-autoloader
+            sudo php artisan migrate:fresh --seed
+            sudo php artisan optimize
