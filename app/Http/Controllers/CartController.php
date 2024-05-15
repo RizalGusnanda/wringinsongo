@@ -39,7 +39,8 @@ class CartController extends Controller
             ->Join('tickets', 'carts.id_ticket', '=', 'tickets.id')
             ->Join('tours', 'carts.id_tour', '=', 'tours.id')
             ->Join('users', 'tickets.id_users', '=', 'users.id')
-            ->where('users.id', $user);
+            ->where('users.id', $user)
+            ->orderBy('carts.created_at', 'desc');
 
         if ($sort != 'all') {
             $cartQuery = $cartQuery->where('carts.status', $sort);

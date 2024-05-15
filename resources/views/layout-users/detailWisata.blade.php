@@ -119,7 +119,6 @@
                                                 name="tanggal_kunjungan" required>
                                         </div>
                                     </div>
-
                                     <div class="row mb-3 align-items-center">
                                         <div class="col-12">
                                             @if (Auth::check())
@@ -246,20 +245,26 @@
         </div>
     </section>
     <script>
+        const tanggalKunjunganInput = document.getElementById('tanggalKunjungan');
+        const today = new Date().toISOString().split('T')[0];
+        tanggalKunjunganInput.setAttribute('min', today);
+
         document.addEventListener('DOMContentLoaded', function() {
             const tambahBtn = document.getElementById('tambahTiket');
             const kurangBtn = document.getElementById('kurangTiket');
             const displayJumlahTiket = document.getElementById('jumlahTiket');
             const inputJumlahTiket = document.getElementById('inputJumlahTiket');
 
-            tambahBtn.addEventListener('click', function() {
+            tambahBtn.addEventListener('click', function(event) {
+                event.preventDefault();
                 let jumlah = parseInt(displayJumlahTiket.innerText);
                 jumlah++;
                 displayJumlahTiket.innerText = jumlah;
                 inputJumlahTiket.value = jumlah;
             });
 
-            kurangBtn.addEventListener('click', function() {
+            kurangBtn.addEventListener('click', function(event) {
+                event.preventDefault();
                 let jumlah = parseInt(displayJumlahTiket.innerText);
                 if (jumlah > 1) {
                     jumlah--;
