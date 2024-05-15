@@ -29,7 +29,7 @@
                     <div class="bag-kr">
                         <div class="card-body">
                             <div class="col mt-5">
-                                <img src="{{ asset('assets/img/avatar/cuate.png') }}" class="img-login pb-5">
+                                <img src="{{ asset('assets/img/avatar/cuate.png') }}" class="img-login">
                             </div>
                         </div>
                     </div>
@@ -37,15 +37,15 @@
                 <div class="col-md-6 col-sm-6 col-lg-6 full-height-card pl-0 pr-0">
                     <div class="bag-kn">
                         <div class="card-body">
-                            <div class="col mt-5 heading-text px-5">
+                            <div class="col mt-5 heading-text px-4">
                                 <h3 class="ctn-login">Selamat datang di Desa <img
                                         src="{{ asset('assets/img/avatar/log-wringinsongo.png') }}" class="img-seldt">
                                 </h3>
                             </div>
-                            <div class="col mt-4 welcome-text px-5">
+                            <div class="col mt-2 welcome-text px-4">
                                 <p>Temukan destinasi wisata terbaik disini</p>
                             </div>
-                            <div class="input-container px-5 mt-4">
+                            <div class="input-container px-4 mt-4">
                                 @if (session('status'))
                                     <div class="alert alert-success" role="alert">
                                         {{ session('status') }}

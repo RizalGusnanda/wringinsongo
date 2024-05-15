@@ -32,7 +32,7 @@
                         <h1 class="tittle-carausel">Wringinsongo</h1>
                         <p class="p-carausel">Desa Wringinsongo: Meretas Jejak Alam yang Memikat, Menyambut Petualangan
                             Tak Terlupakan.</p>
-                        <a href="{{ url('/landing') }}#list-wisata" class="btn btn-corrousell">Lihat Selengkapnya</a>
+                        <a href="{{ url('/') }}#list-wisata" class="btn btn-corrousell">Lihat Selengkapnya</a>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000">
@@ -41,7 +41,7 @@
                         <h1 class="tittle-carausel">Wringinsongo</h1>
                         <p class="p-carausel">Di Tengah Hijauan Alam, Desa Wringinsongo Menawarkan Keunikan Wisata yang
                             Mengasyikkan.</p>
-                        <a href="{{ url('/landing') }}#list-wisata" class="btn btn-corrousell">Lihat Selengkapnya</a>
+                        <a href="{{ url('/') }}#list-wisata" class="btn btn-corrousell">Lihat Selengkapnya</a>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -50,7 +50,7 @@
                         <h1 class="tittle-carausel">Wringinsongo</h1>
                         <p class="p-carausel">Jelajahi Pesona Alam yang Mempesona: Desa Wringinsongo, Destinasi
                             Tersembunyi yang Mengagumkan.</p>
-                        <a href="{{ url('/landing') }}#list-wisata" class="btn btn-corrousell">Lihat Selengkapnya</a>
+                        <a href="{{ url('/') }}#list-wisata" class="btn btn-corrousell">Lihat Selengkapnya</a>
                     </div>
                 </div>
             </div>
