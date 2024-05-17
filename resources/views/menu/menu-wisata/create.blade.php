@@ -85,8 +85,10 @@
                             <select class="form-control @error('fasilitas_km') is-invalid @enderror" id="fasilitas_km"
                                 name="fasilitas_km">
                                 <option value="">Pilih Opsi</option>
-                                <option value="Fasilitas Tersedia">Ada</option>
-                                <option value="Fasilitas Tidak Tersedia">Tidak</option>
+                                <option value="Fasilitas Tersedia"
+                                    {{ old('fasilitas_km') == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
+                                <option value="Fasilitas Tidak Tersedia"
+                                    {{ old('fasilitas_km') == 'Fasilitas Tidak Tersedia' ? 'selected' : '' }}>Tidak</option>
                             </select>
                             @error('fasilitas_km')
                                 <div class="invalid-feedback">
@@ -99,8 +101,11 @@
                             <select class="form-control @error('fasilitas_tm') is-invalid @enderror" id="fasilitas_tm"
                                 name="fasilitas_tm">
                                 <option value="">Pilih Opsi</option>
-                                <option value="Fasilitas Tersedia">Ada</option>
-                                <option value="Fasilitas Tidak Tersedia">Tidak</option>
+                                <option value="Fasilitas Tersedia"
+                                    {{ old('fasilitas_tm') == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
+                                <option value="Fasilitas Tidak Tersedia"
+                                    {{ old('fasilitas_tm') == 'Fasilitas Tidak Tersedia' ? 'selected' : '' }}>Tidak
+                                </option>
                             </select>
                             @error('fasilitas_tm')
                                 <div class="invalid-feedback">
@@ -113,8 +118,11 @@
                             <select class="form-control @error('fasilitas_ti') is-invalid @enderror" id="fasilitas_ti"
                                 name="fasilitas_ti">
                                 <option value="">Pilih Opsi</option>
-                                <option value="Fasilitas Tersedia">Ada</option>
-                                <option value="Fasilitas Tidak Tersedia">Tidak</option>
+                                <option value="Fasilitas Tersedia"
+                                    {{ old('fasilitas_ti') == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
+                                <option value="Fasilitas Tidak Tersedia"
+                                    {{ old('fasilitas_ti') == 'Fasilitas Tidak Tersedia' ? 'selected' : '' }}>Tidak
+                                </option>
                             </select>
                             @error('fasilitas_ti')
                                 <div class="invalid-feedback">
@@ -138,8 +146,11 @@
                         <label for="type">Jenis Wisata</label>
                         <select class="form-control @error('type') is-invalid @enderror" id="type" name="type">
                             <option value="">Pilih Jenis Wisata</option>
-                            <option value="wisata tidak bertiket">Wisata Tidak Bertiket</option>
-                            <option value="wisata bertiket">Wisata Bertiket</option>
+                            <option value="wisata tidak bertiket"
+                                {{ old('type') == 'wisata tidak bertiket' ? 'selected' : '' }}>Wisata Tidak Bertiket
+                            </option>
+                            <option value="wisata bertiket" {{ old('type') == 'wisata bertiket' ? 'selected' : '' }}>
+                                Wisata Bertiket</option>
                         </select>
                         @error('type')
                             <div class="invalid-feedback">
