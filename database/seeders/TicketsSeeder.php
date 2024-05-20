@@ -15,13 +15,13 @@ class TicketsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tickets')->insert([
-            'id_users' => 2,
-            'id_tours' => 1,
-            'date' => '2024-03-27',
-            'tickets_count' => 5,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // DB::table('tickets')->insert([
+        //     'id_users' => 2,
+        //     'id_tours' => 1,
+        //     'date' => '2024-03-27',
+        //     'tickets_count' => 5,
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
     }
 }

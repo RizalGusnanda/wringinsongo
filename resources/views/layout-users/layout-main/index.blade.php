@@ -60,7 +60,7 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav ml-auto navbar-button">
+                <ul class="navbar-nav ml-auto navbar-button m-0">
                     @if (!auth()->user())
                         <li class="nav-item nav-prof">
                             <a class="px-4 py-1 btn mr-2 btn-login" href="/log-in">Login</a>
