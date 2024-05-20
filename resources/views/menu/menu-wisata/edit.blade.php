@@ -74,7 +74,7 @@
                             @foreach ($tour->virtualTours as $index => $virtualTour)
                                 <div class="p-2 image-preview-wrapper" id="virtualTourGroup{{ $index }}">
                                     <div class="img-vt">
-                                        <img src="{{ asset('storage/virtual_tour' . $virtualTour->virtual_tours) }}">
+                                        <img src="{{ asset('storage/' . $virtualTour->virtual_tours) }}">
                                         <button class="btn btn-danger remove-image virtual-remove" type="button"
                                             onclick="removeExistingVirtualTourImage('{{ $index }}', '{{ $virtualTour->id }}')">
                                             <i class="fas fa-times"></i>
