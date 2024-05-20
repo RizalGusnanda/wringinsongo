@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tours_virtual;
 use App\Http\Requests\Storetours_virtualRequest;
 use App\Http\Requests\Updatetours_virtualRequest;
+use App\Models\Tours_virtual;
 
 class ToursVirtualController extends Controller
 {
@@ -47,7 +47,7 @@ class ToursVirtualController extends Controller
      */
     public function show($id)
     {
-        $tourVirtuals = tours_virtual::where('id_tour', $id)->get();
+        $tourVirtuals = Tours_virtual::where('id_tour', $id)->get();
 
         return view('layout-users.virtual', compact('tourVirtuals'));
     }

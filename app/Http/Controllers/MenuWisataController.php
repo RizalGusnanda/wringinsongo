@@ -84,7 +84,7 @@ class MenuWisataController extends Controller
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('virtual_tour', $filename, 'public');
 
-                tours_virtual::create([
+                Tours_virtual::create([
                     'id_tour' => $tour->id,
                     'virtual_tours' => $path
                 ]);
@@ -158,7 +158,7 @@ class MenuWisataController extends Controller
             foreach ($request->file('virtual_tours') as $file) {
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('virtual_tour', $filename, 'public');
-                tours_virtual::create([
+                Tours_virtual::create([
                     'id_tour' => $tour->id,
                     'virtual_tours' => $path
                 ]);
@@ -186,7 +186,7 @@ class MenuWisataController extends Controller
 
     public function deleteVirtualTourImage(Request $request)
     {
-        $image = tours_virtual::findOrFail($request->id);
+        $image = Tours_virtual::findOrFail($request->id);
         Storage::delete('public/' . $image->virtual_tours);
         $image->delete();
 
