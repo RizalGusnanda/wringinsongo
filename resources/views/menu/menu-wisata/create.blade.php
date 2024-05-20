@@ -397,7 +397,7 @@
             var index = $('.virtual-tour-input').length;
             var newInputGroup = $(`
         <div class="input-group mb-3" id="virtualTourGroup${index}">
-            <input type="file" class="form-control virtual-tour-input" name="virtual_tours[]" accept="image/*" onchange="previewVirtualTour(this, ${index})">
+            <input type="file" class="form-control virtual-tour-input" name="virtual_tour[]" accept="image/*" onchange="previewVirtualTour(this, ${index})">
             <div class="input-group-append">
                 <button class="btn btn-danger remove-virtual-tour" type="button" onclick="removeVirtualTour(${index})">Hapus</button>
             </div>

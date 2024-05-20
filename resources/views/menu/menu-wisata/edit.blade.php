@@ -69,7 +69,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="virtual_tours">Gambar Virtual Tour</label>
+                        <label for="virtual_tour">Gambar Virtual Tour</label>
                         <div class="d-flex flex-wrap virtual-image-preview" id="virtualToursContainer">
                             @foreach ($tour->virtualTours as $index => $virtualTour)
                                 <div class="p-2 image-preview-wrapper" id="virtualTourGroup{{ $index }}">
@@ -413,7 +413,7 @@
             var index = $('.virtual-tour-input').length;
             var newInputGroup = $(`
         <div class="input-group mb-3" id="virtualTourGroupNew${index}">
-            <input type="file" class="form-control virtual-tour-input" name="virtual_tours[]" accept="image/*" onchange="previewVirtualImage(this, 'virtualTourGroupNew${index}')">
+            <input type="file" class="form-control virtual-tour-input" name="virtual_tour[]" accept="image/*" onchange="previewVirtualImage(this, 'virtualTourGroupNew${index}')">
             <div class="input-group-append">
                 <button class="btn btn-danger remove-image" type="button" onclick="removePreviewVirtualTourInput('virtualTourGroupNew${index}')">Hapus</button>
             </div>
@@ -455,38 +455,39 @@
         }
 
         function removeExistingVirtualTourImage(index, imageId) {
-            console.log("Function Called: removeExistingVirtualTourImage", index, imageId); // Debugging statement
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda tidak akan dapat mengembalikan ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus saja!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ route('menu-wisata.delete-virtual-tour-image') }}',
-                        type: 'POST',
-                        data: {
-                            '_token': '{{ csrf_token() }}',
-                            'id': imageId
-                        },
-                        success: function(data) {
-                            console.log('Success Response', data);
-                            $('#virtualTourGroup' + index).remove();
-                            Swal.fire('Terhapus!', 'Gambar virtual tour Anda telah dihapus.',
-                                'success');
-                        },
-                        error: function(error) {
-                            console.log('Error Response', error);
-                            Swal.fire('Gagal!', 'Terjadi kesalahan, gambar tidak terhapus.', 'error');
-                        }
-                    });
+    Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: "Anda tidak akan dapat mengembalikan ini!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus saja!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '{{ route('menu-wisata.delete-virtual-tour-image') }}',
+                type: 'POST',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'id': imageId
+                },
+                success: function(data) {
+                    if(data.status === 'success') {
+                        $('#virtualTourGroup' + index).remove();
+                        Swal.fire('Terhapus!', 'Gambar virtual tour Anda telah dihapus.', 'success');
+                    } else {
+                        Swal.fire('Gagal!', data.message, 'error');
+                    }
+                },
+                error: function(error) {
+                    Swal.fire('Gagal!', 'Terjadi kesalahan, gambar tidak terhapus.', 'error');
                 }
             });
         }
+    });
+}
+
 
         function removePreviewVirtualTourInput(groupId) {
             var imgPreview = document.getElementById('preview' + groupId);

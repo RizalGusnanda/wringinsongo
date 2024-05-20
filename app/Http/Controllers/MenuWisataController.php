@@ -79,8 +79,8 @@ class MenuWisataController extends Controller
             }
         }
 
-        if ($request->hasFile('virtual_tours')) {
-            foreach ($request->file('virtual_tours') as $file) {
+        if ($request->hasFile('virtual_tour')) {
+            foreach ($request->file('virtual_tour') as $file) {
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('virtual_tour', $filename, 'public');
 
@@ -154,8 +154,8 @@ class MenuWisataController extends Controller
         }
 
         $virtualToursUpdated = false;
-        if ($request->has('virtual_tours')) {
-            foreach ($request->file('virtual_tours') as $file) {
+        if ($request->has('virtual_tour')) {
+            foreach ($request->file('virtual_tour') as $file) {
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('virtual_tour', $filename, 'public');
                 Tours_virtual::create([
@@ -187,10 +187,14 @@ class MenuWisataController extends Controller
     public function deleteVirtualTourImage(Request $request)
     {
         $image = Tours_virtual::findOrFail($request->id);
-        Storage::delete('public/' . $image->virtual_tours);
-        $image->delete();
-
-        return response()->json(['status' => 'success', 'message' => 'Gambar virtual tur berhasil dihapus.']);
+        $filePath = $image->virtual_tours;
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+            $image->delete();
+            return response()->json(['status' => 'success', 'message' => 'Gambar virtual tour berhasil dihapus.']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Gambar tidak ditemukan di storage.']);
+        }
     }
 
 
