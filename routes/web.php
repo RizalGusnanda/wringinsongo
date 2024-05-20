@@ -46,32 +46,28 @@ use App\Models\Category;
 
 Route::get('/', [LandingController::class, 'show']);
 
-Route::get('/log-in', function () {
-    return view('auth/login');
+Route::middleware('guest')->group(function () {
+
+    Route::get('/wisata', [ToursController::class, 'index']);
+    Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
+    Route::get('/log-in', function () {
+        return view('auth/login');
+    });
+    Route::get('/contact-us', [ContactController::class, 'index']);
+    Route::post('/contact-us/send', [ContactController::class, 'send']);
+
+    Route::get('/virtual-tour', [ToursVirtualController::class, 'index']);
+    Route::get('/virtual-tour/{id}', [ToursVirtualController::class, 'show']);
+
+    Route::get('/about-us', function () {
+        return view('layout-users/about');
+    });
 });
 
-Route::get('/wisata', [ToursController::class, 'index']);
-Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
 Route::post('/reservation/{tour_id}', [ToursController::class, 'storeReservation'])
     ->middleware(['auth', 'verified', 'profile.complete'])
     ->name('reservation.store');
 
-Route::get('/contact-us', [ContactController::class, 'index']);
-Route::post('/contact-us/send', [ContactController::class, 'send']);
-
-Route::get('/virtual-tour', [ToursVirtualController::class, 'index']);
-Route::get('/virtual-tour/{id}', [ToursVirtualController::class, 'show']);
-
-Route::get('/about-us', function () {
-    return view('layout-users/about');
-});
-
-Route::get('/testimoni', [TestimonisController::class, 'index']);
-Route::post('/testimoni/store', [TestimonisController::class, 'store']);
-
-
-Route::post('/payment/initiate', [MidtransController::class, 'initiatePayment'])->name('payment.initiate');
-Route::post('/payment/callback', [MidtransController::class, 'paymentCallback'])->name('payment.callback');
 Route::group(['middleware' => ['auth', 'verified', 'role:user']], function () {
 
     Route::get('/landing', [LandingController::class, 'show']);
@@ -85,6 +81,11 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user']], function () {
     Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');
     Route::get('/transaksi-user', [CartController::class, 'index'])->name('transaksi.user');
 
+    Route::get('/testimoni', [TestimonisController::class, 'index']);
+    Route::post('/testimoni/store', [TestimonisController::class, 'store']);
+
+    Route::post('/payment/initiate', [MidtransController::class, 'initiatePayment'])->name('payment.initiate');
+    Route::post('/payment/callback', [MidtransController::class, 'paymentCallback'])->name('payment.callback');
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:super-admin']], function () {

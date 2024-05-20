@@ -18,9 +18,4 @@ jobs:
             cd /var/www/wisata-wringinsongo/
             sudo git pull
             sudo composer install --no-interaction --prefer-dist --optimize-autoloader
-            sudo php artisan migrate:fresh --seed
             sudo php artisan optimize
-            sudo php artisan cache:clear
-            sudo php artisan route:clear
-            sudo php artisan view:clear
-            sudo php artisan config:cache
