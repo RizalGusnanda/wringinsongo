@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Imports\ToursImport;
 use App\Models\Tours_subimages;
-use App\Models\tours_virtual;
+use App\Models\Tours_virtual;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MenuWisataController extends Controller

@@ -46,17 +46,23 @@ use App\Models\Category;
 
 Route::get('/', [LandingController::class, 'show']);
 
-Route::middleware('guest')->group(function () {
-
+Route::middleware('not_super_admin')->group(function () {
     Route::get('/wisata', [ToursController::class, 'index']);
     Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
+});
+
+Route::middleware('guest')->group(function () {
+
     Route::get('/log-in', function () {
         return view('auth/login');
     });
+
     Route::get('/contact-us', [ContactController::class, 'index']);
+
     Route::post('/contact-us/send', [ContactController::class, 'send']);
 
     Route::get('/virtual-tour', [ToursVirtualController::class, 'index']);
+
     Route::get('/virtual-tour/{id}', [ToursVirtualController::class, 'show']);
 
     Route::get('/about-us', function () {
