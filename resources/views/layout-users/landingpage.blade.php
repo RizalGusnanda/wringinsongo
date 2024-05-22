@@ -136,11 +136,6 @@
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <div class="img-container hero-height position-relative mb-2">
                         <img src="{{ asset('assets/img/avatar/right.png') }}" alt="Gambar 2">
-                        {{-- <a href="#" class="play-btn" data-toggle="modal" data-target="#videoModal">
-                            <button class="btn btn-play" data-bs-toggle="modal" data-bs-target="#videoModal">
-                                <i class="fas fa-play-circle fa-3x"></i>
-                            </button>
-                        </a> --}}
                     </div>
                 </div>
                 <div class="col-md-3 d-flex justify-content-center align-items-center mb-2">
@@ -175,28 +170,6 @@
                                         melestarikan budaya. Ayo, jelajahi dan nikmati Desa Wringinsongo, tempat dimana
                                         pemandangan indah dan pengalaman memperkaya jiwa berpadu sempurna.</p>
                                 </div>
-                                {{-- <div class="col-md-4">
-                                        <iframe class="land-map"
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11575.18917064869!2d112.73856472969604!3d-7.99359457883066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62f6242f74193%3A0xec28cbb1957c0d90!2sWringinsongo%2C%20Kec.%20Tumpang%2C%20Kabupaten%20Malang%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1710736935981!5m2!1sid!2sid"
-                                            frameborder="0" allowfullscreen="" aria-hidden="false"
-                                            tabindex="0"></iframe>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p class="about-p">Desa Wringinsongo, terletak di Kecamatan Tumpang, Kabupaten
-                                            Malang,
-                                            adalah sebuah surga tersembunyi dengan potensi wisata menjanjikan. Keasrian
-                                            alamnya
-                                            menyajikan pemandian alami yang jernih, dikelilingi pepohonan rindang,
-                                            menciptakan
-                                            suasana yang menyejukkan dan damai. Lebih dari sekedar keindahan alam, desa ini
-                                            juga
-                                            menawarkan kekayaan kuliner, dengan sajian lezat dari produk lokal. Destinasi
-                                            ini tidak
-                                            hanya meningkatkan kesejahteraan ekonomi lokal, tetapi juga memperkuat komunitas
-                                            dan
-                                            melestarikan budaya. Ayo, jelajahi dan nikmati Desa Wringinsongo, tempat dimana
-                                            pemandangan indah dan pengalaman memperkaya jiwa berpadu sempurna.</p>
-                                    </div> --}}
                             </div>
                         </div>
                     </div>
@@ -205,27 +178,6 @@
         </div>
     </section>
 
-
-    <!-- Modal Video -->
-    {{-- <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="videoModalLabel">Video Tour</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="ratio ratio-16x9">
-                            <iframe id="youtubeVideo" class="embed-responsive-item"
-                                src="https://www.youtube.com/embed/E6z5MQUGO2g?start=18&end=240&autoplay=1" allowfullscreen
-                                allowscriptaccess="always" allow="autoplay"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-    <!-- Akhir Video -->
-
     <section id="list-wisata" data-aos="fade-up" class="mt-3">
         <div class="container">
             <h3 class="text-center title-land-wis">REKOMENDASI DESTINASI WISATA</h3>
@@ -233,7 +185,7 @@
                 @if (isset($tours))
                     <div class="row">
                         @foreach ($tours as $tour)
-                            <div class="col-md-3">
+                            <div class="col-md-3 ld-gb">
                                 <a href="{{ url('/detail-wisata/' . $tour->id) }}">
                                     <div class="card-lswisata mb-4">
                                         <img src="{{ asset('storage/' . $tour->profile_tour) }}" class="img-fluid"
@@ -243,7 +195,6 @@
                                         </div>
                                     </div>
                                 </a>
-
                             </div>
                         @endforeach
                     </div>

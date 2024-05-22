@@ -4,7 +4,7 @@
         <div class="container">
             <div class="card-search-wisata">
                 <div class="card-body">
-                    <h1 class="title-wisata">Cari wisata sesuai kebutuhanmu</h1>
+                    <h1 class="title-wisata">Cari destinasi wisata sesuai keinginanmu</h1>
                     <div class="search-column">
                         <form action="{{ url('/wisata') }}" class="search-form" method="GET">
                             <div class="search-input-container">
@@ -50,7 +50,7 @@
                                             <p class="wisata-description">{!! strlen($tour->description) > 260 ? substr($tour->description, 0, 260) . '...' : $tour->description !!}</p>
                                         </div>
                                     </div>
-                                    <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata">Lihat
+                                    <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata btn-block">Lihat
                                         Detail</a>
                                 </div>
                             </div>
@@ -60,39 +60,41 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        @if ($tours->onFirstPage())
-                            <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
-                            </li>
-                        @else
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $tours->previousPageUrl() }}" tabindex="-1"
-                                    aria-disabled="true">Previous</a>
-                            </li>
-                        @endif
+        @if ($tours->total() > 5)
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            @if ($tours->onFirstPage())
+                                <li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $tours->previousPageUrl() }}" tabindex="-1"
+                                        aria-disabled="true">Previous</a>
+                                </li>
+                            @endif
 
-                        @foreach ($tours->getUrlRange(1, $tours->lastPage()) as $page => $url)
-                            <li class="page-item {{ $page == $tours->currentPage() ? 'active' : '' }}">
-                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                            </li>
-                        @endforeach
+                            @foreach ($tours->getUrlRange(1, $tours->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $tours->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
 
-                        @if ($tours->hasMorePages())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $tours->nextPageUrl() }}">Next</a>
-                            </li>
-                        @else
-                            <li class="page-item disabled">
-                                <span class="page-link">Next</span>
-                            </li>
-                        @endif
-                    </ul>
-                </nav>
+                            @if ($tours->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $tours->nextPageUrl() }}">Next</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">Next</span>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </div>
+        @endif
     </section>
 @endsection

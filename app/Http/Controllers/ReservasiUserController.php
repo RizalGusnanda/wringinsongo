@@ -27,8 +27,9 @@ class ReservasiUserController extends Controller
         }
 
         $reservasi = $reservasiQuery->where('status', 'success')
-        ->orderBy('created_at', 'desc')
-        ->paginate(5);
+            ->orderBy('created_at', 'desc')
+            ->paginate(5)
+            ->appends(['status' => $status]);
 
         foreach ($reservasi as $cart) {
             $cart->hasTestimonial = $cart->testimonis->isNotEmpty();

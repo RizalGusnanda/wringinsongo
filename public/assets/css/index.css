@@ -335,7 +335,7 @@ h3.text-center.mt-4.font-weight-bold {
     border: none;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 50px;
+    margin-bottom: 15px;
     overflow: hidden;
 }
 
@@ -1029,7 +1029,7 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 .equal-height-img {
-    height: 200px;
+    height: 250px;
     overflow: hidden;
 }
 
@@ -1429,6 +1429,11 @@ h3.text-center.mt-4.font-weight-bold {
     .mage-reser {
         width: 250px !important; 
         height: 200px !important;
+    }
+
+    .ld-gb {
+        padding-left: 23px !important;
+        padding-right: 0 !important;
     }
 
 }

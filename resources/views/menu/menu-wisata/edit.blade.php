@@ -347,6 +347,7 @@
                     imgElement.src = e.target.result;
                     imgElement.style.width = "200px";
                     imgElement.style.height = "200px";
+                    imgElement.style.marginRight = "10px";
                     imgElement.classList.add("img-preview");
                     var container = document.getElementById('imagePreviewContainer');
                     container.appendChild(imgElement);
@@ -455,38 +456,39 @@
         }
 
         function removeExistingVirtualTourImage(index, imageId) {
-    Swal.fire({
-        title: 'Apakah Anda yakin?',
-        text: "Anda tidak akan dapat mengembalikan ini!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, hapus saja!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: '{{ route('menu-wisata.delete-virtual-tour-image') }}',
-                type: 'POST',
-                data: {
-                    '_token': '{{ csrf_token() }}',
-                    'id': imageId
-                },
-                success: function(data) {
-                    if(data.status === 'success') {
-                        $('#virtualTourGroup' + index).remove();
-                        Swal.fire('Terhapus!', 'Gambar virtual tour Anda telah dihapus.', 'success');
-                    } else {
-                        Swal.fire('Gagal!', data.message, 'error');
-                    }
-                },
-                error: function(error) {
-                    Swal.fire('Gagal!', 'Terjadi kesalahan, gambar tidak terhapus.', 'error');
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus saja!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('menu-wisata.delete-virtual-tour-image') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'id': imageId
+                        },
+                        success: function(data) {
+                            if (data.status === 'success') {
+                                $('#virtualTourGroup' + index).remove();
+                                Swal.fire('Terhapus!', 'Gambar virtual tour Anda telah dihapus.',
+                                    'success');
+                            } else {
+                                Swal.fire('Gagal!', data.message, 'error');
+                            }
+                        },
+                        error: function(error) {
+                            Swal.fire('Gagal!', 'Terjadi kesalahan, gambar tidak terhapus.', 'error');
+                        }
+                    });
                 }
             });
         }
-    });
-}
 
 
         function removePreviewVirtualTourInput(groupId) {

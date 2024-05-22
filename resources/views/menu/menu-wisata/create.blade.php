@@ -379,6 +379,7 @@
                         imgElement.src = e.target.result;
                         imgElement.style.width = '200px';
                         imgElement.style.height = '200px';
+                        imgElement.style.marginRight = "10px";
                         imgElement.classList.add('img-preview');
                         document.getElementById('imagePreviewContainer').appendChild(imgElement);
                     } else {
