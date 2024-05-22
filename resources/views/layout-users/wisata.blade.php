@@ -50,8 +50,7 @@
                                             <p class="wisata-description">{!! strlen($tour->description) > 260 ? substr($tour->description, 0, 260) . '...' : $tour->description !!}</p>
                                         </div>
                                     </div>
-                                    <a href="/detail-wisata/{{ $tour->id }}" class="btn btn-detailwisata">Lihat
-                                        Detail</a>
+                                    <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata">Lihat Detail</a>
                                 </div>
                             </div>
                         </div>
