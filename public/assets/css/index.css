@@ -383,7 +383,7 @@ h3.text-center.mt-4.font-weight-bold {
 
 .btn-detailwisata {
     display: block;
-    background-color: #265073;
+    background-color: #265073 !important;
     color: #fff;
     border: none;
     border-radius: 15px;
