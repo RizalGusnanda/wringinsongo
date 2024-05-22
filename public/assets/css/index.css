@@ -382,7 +382,8 @@ h3.text-center.mt-4.font-weight-bold {
 }
 
 .btn-detailwisata {
-    background-color: #265073 !important;
+    display: block;
+    background-color: #265073;
     color: #fff;
     border: none;
     border-radius: 15px;
@@ -391,6 +392,7 @@ h3.text-center.mt-4.font-weight-bold {
     margin-top: auto;
     font-size: 14px;
     line-height: 23px;
+    text-decoration: none;
 }
 
 .btn-detailwisata:hover,
