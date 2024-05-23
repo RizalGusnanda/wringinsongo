@@ -23,17 +23,20 @@
             </div>
         </div>
     </section>
-
     <section class="list-wisata">
         <div class="container">
+            <div class="col-12 d-flex justify-content-end mb-3">
+                <i class="fas fa-sliders-h" style="color: #265073;" data-bs-toggle="modal"
+                    data-bs-target="#filterModal"></i>
+            </div>
             @if (isset($error))
-                <div class="alert alert-warning text-center" role="alert">
+                <div class="alert alert-danger text-center" role="alert">
                     {{ $error }}
                 </div>
             @endif
             <div class="row">
                 @if ($tours->isEmpty())
-                    <div class="alert alert-warning text-center" role="alert">
+                    <div class="alert alert-danger text-center" role="alert">
                         Destinasi wisata belum ditambahkan!
                     </div>
                 @else
@@ -50,7 +53,8 @@
                                             <p class="wisata-description">{!! strlen($tour->description) > 260 ? substr($tour->description, 0, 260) . '...' : $tour->description !!}</p>
                                         </div>
                                     </div>
-                                    <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata">Lihat Detail</a>
+                                    <a href="{{ url('/detail-wisata/' . $tour->id) }}" class="btn btn-detailwisata">Lihat
+                                        Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -96,4 +100,71 @@
             </div>
         @endif
     </section>
+
+    <!-- Filter Modal -->
+    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-right" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="filterModalLabel">Filter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="text-dark mb-2">Abjad</h6>
+                    <form action="{{ url('/wisata') }}" method="GET">
+                        <input type="hidden" name="wisata" value="{{ $search }}">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="ascendingRadio"
+                                value="ascending" {{ request('sort') == 'ascending' ? 'checked' : '' }}>
+                            <label class="form-check-label text-dark" for="ascendingRadio">A-Z</label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="radio" name="sort" id="descendingRadio"
+                                value="descending" {{ request('sort') == 'descending' ? 'checked' : '' }}>
+                            <label class="form-check-label text-dark" for="descendingRadio">Z-A</label>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary w-100 mb-1"
+                                    data-bs-dismiss="modal">Batal</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary w-100 mb-1">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .modal-dialog-right {
+            position: fixed;
+            right: 125px !important;
+            top: 80px !important;
+            bottom: 0;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .modal-dialog-right {
+                right: 10px !important;
+                top: 110px !important;
+            }
+        }
+    </style>
 @endsection
+
+@push('customScript')
+    <script>
+        $(document).ready(function() {
+            $('.search-toggle').click(function() {
+                $('.show-search').toggle();
+            });
+        });
+    </script>
+@endpush

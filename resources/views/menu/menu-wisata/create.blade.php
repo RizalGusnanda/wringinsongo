@@ -84,7 +84,7 @@
                             <label for="fasilitas_km">Kamar Mandi</label>
                             <select class="form-control @error('fasilitas_km') is-invalid @enderror" id="fasilitas_km"
                                 name="fasilitas_km">
-                                <option value="">Pilih Opsi</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="Fasilitas Tersedia"
                                     {{ old('fasilitas_km') == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
                                 <option value="Fasilitas Tidak Tersedia"
@@ -100,7 +100,7 @@
                             <label for="fasilitas_tm">Tempat Makanan</label>
                             <select class="form-control @error('fasilitas_tm') is-invalid @enderror" id="fasilitas_tm"
                                 name="fasilitas_tm">
-                                <option value="">Pilih Opsi</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="Fasilitas Tersedia"
                                     {{ old('fasilitas_tm') == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
                                 <option value="Fasilitas Tidak Tersedia"
@@ -117,7 +117,7 @@
                             <label for="fasilitas_ti">Tempat Ibadah</label>
                             <select class="form-control @error('fasilitas_ti') is-invalid @enderror" id="fasilitas_ti"
                                 name="fasilitas_ti">
-                                <option value="">Pilih Opsi</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="Fasilitas Tersedia"
                                     {{ old('fasilitas_ti') == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
                                 <option value="Fasilitas Tidak Tersedia"
@@ -145,7 +145,7 @@
                     <div class="form-group">
                         <label for="type">Jenis Wisata</label>
                         <select class="form-control @error('type') is-invalid @enderror" id="type" name="type">
-                            <option value="">Pilih Jenis Wisata</option>
+                            <option value="" disabled selected>Pilih Jenis Wisata</option>
                             <option value="wisata tidak bertiket"
                                 {{ old('type') == 'wisata tidak bertiket' ? 'selected' : '' }}>Wisata Tidak Bertiket
                             </option>

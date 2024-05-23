@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\testimonis;
+use App\Models\Testimonis;
 use App\Http\Requests\StoretestimonisRequest;
 use App\Http\Requests\UpdatetestimonisRequest;
 use App\Models\Tours;

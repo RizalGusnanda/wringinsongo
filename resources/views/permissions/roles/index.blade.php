@@ -49,16 +49,16 @@
                             </div>
                             <div class="show-search mb-3" style="display: none">
                                 <form id="search" method="GET" action="{{ route('role.index') }}">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                    <div class="form-row align-items-end">
+                                        <div class="form-group col-md-10">
                                             <label for="role">Role</label>
                                             <input type="text" name="name" class="form-control" id="name"
                                                 placeholder="Role Name">
                                         </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                                        <a class="btn btn-secondary" href="{{ route('role.index') }}">Reset</a>
+                                        <div class="form-group col-md-2 d-flex justify-content-start">
+                                            <button class="btn btn-primary mr-2" type="submit">Submit</button>
+                                            <a class="btn btn-secondary" href="{{ route('role.index') }}">Reset</a>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

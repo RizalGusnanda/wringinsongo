@@ -11,6 +11,7 @@ class ReservasiWisataController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
+        $filterStatus = $request->get('filter_status');
 
         $reservations = DB::table('carts')
             ->join('tickets', 'carts.id_ticket', '=', 'tickets.id')
@@ -28,7 +29,10 @@ class ReservasiWisataController extends Controller
             )
             ->where(function ($query) {
                 $query->where('carts.status', 'success')
-                      ->orWhere('carts.status', 'pending');
+                    ->orWhere('carts.status', 'pending');
+            })
+            ->when($filterStatus, function ($query, $filterStatus) {
+                return $query->where('carts.status', $filterStatus);
             })
             ->where(function ($query) use ($search) {
                 $query->where('users.name', 'like', "%$search%")
@@ -38,6 +42,7 @@ class ReservasiWisataController extends Controller
 
         return view('menu.reservasi-wisata.index', compact('reservations'));
     }
+
 
     public function create()
     {

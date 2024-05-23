@@ -92,8 +92,8 @@
                         <label for="fasilitas_km">Fasilitas Kamar Mandi</label>
                         <select class="form-control @error('fasilitas_km') is-invalid @enderror" id="fasilitas_km"
                             name="fasilitas_km">
-                            <option value="ada" {{ $tour->fasilitas_km == 'ada' ? 'selected' : '' }}>Ada</option>
-                            <option value="tidak" {{ $tour->fasilitas_km == 'tidak' ? 'selected' : '' }}>Tidak</option>
+                            <option value="Fasilitas Tersedia" {{ $tour->fasilitas_km == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
+                            <option value="Fasilitas Tidak Tersedia" {{ $tour->fasilitas_km == 'Fasilitas Tidak Tersedia' ? 'selected' : '' }}>Tidak</option>
                         </select>
                         @error('fasilitas_km')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -103,8 +103,8 @@
                         <label for="fasilitas_tm">Fasilitas Tempat Makan</label>
                         <select class="form-control @error('fasilitas_tm') is-invalid @enderror" id="fasilitas_tm"
                             name="fasilitas_tm">
-                            <option value="ada" {{ $tour->fasilitas_tm == 'ada' ? 'selected' : '' }}>Ada</option>
-                            <option value="tidak" {{ $tour->fasilitas_tm == 'tidak' ? 'selected' : '' }}>Tidak</option>
+                            <option value="Fasilitas Tersedia" {{ $tour->fasilitas_tm == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
+                            <option value="Fasilitas Tidak Tersedia" {{ $tour->fasilitas_tm == 'Fasilitas Tidak Tersedia' ? 'selected' : '' }}>Tidak</option>
                         </select>
                         @error('fasilitas_tm')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -114,8 +114,8 @@
                         <label for="fasilitas_ti">Fasilitas Tempat Ibadah</label>
                         <select class="form-control @error('fasilitas_ti') is-invalid @enderror" id="fasilitas_ti"
                             name="fasilitas_ti">
-                            <option value="ada" {{ $tour->fasilitas_ti == 'ada' ? 'selected' : '' }}>Ada</option>
-                            <option value="tidak" {{ $tour->fasilitas_ti == 'tidak' ? 'selected' : '' }}>Tidak</option>
+                            <option value="Fasilitas Tersedia" {{ $tour->fasilitas_ti == 'Fasilitas Tersedia' ? 'selected' : '' }}>Ada</option>
+                            <option value="Fasilitas Tidak Tersedia" {{ $tour->fasilitas_ti == 'Fasilitas Tidak Tersedia' ? 'selected' : '' }}>Tidak</option>
                         </select>
                         @error('fasilitas_ti')
                             <div class="invalid-feedback">{{ $message }}</div>

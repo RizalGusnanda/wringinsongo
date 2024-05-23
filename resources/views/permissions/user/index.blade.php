@@ -59,10 +59,16 @@
                                                 <td>{{ implode(', ', $user->getRoleNames()->toArray()) }}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-end">
-                                                        <a href="{{ route('assign.user.edit', $user->id) }}"
-                                                            class="btn btn-sm btn-info btn-icon "><i
-                                                                class="fas fa-edit"></i>
-                                                            Edit</a>
+                                                        @if (!$user->hasRole('super-admin'))
+                                                            <a href="{{ route('assign.user.edit', $user->id) }}"
+                                                                class="btn btn-sm btn-info btn-icon "><i
+                                                                    class="fas fa-edit"></i>
+                                                                Edit</a>
+                                                        @else
+                                                            <button class="btn btn-sm btn-secondary btn-icon" disabled><i
+                                                                    class="fas fa-ban"></i>
+                                                                Edit</button>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

@@ -79,43 +79,6 @@
                 color: transparent;
             }
         </style>
-        <!-- Tour Detail Modal -->
-        <div class="modal fade" id="tourDetailModal" tabindex="-1" role="dialog" aria-labelledby="tourDetailModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="tourDetailModalLabel">Detail Wisata</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="text-white">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body bg-light">
-                        <div class="card">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><strong>Nama Wisata:</strong> <span id="tourName"></span></li>
-                                <li class="list-group-item"><strong>Fasilitas Kamar Mandi:</strong> <span
-                                        id="fasilitasKm"></span>
-                                </li>
-                                <li class="list-group-item"><strong>Fasilitas Tempat Makan:</strong> <span
-                                        id="fasilitasTm"></span>
-                                </li>
-                                <li class="list-group-item"><strong>Fasilitas Tempat Ibadah:</strong> <span
-                                        id="fasilitasTi"></span>
-                                </li>
-                                <li class="list-group-item"><strong>Maps:</strong> <span id="maps"></span></li>
-                                <li class="list-group-item"><strong>Tipe Wisata:</strong> <span id="type"></span></li>
-                                <li class="list-group-item"><strong>Harga Tiket:</strong> <span id="hargaTiket"></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="section-header">
             <h1>Menu Wisata</h1>
         </div>
@@ -204,29 +167,29 @@
                                     <tbody>
                                         <tr class="text-center">
                                             <th>#</th>
-                                            <th>Nama Wisata</th>
                                             <th>Profile Wisata</th>
-                                            <th>Deskripsi</th>
-                                            <th>Sejarah</th>
+                                            <th>Nama Wisata</th>
+                                            <th>Jenis Wisata</th>
+                                            <th>Maps</th>
                                             <th>Action</th>
                                         </tr>
-                                        @foreach ($tours as $tour)
+                                        @forelse ($tours as $tour)
                                             <tr>
                                                 <td class="text-center">
                                                     {{ ($tours->currentPage() - 1) * $tours->perPage() + $loop->index + 1 }}
                                                 </td>
-                                                <td>{{ $tour->name }}</td>
                                                 <td class="d-flex justify-content-center">
                                                     <img src="{{ asset('storage/' . $tour->profile_tour) }}"
                                                         alt="Profile Tour"
                                                         style="width: 200px; height: 150px; object-fit: cover;">
                                                 </td>
-                                                <td>{!! $tour->description !!}</td>
-                                                <td>{!! $tour->history !!}</td>
+                                                <td class="text-center">{{ $tour->name }}</td>
+                                                <td class="text-center">{!! $tour->type !!}</td>
+                                                <td class="text-center">{!! $tour->maps !!}</td>
                                                 <td class="text-right">
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="javascript:void(0)" class="btn btn-success mr-2"
-                                                            onclick="showTourDetails('{{ $tour->name }}', '{{ $tour->fasilitas_km }}', '{{ $tour->fasilitas_tm }}', '{{ $tour->fasilitas_ti }}', '{{ $tour->maps }}', '{{ $tour->type }}', '{{ $tour->harga_tiket }}')">Show</a>
+                                                        <a href="{{ route('menu-wisata.show', $tour->id) }}"
+                                                            class="btn btn-success mr-2">Show</a>
                                                         <a href="{{ route('menu-wisata.edit', $tour->id) }}"
                                                             class="btn btn-warning mr-2">Edit</a>
                                                         <form action="{{ route('menu-wisata.destroy', $tour->id) }}"
@@ -241,7 +204,15 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        Destinasi Wisata tidak ditemukan.
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
@@ -255,28 +226,6 @@
         </div>
 
     </section>
-    <script>
-        function showTourDetails(name, fasilitasKm, fasilitasTm, fasilitasTi, maps, type, hargaTiket) {
-            var hargaTiketFormatted = hargaTiket && !isNaN(hargaTiket) ? 'Rp. ' + parseInt(hargaTiket).toLocaleString(
-                'id-ID') : 'Rp. -';
-
-            $('#tourName').text(name);
-            $('#fasilitasKm').text(fasilitasKm);
-            $('#fasilitasTm').text(fasilitasTm);
-            $('#fasilitasTi').text(fasilitasTi);
-            $('#maps').html(`<a href="${maps}" target="_blank">${maps}</a>`);
-            $('#type').text(type);
-            $('#hargaTiket').text(hargaTiketFormatted);
-
-            $('#tourDetailModal').modal({
-                backdrop: false,
-                keyboard: true
-            });
-        }
-
-        var mapsUrl = `https://www.google.com/maps/search/?api=1&query=${maps}`;
-        $('#maps').html(`<a href="${mapsUrl}" target="_blank">${maps}</a>`);
-    </script>
 @endsection
 @push('customScript')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

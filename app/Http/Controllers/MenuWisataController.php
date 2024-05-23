@@ -34,6 +34,8 @@ class MenuWisataController extends Controller
             $tours = Tours::paginate(5);
         }
 
+        $isSearchEmpty = empty($search) ? false : $tours->isEmpty();
+
         return view('menu.menu-wisata.index', ['tours' => $tours]);
     }
 
@@ -223,6 +225,12 @@ class MenuWisataController extends Controller
     {
         $exists = Tours::where('maps', $request->maps)->exists();
         return response()->json(['exists' => $exists]);
+    }
+
+    public function show($id)
+    {
+        $tour = Tours::findOrFail($id);
+        return view('menu.menu-wisata.show', compact('tour'));
     }
 
 

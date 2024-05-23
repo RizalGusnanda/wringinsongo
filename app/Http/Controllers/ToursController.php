@@ -21,19 +21,29 @@ class ToursController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('wisata');
+        $sort = $request->query('sort');
+
+        $query = Tours::query();
 
         if ($search) {
-            $tours = Tours::where('name', 'like', '%' . $search . '%')->paginate(5);
-        } else {
-            $tours = Tours::paginate(5);
+            $query->where('name', 'like', '%' . $search . '%');
         }
+
+        if ($sort == 'ascending') {
+            $query->orderBy('name', 'asc');
+        } elseif ($sort == 'descending') {
+            $query->orderBy('name', 'desc');
+        }
+
+        $tours = $query->paginate(5);
 
         if ($tours->isEmpty() && $search) {
-            return view('layout-users.wisata', compact('tours', 'search'))->with('error', 'Destinasi Wisata tidak ditemukan!');
+            return view('layout-users.wisata', compact('tours', 'search', 'sort'))->with('error', 'Destinasi Wisata tidak ditemukan!');
         }
 
-        return view('layout-users.wisata', compact('tours', 'search'));
+        return view('layout-users.wisata', compact('tours', 'search', 'sort'));
     }
+
 
     public function detail($id, Request $request)
     {
