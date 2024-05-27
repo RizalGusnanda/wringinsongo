@@ -37,12 +37,14 @@ class ToursController extends Controller
 
         $tours = $query->paginate(5);
 
-        if ($tours->isEmpty() && $search) {
-            return view('layout-users.wisata', compact('tours', 'search', 'sort'))->with('error', 'Destinasi Wisata tidak ditemukan!');
+        $error = null;
+        if ($tours->isEmpty()) {
+            $error = $search ? 'Destinasi Wisata tidak ditemukan!' : 'Destinasi wisata belum ditambahkan!';
         }
 
-        return view('layout-users.wisata', compact('tours', 'search', 'sort'));
+        return view('layout-users.wisata', compact('tours', 'search', 'sort', 'error'));
     }
+
 
 
     public function detail($id, Request $request)

@@ -37,45 +37,60 @@ class PendapatanWisataExport implements FromCollection, WithHeadings, WithMappin
 
     public function headings(): array
     {
-        return [
+        $headings = [
             'Nama Wisata',
             'Harga Tiket',
             'Total Tiket',
-            'Total Pendapatan',
-            'Pendapatan Per Bulan'
+            'Total Pendapatan'
         ];
+
+        $year = Carbon::now()->year;
+        for ($i = 1; $i <= 12; $i++) {
+            $month = Carbon::createFromDate($year, $i, 1)->translatedFormat('F Y');
+            $headings[] = "Pendapatan {$month}";
+        }
+
+        return $headings;
     }
 
     public function map($tour): array
     {
-        $pendapatanPerBulan = [];
+
+        $pendapatanPerBulan = array_fill(1, 12, 0);
+
         foreach ($tour->carts as $cart) {
-            $bulan = Carbon::parse($cart->created_at)->format('Y-m');
-            if (!isset($pendapatanPerBulan[$bulan])) {
-                $pendapatanPerBulan[$bulan] = 0;
+            $bulan = Carbon::parse($cart->created_at)->month;
+            $tahun = Carbon::parse($cart->created_at)->year;
+            if ($tahun == Carbon::now()->year) {
+                $pendapatanPerBulan[$bulan] += $cart->total_price;
             }
-            $pendapatanPerBulan[$bulan] += $cart->total_price;
         }
 
-        $pendapatanPerBulanString = '';
-        foreach ($pendapatanPerBulan as $bulan => $pendapatan) {
-            $pendapatanPerBulanString .= "$bulan: Rp. " . number_format($pendapatan, 0, ',', '.') . "\n";
-        }
-
-        return [
+        $data = [
             $tour->name,
             'Rp. ' . number_format($tour->harga_tiket, 0, ',', '.'),
             $tour->carts->sum('total_tickets'),
-            'Rp. ' . number_format($tour->carts->sum('total_pendapatan'), 0, ',', '.'),
-            $pendapatanPerBulanString,
+            'Rp. ' . number_format($tour->carts->sum('total_pendapatan'), 0, ',', '.')
         ];
+
+        foreach ($pendapatanPerBulan as $pendapatan) {
+            $data[] = 'Rp. ' . number_format($pendapatan, 0, ',', '.');
+        }
+
+        return $data;
     }
 
     public function columnFormats(): array
     {
-        return [
+        $formats = [
             'B' => NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE,
             'D' => NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE,
         ];
+
+        for ($i = 'E'; $i <= 'P'; $i++) {
+            $formats[$i] = NumberFormat::FORMAT_CURRENCY_EUR_SIMPLE;
+        }
+
+        return $formats;
     }
 }

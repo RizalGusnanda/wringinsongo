@@ -35,7 +35,7 @@
                 </div>
             @endif
             <div class="row">
-                @if ($tours->isEmpty())
+                @if ($tours->isEmpty() && !isset($error))
                     <div class="alert alert-danger text-center" role="alert">
                         Destinasi wisata belum ditambahkan!
                     </div>
