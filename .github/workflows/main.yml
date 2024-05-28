@@ -19,4 +19,4 @@ jobs:
             sudo git pull
             sudo composer install --no-interaction --prefer-dist --optimize-autoloader
             sudo php artisan migrate:fresh --seed
-            php artisan optimize:clear
+            sudo php artisan optimize:clear
