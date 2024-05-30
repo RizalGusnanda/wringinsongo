@@ -24,7 +24,7 @@ class Updatetours_virtualRequest extends FormRequest
     public function rules()
     {
         return [
-            'virtual_tours.*' => 'required|image|max:15360',
+            'virtual_tours.*' => 'required|image|max:20480',
         ];
     }
 
@@ -33,7 +33,7 @@ class Updatetours_virtualRequest extends FormRequest
         return [
             'virtual_tours.*.required' => 'Setiap gambar virtual tour wajib diisi.',
             'virtual_tours.*.image' => 'File harus berupa gambar.',
-            'virtual_tours.*.max' => 'Ukuran gambar virtual tour terlalu besar, maksimal adalah 10MB.',
+            'virtual_tours.*.max' => 'Ukuran gambar virtual tour terlalu besar, maksimal adalah 20MB.',
         ];
     }
 }

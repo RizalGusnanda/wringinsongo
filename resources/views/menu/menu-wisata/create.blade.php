@@ -410,11 +410,11 @@
         window.previewVirtualTour = function(input, index) {
             if (input.files && input.files[0]) {
                 var file = input.files[0];
-                if (file.size > 15728640) {
+                if (file.size > 20971520) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar virtual tour adalah 15MB.'
+                        text: 'Ukuran gambar terlalu besar, maksimal ukuran gambar virtual tour adalah 20MB.'
                     });
                     input.value = "";
                     var existingImg = document.getElementById('previewVirtualTour' + index);

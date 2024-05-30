@@ -55,12 +55,14 @@ class PendapatanWisataExport implements FromCollection, WithHeadings, WithMappin
 
     public function map($tour): array
     {
-
         $pendapatanPerBulan = array_fill(1, 12, 0);
 
         foreach ($tour->carts as $cart) {
             $bulan = Carbon::parse($cart->created_at)->month;
             $tahun = Carbon::parse($cart->created_at)->year;
+            // Debug: Periksa bulan, tahun, dan total harga
+            \Log::info("Cart: {$cart->id}, Bulan: {$bulan}, Tahun: {$tahun}, Total Harga: {$cart->total_price}");
+
             if ($tahun == Carbon::now()->year) {
                 $pendapatanPerBulan[$bulan] += $cart->total_price;
             }
@@ -79,6 +81,7 @@ class PendapatanWisataExport implements FromCollection, WithHeadings, WithMappin
 
         return $data;
     }
+
 
     public function columnFormats(): array
     {
