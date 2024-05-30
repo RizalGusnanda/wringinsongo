@@ -60,10 +60,7 @@ class PendapatanWisataExport implements FromCollection, WithHeadings, WithMappin
         foreach ($tour->carts as $cart) {
             $bulan = Carbon::parse($cart->created_at)->month;
             $tahun = Carbon::parse($cart->created_at)->year;
-            // Debug: Periksa bulan, tahun, dan total harga
-            \Log::info("Cart: {$cart->id}, Bulan: {$bulan}, Tahun: {$tahun}, Total Harga: {$cart->total_price}");
-
-            if ($tahun == Carbon::now()->year) {
+            if ($tahun == Carbon::now()->year) { 
                 $pendapatanPerBulan[$bulan] += $cart->total_price;
             }
         }
