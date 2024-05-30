@@ -27,7 +27,7 @@
                     <div
                         class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="login-brand">
-                            <img src="{{ asset('assets/img/avatar/Wringinsongo.png') }}" alt="logo" width="250">
+                            <img src="{{ asset('assets/img/avatar/icon-logo.png') }}" alt="logo" width="250">
                         </div>
 
                         <div class="card card-primary">
@@ -62,9 +62,6 @@
                                     <button type="submit" class="btn btn-primary btn-block">Kirim Reset Kata Sandi</button>
                                 </form>
                             </div>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; 2024 Design By Muchamad Rizal Gusnanda Atmaja
                         </div>
                     </div>
                 </div>
