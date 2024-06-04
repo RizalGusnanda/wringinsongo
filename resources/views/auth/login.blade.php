@@ -89,18 +89,17 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div
-                                        style="background-color: #333;
+                                    <div class="form-group mb-4"
+                                        style="background-color: rgba(31, 60, 136, 0.90);
                             color: #fff;
                             padding: 20px;
                             border-radius: 15px;
-                            max-width: 300px;
-                            margin: auto;">
+                            max-width: 300px;">
                                         <altcha-widget
                                             challengeurl="https://eu.altcha.org/api/v1/challenge?apiKey=ckey_01bd6030348126fad9cdb22d5007"
-                                            style=" --altcha-color-border: pink;
-                                    --altcha-color-icon: pink;
-                                    --altcha-color-checkbox: pink;
+                                            style=" --altcha-color-border: white;
+                                    --altcha-color-icon: white;
+                                    --altcha-color-checkbox: white;
                                     --altcha-border-width: 3px;
                                     --altcha-border-radius: 15px;
                                     display: block;
