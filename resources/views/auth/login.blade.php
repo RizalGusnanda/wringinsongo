@@ -97,7 +97,7 @@
                             max-width: 300px;
                             margin: auto;">
                                         <altcha-widget
-                                            challengeurl="https://eu.altcha.org/api/v1/challenge?apiKey=ckey_01bd60303481f5f9b539fa018c53"
+                                            challengeurl="https://eu.altcha.org/api/v1/challenge?apiKey=ckey_01bd6030348126fad9cdb22d5007"
                                             style=" --altcha-color-border: pink;
                                     --altcha-color-icon: pink;
                                     --altcha-color-checkbox: pink;

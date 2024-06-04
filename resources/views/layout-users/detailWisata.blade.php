@@ -129,6 +129,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                <div class="px-2 bg-light "><marquee class="py-3">Selamat datang di website kami teknologi.visitklaten.com - Sharing Teknologi - Berbagi Ilmu Tentang Teknologi</marquee></div>
                             </div>
                         </div>
                     </div>
