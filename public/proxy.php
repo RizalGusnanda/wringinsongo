@@ -1,3 +1,3 @@
 <?php
 header('Content-Type: application/javascript');
-echo file_get_contents('https://eu.altcha.org/js/latest/altcha.min.js');
+echo file_get_contents('https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js');

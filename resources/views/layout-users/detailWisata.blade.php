@@ -90,6 +90,9 @@
                     <div class="col-md-6">
                         <div class="card shadow">
                             <div class="card-body">
+                                <div class="px-2 mb-3 bg-white">
+                                    <marquee class="py-1 text-danger" style="font-weight: 700;">Tiket yang dipesan tidak dapat direfund!</marquee>
+                                </div>
                                 <form method="POST" action="{{ route('reservation.store', $tour->id) }}">
                                     @csrf
                                     <div class="row mb-3 align-items-center">
@@ -129,7 +132,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="px-2 bg-light "><marquee class="py-3">Selamat datang di website kami teknologi.visitklaten.com - Sharing Teknologi - Berbagi Ilmu Tentang Teknologi</marquee></div>
                             </div>
                         </div>
                     </div>
