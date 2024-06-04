@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
+    <script async defer src="https://eu.altcha.org/js/latest/altcha.min.js" type="module"></script>
+
 </head>
 
 <body>
@@ -87,6 +89,23 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div
+                                        style="background-color: #333;
+                            color: #fff;
+                            padding: 20px;
+                            border-radius: 15px;
+                            max-width: 300px;
+                            margin: auto;">
+                                        <altcha-widget
+                                            challengeurl="https://eu.altcha.org/api/v1/challenge?apiKey=ckey_01bd60303481f5f9b539fa018c53"
+                                            style=" --altcha-color-border: pink;
+                                    --altcha-color-icon: pink;
+                                    --altcha-color-checkbox: pink;
+                                    --altcha-border-width: 3px;
+                                    --altcha-border-radius: 15px;
+                                    display: block;
+                                    margin: auto;"></altcha-widget>
+                                    </div>
                                     <div class="form-group mb-4">
                                         <button type="submit" class="btn btn-responsive" tabindex="4">
                                             Masuk
@@ -126,6 +145,8 @@
     <!-- Template JS File -->
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
+    <script async defer src="proxy.php" type="module"></script>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
