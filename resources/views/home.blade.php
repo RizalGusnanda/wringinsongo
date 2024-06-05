@@ -4,7 +4,7 @@
         <div class="section-header">
             <h1>Dashboard Superadmin</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{'/dashboard'}}">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ '/dashboard' }}">Dashboard</a></div>
             </div>
         </div>
         {{-- <div class="row">
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="card px-3 py-2">
-                    <canvas id="monthlyTransactionsChart"></canvas>
+                    <canvas id="monthlyTicketSalesChart"></canvas>
                 </div>
             </div>
         </div>
@@ -136,14 +136,14 @@
 @push('customScript')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var ctx = document.getElementById('monthlyTransactionsChart').getContext('2d');
-        var monthlyTransactionsChart = new Chart(ctx, {
+        var ctx = document.getElementById('monthlyTicketSalesChart').getContext('2d');
+        var monthlyTicketSalesChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: {!! json_encode($monthlyLabels) !!},
                 datasets: [{
-                    label: 'Jumlah Transaksi',
-                    data: {!! json_encode($monthlyTransactions) !!},
+                    label: 'Jumlah Tiket Terjual',
+                    data: {!! json_encode($monthlyTicketSales) !!},
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
@@ -154,9 +154,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            ticks: {
-                                stepSize: 5
-                            }
+                            stepSize: 5
                         }
                     }]
                 }
