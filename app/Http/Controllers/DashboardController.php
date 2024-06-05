@@ -35,22 +35,23 @@ class DashboardController extends Controller
             ->get();
 
         $monthlyLabels = [];
-        $monthlyTicketSales = [];
+        $monthlyTicketsSold = [];
 
         $startMonth = Carbon::now()->startOfYear();
         $endMonth = Carbon::now()->endOfYear();
 
         while ($startMonth->lte($endMonth)) {
-            $monthLabel = $startMonth->formatLocalized('%B');
+            $monthLabel = $startMonth->translatedFormat('F');
             $monthlyLabels[] = $monthLabel;
 
-            $ticketsCount = Carts::where('status', 'success')
-                ->whereYear('created_at', $startMonth->year)
-                ->whereMonth('created_at', $startMonth->month)
+            $ticketsSold = DB::table('carts')
                 ->join('tickets', 'carts.id_ticket', '=', 'tickets.id')
+                ->where('carts.status', 'success')
+                ->whereYear('carts.created_at', $startMonth->year)
+                ->whereMonth('carts.created_at', $startMonth->month)
                 ->sum('tickets.tickets_count');
 
-            $monthlyTicketSales[] = $ticketsCount;
+            $monthlyTicketsSold[] = $ticketsSold;
 
             $startMonth->addMonth();
         }
@@ -63,7 +64,8 @@ class DashboardController extends Controller
             'topThreeTours' => $topThreeTours,
             'topThreeUsers' => $topThreeUsers,
             'monthlyLabels' => $monthlyLabels,
-            'monthlyTicketSales' => $monthlyTicketSales,
+            'monthlyTicketsSold' => $monthlyTicketsSold,
         ]);
     }
+
 }
