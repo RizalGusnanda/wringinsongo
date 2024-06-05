@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            {{-- <div class="col-lg-6 col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h4>User Transaksi Terbanyak</h4>
@@ -120,7 +120,7 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row">

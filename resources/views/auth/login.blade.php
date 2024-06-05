@@ -91,21 +91,20 @@
                                     </div>
                                     @env('production')
                                     <div class="form-group mb-4"
-                                    style="background-color: rgba(31, 60, 136, 0.90);
-                                    color: #fff;
-                                    padding: 20px;
+                                        style="background-color: #fff;
+                                    color:  rgba(31, 60, 136, 0.90);
                                     border-radius: 15px;
-                                    max-width: 300px;">
-                                    <altcha-widget
-                                        challengeurl="https://eu.altcha.org/api/v1/challenge?apiKey=ckey_01bd6030348126fad9cdb22d5007"
-                                        style=" --altcha-color-border: white;
-                                --altcha-color-icon: white;
+                                    max-width: 250px;">
+                                        <altcha-widget
+                                            challengeurl="https://eu.altcha.org/api/v1/challenge?apiKey=ckey_01bd6030348126fad9cdb22d5007"
+                                            style=" --altcha-color-border: rgba(31, 60, 136, 0.90);
+                                --altcha-color-icon: rgba(31, 60, 136, 0.90);
                                 --altcha-color-checkbox: white;
-                                --altcha-border-width: 3px;
+                                --altcha-border-width: 1px;
                                 --altcha-border-radius: 15px;
                                 display: block;
                                 margin: auto;"></altcha-widget>
-                                </div>
+                                    </div>
                                     @endenv
                                     <div class="form-group mb-4">
                                         <button type="submit" class="btn btn-responsive" tabindex="4">

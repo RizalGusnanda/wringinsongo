@@ -91,7 +91,7 @@
                                                     <td>{{ $cart->tour->name ?? 'N/A' }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($cart->ticket->date)->translatedFormat('d F Y') ?? 'N/A' }}
                                                     </td>
-                                                    <td>Rp. {{ number_format($cart->total_price, 0, ',', '.') }}</td>
+                                                    <td>{{ $cart->ticket->tickets_count ?? 'N/A' }}</td>
                                                     <td>
                                                         @if ($cart->status_confirm == 'success')
                                                             <span class="badge badge-success">
