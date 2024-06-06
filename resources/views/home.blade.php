@@ -4,7 +4,7 @@
         <div class="section-header">
             <h1>Dashboard Superadmin</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="{{'/dashboard'}}">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ '/dashboard' }}">Dashboard</a></div>
             </div>
         </div>
         {{-- <div class="row">
@@ -17,71 +17,59 @@
                 </div>
             </div>
         </div>  --}}
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="far fa-user"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total User</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalUsersWithRole }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="far fa-newspaper"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Wisata</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalTours }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-archive"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Transaksi</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalTransactions }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Pendapatan</h4>
-                        </div>
-                        <div class="card-body">
-                            Rp. {{ number_format($totalRevenue, 0, ',', '.') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-8 col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Transaksi Terbaru</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card mb-3">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-md">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nama User</th>
+                                            <th>Nama Wisata</th>
+                                            <th>Tanggal Kunjungan</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($latestTransactions as $index => $transaction)
+                                            <tr class="text-center">
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $transaction->user_name }}</td>
+                                                <td>{{ $transaction->tour_name }}</td>
+                                                <td>{{ $transaction->date }}</td>
+                                                <td>
+                                                    @if ($transaction->status == 'success')
+                                                        <span class="badge badge-success">
+                                                            <i class="fas fa-check-circle"></i> Success
+                                                        </span>
+                                                    @else
+                                                        <span class="badge badge-warning">
+                                                            <i class="fas fa-hourglass-half"></i> Pending
+                                                        </span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-right py-2">
+                            <a href="{{ route('reservasi-wisata.index') }}"
+                                style="font-weight: 600; color: #11468F; text-decoration: none;">Selengkapnya<i
+                                    class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <h4>Tempat Wisata Tertop</h4>
@@ -101,26 +89,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-6 col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>User Transaksi Terbanyak</h4>
-                    </div>
-                    <div class="card-body">
-                        @foreach ($topThreeUsers as $user)
-                            <div class="card bg-primary text-white mb-3">
-                                <div class="card-body d-flex align-items-center">
-                                    <i class="fas fa-user mr-5" style="font-size: 2em;"></i>
-                                    <div>
-                                        <h5 class="card-title">{{ $user->name }}</h5>
-                                        <p class="card-text">Jumlah Transaksi: {{ $user->transactions_count }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div> --}}
         </div>
 
         <div class="row">
@@ -138,7 +106,7 @@
     <script>
         var ctx = document.getElementById('monthlyTicketsSoldChart').getContext('2d');
         var monthlyTicketsSoldChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: {!! json_encode($monthlyLabels) !!},
                 datasets: [{

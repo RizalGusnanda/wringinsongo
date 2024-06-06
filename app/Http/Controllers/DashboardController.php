@@ -13,59 +13,55 @@ use Carbon\Carbon;
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $roleUser = Role::where('name', 'user')->first();
-        $totalUsersWithRole = $roleUser ? $roleUser->users()->count() : 0;
+{
+    $topThreeTours = Tours::withCount('tickets')->orderBy('tickets_count', 'desc')->take(3)->get();
 
-        $totalTours = Tours::count();
+    $topThreeUsers = User::select('users.id', DB::raw('MAX(users.name) as name'), DB::raw('COUNT(carts.id) as transactions_count'))
+        ->join('tickets', 'users.id', '=', 'tickets.id_users')
+        ->join('carts', 'tickets.id', '=', 'carts.id_ticket')
+        ->where('carts.status', 'success')
+        ->groupBy('users.id')
+        ->orderByDesc('transactions_count')
+        ->take(3)
+        ->get();
 
-        $totalTransactions = Carts::where('status', 'success')->count();
+    $monthlyLabels = [];
+    $monthlyTicketsSold = [];
 
-        $totalRevenue = Carts::where('status', 'success')->sum('total_price');
+    $startMonth = Carbon::now()->startOfYear();
+    $endMonth = Carbon::now()->endOfYear();
 
-        $topThreeTours = Tours::withCount('tickets')->orderBy('tickets_count', 'desc')->take(3)->get();
+    while ($startMonth->lte($endMonth)) {
+        $monthLabel = $startMonth->translatedFormat('F');
+        $monthlyLabels[] = $monthLabel;
 
-        $topThreeUsers = User::select('users.id', DB::raw('MAX(users.name) as name'), DB::raw('COUNT(carts.id) as transactions_count'))
-            ->join('tickets', 'users.id', '=', 'tickets.id_users')
-            ->join('carts', 'tickets.id', '=', 'carts.id_ticket')
+        $ticketsSold = DB::table('carts')
+            ->join('tickets', 'carts.id_ticket', '=', 'tickets.id')
             ->where('carts.status', 'success')
-            ->groupBy('users.id')
-            ->orderByDesc('transactions_count')
-            ->take(3)
-            ->get();
+            ->whereYear('carts.created_at', $startMonth->year)
+            ->whereMonth('carts.created_at', $startMonth->month)
+            ->sum('tickets.tickets_count');
 
-        $monthlyLabels = [];
-        $monthlyTicketsSold = [];
+        $monthlyTicketsSold[] = $ticketsSold;
 
-        $startMonth = Carbon::now()->startOfYear();
-        $endMonth = Carbon::now()->endOfYear();
-
-        while ($startMonth->lte($endMonth)) {
-            $monthLabel = $startMonth->translatedFormat('F');
-            $monthlyLabels[] = $monthLabel;
-
-            $ticketsSold = DB::table('carts')
-                ->join('tickets', 'carts.id_ticket', '=', 'tickets.id')
-                ->where('carts.status', 'success')
-                ->whereYear('carts.created_at', $startMonth->year)
-                ->whereMonth('carts.created_at', $startMonth->month)
-                ->sum('tickets.tickets_count');
-
-            $monthlyTicketsSold[] = $ticketsSold;
-
-            $startMonth->addMonth();
-        }
-
-        return view('home', [
-            'totalUsersWithRole' => $totalUsersWithRole,
-            'totalTours' => $totalTours,
-            'totalTransactions' => $totalTransactions,
-            'totalRevenue' => $totalRevenue,
-            'topThreeTours' => $topThreeTours,
-            'topThreeUsers' => $topThreeUsers,
-            'monthlyLabels' => $monthlyLabels,
-            'monthlyTicketsSold' => $monthlyTicketsSold,
-        ]);
+        $startMonth->addMonth();
     }
+
+    $latestTransactions = DB::table('carts')
+        ->join('tickets', 'carts.id_ticket', '=', 'tickets.id')
+        ->join('users', 'tickets.id_users', '=', 'users.id')
+        ->join('tours', 'tickets.id_tours', '=', 'tours.id')
+        ->select('users.name as user_name', 'tours.name as tour_name', 'tickets.date', 'carts.status')
+        ->orderBy('carts.created_at', 'desc')
+        ->take(3)
+        ->get();
+
+    return view('home', [
+        'topThreeTours' => $topThreeTours,
+        'monthlyLabels' => $monthlyLabels,
+        'monthlyTicketsSold' => $monthlyTicketsSold,
+        'latestTransactions' => $latestTransactions,
+    ]);
+}
 
 }

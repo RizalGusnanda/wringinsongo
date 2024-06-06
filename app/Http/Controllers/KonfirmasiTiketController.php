@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Carts;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class KonfirmasiTiketController extends Controller
 {
@@ -26,9 +27,16 @@ class KonfirmasiTiketController extends Controller
                 });
         }
 
+        $filter_status = $request->get('filter_status');
+        if ($filter_status == 'now') {
+            $query->whereHas('ticket', function ($q) {
+                $q->whereDate('date', Carbon::today());
+            });
+        }
+
         $carts = $query->paginate(10);
 
-        return view('menu.konfirmasi-tiket.index', compact('carts', 'search'));
+        return view('menu.konfirmasi-tiket.index', compact('carts', 'search', 'filter_status'));
     }
 
 

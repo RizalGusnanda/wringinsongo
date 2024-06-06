@@ -25,10 +25,10 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-2">
                         <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Batal</button>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-2">
                         <button type="button" class="btn btn-primary btn-block" onclick="applyFilter()">Filter</button>
                     </div>
                 </div>
