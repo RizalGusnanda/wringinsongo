@@ -76,8 +76,8 @@
                     </div>
                     <div class="card-body">
                         @foreach ($topThreeTours as $tour)
-                            <div class="card bg-primary text-white mb-3">
-                                <div class="card-body d-flex align-items-center">
+                            <div class="card bg-primary text-white mb-2">
+                                <div class="card-body d-flex align-items-center" style="padding-top: 5px; padding-bottom: 5px;">
                                     <i class="fas fa-map-marker-alt mr-5" style="font-size: 2em;"></i>
                                     <div>
                                         <h5 class="card-title">{{ $tour->name }}</h5>
