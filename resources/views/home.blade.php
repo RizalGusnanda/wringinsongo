@@ -63,7 +63,7 @@
                         </div>
                         <div class="text-right py-2">
                             <a href="{{ route('reservasi-wisata.index') }}"
-                                style="font-weight: 600; color: #11468F; text-decoration: none;">Selengkapnya<i
+                                style="font-weight: 600; color: #265073; text-decoration: none;">Selengkapnya<i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="card-body">
                         @foreach ($topThreeTours as $tour)
-                            <div class="card bg-primary text-white mb-2">
+                            <div class="card text-white mb-2" style="background-color: #265073">
                                 <div class="card-body d-flex align-items-center" style="padding-top: 8px; padding-bottom: 8px;">
                                     <i class="fas fa-map-marker-alt mr-5" style="font-size: 2em;"></i>
                                     <div>
@@ -113,7 +113,7 @@
                     label: 'Jumlah Tiket Terjual',
                     data: {!! json_encode($monthlyTicketsSold) !!},
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderColor: '#265073',
                     borderWidth: 1
                 }]
             },

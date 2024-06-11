@@ -27,9 +27,7 @@ class Midtrans
         $orderId = $this->generateUniqueOrderId($request);
         $payload = $this->preprocessTransactionDetails($orderId, $request);
         $response = $this->getTransactionToken($payload);
-        // dd($res)
         if (isset($response['token'])) {
-            // Ensure the order_id is also returned as part of the response for later use
             return [
                 'status' => 'success',
                 'token' => $response['token'],
@@ -41,6 +39,92 @@ class Midtrans
         }
     }
 
+    public function createInvoice($invoiceData)
+    // public function createInvoice()
+    {
+        $url = $this->isProduction
+            ? "https://api.midtrans.com/v1/invoices"
+            : "https://api.sandbox.midtrans.com/v1/invoices";
+        // $invoiceData =
+        //     // "order_id": "ORDER-666534ab67251",
+        //     '
+        //     {
+        //         "order_id" : "7950c36a-d267-4f25-bb03-7a82b00z168t",
+        //         "invoice_number" : "7128c81b-cde5-4c33-8777-4d1d0fcd6377",
+        //         "due_date" : "2025-08-06 20:03:04 +0700",
+        //         "invoice_date" : "2025-01-06 20:03:04 +0700",
+        //          "customer_details": {
+        //             "id": 2,
+        //             "name": "user",
+        //             "email": "user@gmail.com",
+        //                 "phone" : "82313123123"
+
+        //         },
+        //         "payment_type" : "virtual_account",
+        //         "reference": "reference",
+        //         "item_details": [
+        //             {
+        //                 "item_id": "35",
+        //                 "price": 10000,
+        //                 "quantity": 2,
+        //                 "description": "Kosong"
+        //             }
+        //         ],
+        //         "notes": "Tidak Ada",
+        //         "virtual_accounts": [
+        //             {
+        //             "bank": "bca_va"
+        //             }
+        //         ],
+        //         "amount": {
+        //             "vat": 10000,
+        //             "discount": 0,
+        //             "shipping": 0
+        //         },
+        //     ';
+        // $invoiceData = [
+        //     "order_id" => "7950c36a-d267-4f25-bb03-7a82b00z168",
+        //     "invoice_number" => "7128c81b-cde5-4c33-8777-4d1d0fcd6377",
+        //     "due_date" => "2025-08-06 20:03:04 +0700",
+        //     "invoice_date" => "2025-01-06 20:03:04 +0700",
+        //     "customer_details" => [
+        //         "id" => 2,
+        //         "name" => "user",
+        //         "email" => "user@gmail.com",
+        //     ],
+        //     "payment_type" => "virtual_account",
+        //     "reference" => "reference",
+        //     "item_details" => [
+        //         [
+        //             "item_id" => "35",
+        //             "price" => 10000,
+        //             "quantity" => 2,
+        //             "description" => "Kosong"
+        //         ]
+        //     ],
+        //     "notes" => "Tidak Ada",
+        //     "virtual_accounts" => [
+        //         [
+        //             "bank" => "bca_va"
+        //         ]
+        //     ],
+        //     "amount" => [
+        //         "vat" => 10000,
+        //         "discount" => 0,
+        //         "shipping" => 0
+        //     ]
+        // ];
+
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Basic ' . base64_encode($this->serverKey . ':'),
+            'Content-Type' => 'application/json',
+        ])->post($url, $invoiceData);
+
+        return $response->json();
+        // return $response;
+    }
 
     protected function generateUniqueOrderId(Request $request)
     {
@@ -68,10 +152,9 @@ class Midtrans
 
     protected function getTransactionToken(array $payload)
     {
-        $url =
-            // $this->isProduction ?
-            "https://app.midtrans.com/snap/v1/transactions";
-        // :"https://app.sandbox.midtrans.com/snap/v1/transactions";
+        $url = $this->isProduction
+            ? "https://app.midtrans.com/snap/v1/transactions"
+            : "https://app.sandbox.midtrans.com/snap/v1/transactions";
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',

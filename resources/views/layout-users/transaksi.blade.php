@@ -132,8 +132,14 @@
 @endsection
 @push('customScript')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @env('production')
     <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js"
         data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+    @endenv
+    @env('local')
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+    @endenv
     <script type="text/javascript">
         document.querySelectorAll('.btn-byr').forEach(button => {
             button.addEventListener('click', function() {

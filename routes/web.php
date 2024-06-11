@@ -81,7 +81,9 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user']], function () {
     Route::get('/profile-user', [ProfilesController::class, 'profile'])->name('profile.index');
     Route::post('/profile-user', [ProfilesController::class, 'update'])->name('profile.update');
 
-    Route::get('/reservasi-user', [ReservasiUserController::class, 'index']);
+    Route::get('/reservasi-user', [ReservasiUserController::class, 'index'])->name('reservasi.index');
+    Route::get('/reservasi-user/detail/{order_id}', [ReservasiUserController::class, 'showDetail'])->name('reservasi.detail');
+
 
     Route::get('/transaksi-user/{id}', [CartController::class, 'show'])->name('cart.show');
     Route::post('/transaksi-user', [CartController::class, 'store'])->name('cart.store');

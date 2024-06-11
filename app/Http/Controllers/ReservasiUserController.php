@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carts;
+use App\Models\Payments;
 use Illuminate\Support\Facades\Auth;
 
 class ReservasiUserController extends Controller
@@ -37,4 +38,25 @@ class ReservasiUserController extends Controller
 
         return view('layout-users.reservasi', compact('reservasi'));
     }
+
+    public function showDetail($order_id)
+{
+    $payment = Payments::where('order_id', $order_id)
+                ->with(['cart.tour', 'cart.ticket'])
+                ->first();
+
+    if (!$payment) {
+        return redirect()->route('reservasi.index')->with('error', 'Reservasi tidak ditemukan.');
+    }
+
+    // Decode the JSON response
+    $response = json_decode($payment->raw_response_response, true);
+
+    // Additional tour and ticket details
+    $tour = $payment->cart->tour;
+    $ticket = $payment->cart->ticket;
+
+    return view('layout-users.detailInvoice', compact('payment', 'response', 'tour', 'ticket'));
+}
+
 }

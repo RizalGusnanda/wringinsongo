@@ -79,8 +79,10 @@
                                                                                 style="border-radius: 20px;">Selesai</button>
                                                                         @else
                                                                             <button class="btn btn-warning px-3 text-white"
-                                                                                style="border-radius: 20px;">Lihat
-                                                                                Detail</button>
+                                                                                style="border-radius: 20px;"
+                                                                                onclick="window.location.href='{{ route('reservasi.detail', ['order_id' => $cart->payments->order_id]) }}'">
+                                                                                Lihat Detail
+                                                                            </button>
                                                                         @endif
                                                                     </div>
                                                                 </div>
