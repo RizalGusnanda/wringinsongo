@@ -36,7 +36,7 @@ class KonfirmasiTiketController extends Controller
             });
         }
 
-        $carts = $query->paginate(10);
+        $carts = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('menu.konfirmasi-tiket.index', compact('carts', 'search', 'filter_status'));
     }
