@@ -11,6 +11,8 @@ class KonfirmasiTiketController extends Controller
 {
     public function index(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
+
         $query = Carts::where('status', 'success')->with(['payments', 'ticket.user', 'tour']);
 
         $search = $request->get('search');
@@ -30,7 +32,7 @@ class KonfirmasiTiketController extends Controller
         $filter_status = $request->get('filter_status');
         if ($filter_status == 'now') {
             $query->whereHas('ticket', function ($q) {
-                $q->whereDate('date', Carbon::today());
+                $q->whereDate('date', Carbon::now('Asia/Jakarta'));
             });
         }
 
