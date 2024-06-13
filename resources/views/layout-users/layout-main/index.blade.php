@@ -53,10 +53,10 @@
                         <a class="nav-link link-navbar" href="{{ url('/wisata') }}">Wisata</a>
                     </li>
                     <li class="nav-item {{ Request::is('contact-us') ? 'active' : '' }}">
-                        <a class="nav-link link-navbar" href="{{ url('/contact-us') }}">Contact Us</a>
+                        <a class="nav-link link-navbar" href="{{ url('/contact-us') }}">Hubungi Kami</a>
                     </li>
                     <li class="nav-item {{ Request::is('about-us') ? 'active' : '' }}">
-                        <a class="nav-link link-navbar" href="{{ url('/') }}#about-section">About Us</a>
+                        <a class="nav-link link-navbar" href="{{ url('/') }}#about-section">Tentang Kami</a>
                     </li>
                 </ul>
 

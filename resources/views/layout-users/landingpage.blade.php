@@ -70,7 +70,7 @@
             <div class="container">
                 <div class="row mt-4">
                     <div class="col-md-10 mx-auto">
-                        <h3 class="text-center title-choose" style="color: #000000;">WHY CHOOSE US
+                        <h3 class="text-center title-choose" style="color: #000000;">MENGAPA MEMILIH KAMI
                         </h3>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
 
     <section id="about-section" class="bg-about" data-aos="fade-up">
         <div class="container py-5">
-            <h1 class="titl-about">ABOUT US</h1>
+            <h1 class="titl-about">TENTANG KAMI</h1>
             <div class="row h-200 justify-content-center">
                 <div class="col-md-3 d-flex justify-content-center align-items-center mb-2">
                     <div class="img-container equal-height-img">

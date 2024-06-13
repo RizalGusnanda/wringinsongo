@@ -5,7 +5,7 @@
         <section>
             <div class="col-md-12">
                 <div class="col-md-6 mx-auto text-center ">
-                    <h3 class="font-weight-bold contact-header">KONTAK KAMI</h3>
+                    <h3 class="font-weight-bold contact-header">HUBUNGI KAMI</h3>
                     <p>Silahkan tinggalkan pesan Anda, pada kolom yang tersedia.</p>
                 </div>
                 <form action="{{ url('/contact-us/send') }}" method="post">
