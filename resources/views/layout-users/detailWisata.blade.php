@@ -24,7 +24,6 @@
         }
 
         @media (max-width: 768px) {
-
             .header-img-top {
                 height: 300px;
                 margin-top: -80px;
@@ -91,7 +90,8 @@
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="px-2 mb-3 bg-white">
-                                    <marquee class="py-1 text-danger" style="font-weight: 700;">Tiket yang dipesan tidak dapat direfund!</marquee>
+                                    <marquee class="py-1 text-danger" style="font-weight: 700;">Tiket yang dipesan tidak
+                                        dapat direfund!</marquee>
                                 </div>
                                 <form method="POST" action="{{ route('reservation.store', $tour->id) }}">
                                     @csrf
@@ -106,9 +106,8 @@
                                         <div class="col-6">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <button class="btn btn-secondary" id="kurangTiket">-</button>
-                                                <span id="jumlahTiket">1</span>
-                                                <input type="hidden" name="jumlah_tiket" id="inputJumlahTiket"
-                                                    value="1">
+                                                <span id="jumlahTiket">{{ $jumlahTiket ?? 1 }}</span>
+                                                <input type="hidden" name="jumlah_tiket" id="inputJumlahTiket" value="{{ $jumlahTiket ?? 1 }}">
                                                 <button class="btn btn-secondary" id="tambahTiket">+</button>
                                             </div>
                                         </div>
@@ -118,8 +117,7 @@
                                             <label for="tanggalKunjungan" class="form-label">Tanggal Kunjungan:</label>
                                         </div>
                                         <div class="col-6">
-                                            <input type="date" class="form-control" id="tanggalKunjungan"
-                                                name="tanggal_kunjungan" required>
+                                            <input type="date" class="form-control" id="tanggalKunjungan" name="tanggal_kunjungan" required value="{{ $tanggalKunjungan ?? '' }}">
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -127,7 +125,7 @@
                                             @if (Auth::check())
                                                 <button type="submit" class="btn reserv-tiket">Reservasi Tiket</button>
                                             @else
-                                                <a href="{{ url('/log-in') }}" class="btn reserv-tiket">Reservasi Tiket</a>
+                                                <a href="{{ route('login') }}" class="btn reserv-tiket" onclick="saveToSession()">Reservasi Tiket</a>
                                             @endif
                                         </div>
                                     </div>
@@ -253,6 +251,13 @@
         tanggalKunjunganInput.setAttribute('min', today);
 
         document.addEventListener('DOMContentLoaded', function() {
+            const jumlahTiket = sessionStorage.getItem('jumlah_tiket') || 1;
+            const tanggalKunjungan = sessionStorage.getItem('tanggal_kunjungan') || '';
+
+            document.getElementById('inputJumlahTiket').value = jumlahTiket;
+            document.getElementById('jumlahTiket').innerText = jumlahTiket;
+            document.getElementById('tanggalKunjungan').value = tanggalKunjungan;
+
             const tambahBtn = document.getElementById('tambahTiket');
             const kurangBtn = document.getElementById('kurangTiket');
             const displayJumlahTiket = document.getElementById('jumlahTiket');
@@ -275,9 +280,7 @@
                     inputJumlahTiket.value = jumlah;
                 }
             });
-        });
 
-        document.addEventListener('DOMContentLoaded', function() {
             const links = document.querySelectorAll('#testimoniList .pagination a');
             links.forEach(link => {
                 link.addEventListener('click', function(event) {
@@ -303,6 +306,14 @@
                         });
                     });
                 });
+        }
+
+        function saveToSession() {
+            const jumlahTiket = document.getElementById('inputJumlahTiket').value;
+            const tanggalKunjungan = document.getElementById('tanggalKunjungan').value;
+
+            sessionStorage.setItem('jumlah_tiket', jumlahTiket);
+            sessionStorage.setItem('tanggal_kunjungan', tanggalKunjungan);
         }
     </script>
 @endsection

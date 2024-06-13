@@ -46,9 +46,16 @@ use App\Models\Category;
 
 Route::get('/', [LandingController::class, 'show']);
 
+Route::middleware(['not_super_admin', 'after.login'])->group(function () {
+    Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
+});
+
+Route::get('/cek-session', function () {
+    return session()->all();
+});
+
 Route::middleware('not_super_admin')->group(function () {
     Route::get('/wisata', [ToursController::class, 'index']);
-    Route::get('/detail-wisata/{id}', [ToursController::class, 'detail']);
 
     Route::get('/contact-us', [ContactController::class, 'index']);
 

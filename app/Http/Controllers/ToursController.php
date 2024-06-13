@@ -59,47 +59,59 @@ class ToursController extends Controller
 
         $testimonials = $tour->testimonis()->with('user')->paginate(5);
 
+        // Ambil data dari session jika ada
+        $jumlahTiket = session('jumlah_tiket', 1);
+        $tanggalKunjungan = session('tanggal_kunjungan', null);
+
         if ($request->ajax()) {
             return view('partials.testimonials', compact('testimonials'))->render();
         }
 
-        return view('layout-users.detailWisata', compact('tour', 'averageRating', 'testimonials'));
+        return view('layout-users.detailWisata', compact('tour', 'averageRating', 'testimonials', 'jumlahTiket', 'tanggalKunjungan'));
     }
-
 
     public function storeReservation(Request $request, $tour_id)
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Silahkan login untuk melakukan reservasi.');
-        }
+{
+    if (!Auth::check()) {
+        $request->session()->put('jumlah_tiket', $request->jumlah_tiket);
+        $request->session()->put('tanggal_kunjungan', $request->tanggal_kunjungan);
 
-        $user = Auth::user();
-        $profile = $user->profile;
-
-        if (!$profile || !$profile->isComplete()) {
-            return redirect()->route('profile.index')->with('error', 'Silahkan lengkapi profile anda terlebih dahulu.');
-        }
-
-        $tour = Tours::findOrFail($tour_id);
-
-        $ticket = new Tickets([
-            'id_users' => $user->id,
-            'id_tours' => $tour_id,
-            'date' => $request->tanggal_kunjungan,
-            'tickets_count' => $request->jumlah_tiket,
-        ]);
-        $ticket->save();
-
-        $total_price = $tour->harga_tiket * $request->jumlah_tiket;
-
-        $cart = new Carts([
-            'id_ticket' => $ticket->id,
-            'id_tour' => $tour_id,
-            'total_price' => $total_price,
-            'status' => 'pending',
-        ]);
-        $cart->save();
-
-        return redirect()->route('cart.store')->with('success', 'Reservasi berhasil dibuat.');
+        return redirect()->route('login')->with('error', 'Silahkan login untuk melakukan reservasi.');
     }
+
+    $user = Auth::user();
+    $profile = $user->profile;
+
+    if (!$profile || !$profile->isComplete()) {
+        return redirect()->route('profile.index')->with('error', 'Silahkan lengkapi profile anda terlebih dahulu.');
+    }
+
+    $tour = Tours::findOrFail($tour_id);
+
+    $ticket = new Tickets([
+        'id_users' => $user->id,
+        'id_tours' => $tour_id,
+        'date' => $request->tanggal_kunjungan,
+        'tickets_count' => $request->jumlah_tiket,
+    ]);
+    $ticket->save();
+
+    $total_price = $tour->harga_tiket * $request->jumlah_tiket;
+
+    $cart = new Carts([
+        'id_ticket' => $ticket->id,
+        'id_tour' => $tour_id,
+        'total_price' => $total_price,
+        'status' => 'pending',
+    ]);
+    $cart->save();
+
+    // Hapus data dari session setelah berhasil membuat reservasi
+    $request->session()->forget('jumlah_tiket');
+    $request->session()->forget('tanggal_kunjungan');
+
+    return redirect()->route('cart.store')->with('success', 'Reservasi berhasil dibuat.');
+}
+
+
 }
